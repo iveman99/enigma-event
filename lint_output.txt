@@ -1,0 +1,41 @@
+
+> enigma-event@0.1.0 lint
+> eslint
+
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\sections\About.tsx
+  5:10  warning  'Cpu' is defined but never used       @typescript-eslint/no-unused-vars
+  5:15  warning  'Zap' is defined but never used       @typescript-eslint/no-unused-vars
+  5:40  warning  'Code2' is defined but never used     @typescript-eslint/no-unused-vars
+  5:47  warning  'Database' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\sections\Events.tsx
+  7:57  warning  'Trophy' is defined but never used      @typescript-eslint/no-unused-vars
+  7:79  warning  'ArrowRight' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\sections\Team.tsx
+  6:26  warning  'Github' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\ui\CyberButton.tsx
+  5:10  warning  't' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\ui\HolographicCard.tsx
+  3:10  warning  'motion' is defined but never used    @typescript-eslint/no-unused-vars
+  4:10  warning  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\ui\TechBackground.tsx
+    6:16  warning  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+    6:40  warning  'Trail' is defined but never used     @typescript-eslint/no-unused-vars
+    7:28  warning  'useMemo' is defined but never used   @typescript-eslint/no-unused-vars
+   71:60  warning  '_' is defined but never used         @typescript-eslint/no-unused-vars
+   71:63  warning  'i' is defined but never used         @typescript-eslint/no-unused-vars
+  118:22  warning  'delta' is defined but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\Veman S Chippa\.gemini\antigravity\scratch\enigma-event\components\ui\TextDecrypt.tsx
+   4:20  warning  'useEffect' is defined but never used               @typescript-eslint/no-unused-vars
+  10:12  warning  'isHovering' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  10:24  warning  'setIsHovering' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  18:28  warning  'prev' is defined but never used                    @typescript-eslint/no-unused-vars
+
+✖ 20 problems (0 errors, 20 warnings)
+

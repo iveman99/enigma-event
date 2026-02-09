@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 import ScanlineOverlay from "@/components/ui/ScanlineOverlay";
-import CyberCursor from "@/components/ui/CyberCursor";
+
 
 export default function RootLayout({
   children,
@@ -39,12 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${orbitron.variable} ${jetbrainsMono.variable} ${libreBaskerville.variable} antialiased bg-background text-foreground overflow-x-hidden cursor-none`}
+        className={`${inter.variable} ${orbitron.variable} ${jetbrainsMono.variable} ${libreBaskerville.variable} antialiased bg-background text-foreground overflow-x-hidden`}
       >
         <ScanlineOverlay />
-        <CyberCursor />
         {children}
       </body>
-    </html>
+    </html >
   );
 }

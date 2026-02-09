@@ -1,8 +1,10 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Grid, Sparkles, Float, Stars, Trail } from "@react-three/drei";
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
@@ -49,23 +51,24 @@ function AnimatedGrid() {
                 sectionThickness={1}
                 cellThickness={0.5}
                 rotation={[Math.PI, 0, 0]}
-                opacity={0.5}
             />
         </group>
     );
 }
 
 function FloatingObj() {
-    const group = useRef<any>();
+    const group = useRef<any>(null);
+    const [shapes, setShapes] = useState<any[]>([]);
 
     useFrame((state) => {
-        const t = state.clock.getElapsedTime();
-        group.current.rotation.y = t * 0.2;
-    })
+        if (group.current) {
+            const t = state.clock.getElapsedTime();
+            group.current.rotation.y = t * 0.2;
+        }
+    });
 
-    // Random geometric shapes to float in the background
-    const shapes = useMemo(() => {
-        return new Array(15).fill(0).map((_, i) => ({
+    useEffect(() => {
+        const generatedShapes = new Array(15).fill(0).map((_, i) => ({
             position: [
                 (Math.random() - 0.5) * 20,
                 (Math.random() - 0.5) * 10,
@@ -73,8 +76,9 @@ function FloatingObj() {
             ],
             scale: Math.random() * 0.5 + 0.2,
             type: Math.random() > 0.5 ? 'box' : 'oct'
-        }))
-    }, [])
+        }));
+        setShapes(generatedShapes);
+    }, []);
 
     return (
         <group ref={group}>
@@ -91,14 +95,16 @@ function FloatingObj() {
 }
 
 function WarpStars() {
-    const ref = useRef<any>();
+    const ref = useRef<any>(null);
     const { mouse } = useThree();
 
     useFrame((state, delta) => {
-        // Rotate stars based on mouse interaction for "warp" feel
-        ref.current.rotation.y -= delta * 0.05 + (mouse.x * 0.01);
-        ref.current.rotation.x -= delta * 0.02 + (mouse.y * 0.01);
-        ref.current.position.z = (state.clock.elapsedTime * 0.5) % 10;
+        if (ref.current) {
+            // Rotate stars based on mouse interaction for "warp" feel
+            ref.current.rotation.y -= delta * 0.05 + (mouse.x * 0.01);
+            ref.current.rotation.x -= delta * 0.02 + (mouse.y * 0.01);
+            ref.current.position.z = (state.clock.elapsedTime * 0.5) % 10;
+        }
     });
 
     return (
@@ -131,9 +137,7 @@ export default function TechBackground() {
 
                 <CameraRig />
 
-                <EffectComposer disableNormalPass>
-                    <Bloom luminanceThreshold={0.5} mipmapBlur intensity={1.5} radius={0.4} />
-                </EffectComposer>
+
             </Canvas>
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 pointer-events-none" />

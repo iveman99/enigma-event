@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import SectionWrapper from "../ui/SectionWrapper";
 import SectionHeader from "../ui/SectionHeader";
@@ -45,10 +46,7 @@ export default function Team() {
                                 )}
                             </div>
 
-                            import TextDecrypt from "../ui/TextDecrypt";
-                            // ... imports
 
-                            // ... inside map
 
                             <h4 className="text-lg font-display font-bold text-white mb-1 group-hover:text-neon-cyan transition-colors">
                                 <TextDecrypt text={member.name} />

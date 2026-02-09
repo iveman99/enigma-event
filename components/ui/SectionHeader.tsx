@@ -35,7 +35,7 @@ export default function SectionHeader({ title, subtitle, className }: SectionHea
                     transition={{ delay: 0.2, duration: 0.5 }}
                     className="mt-4 text-neon-cyan/80 font-mono tracking-widest text-sm uppercase"
                 >
-          // {subtitle}
+                    {subtitle}
                 </motion.p>
             )}
 

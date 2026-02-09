@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import CyberButton from "../ui/CyberButton";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import EnigmaCore from "../ui/EnigmaCore";
 // ... existing imports
@@ -12,7 +12,7 @@ export default function Hero() {
         <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
             <EnigmaCore />
             <div className="container mx-auto px-6 text-center relative z-10">
-// ... rest of the file
+
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
