@@ -72,6 +72,25 @@ export default function Hero() {
                             </span>
                         </div>
                     </motion.div>
+
+                    {/* Prize Pool Display */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.65, duration: 0.8 }}
+                        className="mt-8 mb-4 flex flex-col items-center"
+                    >
+                        <div className="relative group cursor-default">
+                            <div className="absolute -inset-4 bg-neon-magenta/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 animate-pulse-slow"></div>
+                            <h2 className="relative text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-magenta via-white to-neon-magenta drop-shadow-[0_0_15px_rgba(255,0,85,0.8)] z-10">
+                                ₹44,000+
+                            </h2>
+                            <div className="absolute top-0 left-0 w-full h-full border-t border-b border-neon-magenta/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                        </div>
+                        <p className="mt-2 text-sm md:text-base text-neon-magenta/80 font-mono tracking-[0.3em] uppercase drop-shadow-[0_0_5px_rgba(255,0,85,0.5)]">
+                            Total Prize Pool
+                        </p>
+                    </motion.div>
                 </motion.div>
 
                 {/* Tagline */}

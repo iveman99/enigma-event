@@ -5,7 +5,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Events from "@/components/sections/Events";
 import Schedule from "@/components/sections/Schedule";
-import PrizePool from "@/components/sections/PrizePool";
+
 import Registration from "@/components/sections/Registration";
 import Team from "@/components/sections/Team";
 
@@ -19,7 +19,7 @@ export default function Home() {
       <About />
       <Events />
       <Schedule />
-      <PrizePool />
+
       <Registration />
       <Team />
 

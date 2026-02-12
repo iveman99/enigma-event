@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import TextDecrypt from "../ui/TextDecrypt";
 
 const volunteers = [
-    { name: "iVeman", role: "Tech Head", linkedin: "https://www.linkedin.com/in/veman-chippa", image: "/images/team/iveman.jpg" },
+    { name: "iVeman", role: "Tech Head", linkedin: "https://www.linkedin.com/in/veman-chippa", image: "/images/team/iveman.jpeg" },
     { name: "Adarsh Mishra", role: "Creative & Media Head", linkedin: "https://www.linkedin.com/in/ahadarshx/", image: "/images/team/Adarsh.jpeg" },
     { name: "Hera Khan", role: "PR Marketing Head", linkedin: "https://www.linkedin.com/in/hera-h-khan/", image: "/images/team/Hera.jpeg" },
     { name: "Rawket", role: "Logistics Head", linkedin: "https://www.linkedin.com/in/om-mahadik-22208525a/", image: "/images/team/Om.jpeg" },
