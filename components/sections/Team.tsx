@@ -10,7 +10,7 @@ import TextDecrypt from "../ui/TextDecrypt";
 const volunteers = [
     { name: "iVeman", role: "Tech Head", linkedin: "https://www.linkedin.com/in/veman-chippa", image: "/images/team/iveman.jpeg" },
     { name: "Adarsh Mishra", role: "Creative & Media Head", linkedin: "https://www.linkedin.com/in/ahadarshx/", image: "/images/team/Adarsh.jpeg" },
-    { name: "Hera Khan", role: "PR Marketing Head", linkedin: "https://www.linkedin.com/in/hera-h-khan/", image: "/images/team/Hera.jpg" },
+    { name: "Hera Khan", role: "PR Marketing Head", linkedin: "https://www.linkedin.com/in/hera-h-khan/", image: "/images/team/hera.jpg" },
     { name: "Rawket", role: "Logistics Head", linkedin: "https://www.linkedin.com/in/om-mahadik-22208525a/", image: "/images/team/Om.jpeg" },
     { name: "Pranav More", role: "Event Head", linkedin: "https://www.linkedin.com/in/pranav-more-a66423378", image: "/images/team/Pranav.jpeg" },
     { name: "Mayur Shewale", role: "Finance Head", linkedin: "https://www.linkedin.com/in/mayur-shewale312003/", image: "/images/team/Mayur.jpeg" },
