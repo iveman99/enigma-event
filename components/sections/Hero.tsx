@@ -105,20 +105,7 @@ export default function Hero() {
                     <span className="text-sm opacity-70">Where ideas turn into execution.</span>
                 </motion.p>
 
-                {/* CTA Buttons */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 }}
-                    className="flex flex-col md:flex-row gap-8 justify-center items-center"
-                >
-                    <CyberButton variant="primary" icon={<ArrowRight size={20} />} className="w-56 justify-center">
-                        Explore Events
-                    </CyberButton>
-                    <CyberButton variant="secondary" onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })} className="w-56 justify-center">
-                        Register Now
-                    </CyberButton>
-                </motion.div>
+
             </div>
 
             {/* Decorative Elements */}
