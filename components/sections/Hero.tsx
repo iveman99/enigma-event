@@ -32,7 +32,7 @@ export default function Hero() {
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan"></span>
                         </span>
                         <span className="text-xs md:text-sm font-mono text-neon-cyan tracking-widest">
-                            INITIATED_BY_PLACEMENT_CELL_UDCS
+                            INITIATED BY PLACEMENT CELL UDCS
                         </span>
                     </a>
                 </motion.div>
