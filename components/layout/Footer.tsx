@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -17,31 +17,43 @@ export default function Footer() {
                 </div>
 
                 <div className="flex justify-center gap-6 mb-8">
-                    {[Github, Twitter, Linkedin, Instagram].map((Icon, i) => (
-                        <a
-                            key={i}
-                            href="#"
-                            className="text-gray-400 hover:text-neon-cyan transition-colors p-2 border border-transparent hover:border-neon-cyan/30 rounded-full hover:bg-neon-cyan/5"
-                        >
-                            <Icon size={20} />
-                        </a>
-                    ))}
+                    <a
+                        href="https://www.linkedin.com/company/placement-udcs"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-neon-cyan transition-colors p-3 border border-transparent hover:border-neon-cyan/30 rounded-full hover:bg-neon-cyan/5 group"
+                    >
+                        <Linkedin size={24} className="group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a
+                        href="https://www.instagram.com/udcs.mumbaiuniversity"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-neon-magenta transition-colors p-3 border border-transparent hover:border-neon-magenta/30 rounded-full hover:bg-neon-magenta/5 group"
+                    >
+                        <Instagram size={24} className="group-hover:scale-110 transition-transform" />
+                    </a>
                 </div>
 
                 <div className="text-xs text-gray-600 font-mono uppercase tracking-widest flex flex-col md:flex-row items-center justify-center gap-4">
                     <p>&copy; 2026 Placement Cell, UDCS. All rights reserved.</p>
                     <div className="h-px w-8 bg-gray-800 md:h-4 md:w-px" />
-                    <p>
-                        Built with <span className="text-neon-magenta animate-pulse">♥</span> by{" "}
+                    <div className="flex items-center gap-2">
+                        <span>Built with</span>
+                        <span className="text-neon-magenta animate-pulse text-lg">♥</span>
+                        <span>by</span>
                         <a
                             href="https://www.linkedin.com/in/veman-chippa"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-neon-cyan hover:text-white transition-colors border-b border-neon-cyan/30 hover:border-white"
+                            className="relative group text-neon-cyan font-bold tracking-wider hover:text-white transition-colors"
                         >
-                            iVeman
+                            <span className="absolute -inset-1 bg-neon-cyan/20 blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <span className="relative z-10 px-2 py-1 border border-transparent group-hover:border-neon-cyan/50 rounded-md bg-transparent group-hover:bg-neon-cyan/10">
+                                iVeman
+                            </span>
                         </a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </footer>
