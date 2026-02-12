@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import CyberButton from "../ui/CyberButton";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 import EnigmaCore from "../ui/EnigmaCore";
 // ... existing imports
@@ -20,7 +21,12 @@ export default function Hero() {
                     transition={{ delay: 0.2 }}
                     className="flex items-center justify-center gap-2 mb-8"
                 >
-                    <div className="px-4 py-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 backdrop-blur-md flex items-center gap-3 shadow-[0_0_15px_-5px_rgba(0,243,255,0.3)]">
+                    <a
+                        href="https://www.linkedin.com/company/placement-udcs/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/5 backdrop-blur-md flex items-center gap-3 shadow-[0_0_15px_-5px_rgba(0,243,255,0.3)] hover:bg-neon-cyan/10 transition-colors cursor-pointer"
+                    >
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan"></span>
@@ -28,7 +34,7 @@ export default function Hero() {
                         <span className="text-xs md:text-sm font-mono text-neon-cyan tracking-widest">
                             INITIATED_BY_PLACEMENT_CELL_UDCS
                         </span>
-                    </div>
+                    </a>
                 </motion.div>
 
                 {/* Main Title */}
@@ -38,12 +44,15 @@ export default function Hero() {
                     transition={{ duration: 1, type: "spring" }}
                     className="mb-8 relative"
                 >
-                    <h1 className="text-6xl md:text-9xl font-[family-name:var(--font-libre-baskerville)] font-bold tracking-[0.2em] uppercase text-white/90 relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                        ENIGMA
-                    </h1>
-                    <h1 className="text-6xl md:text-9xl font-[family-name:var(--font-libre-baskerville)] font-bold tracking-[0.2em] uppercase text-neon-blue absolute top-0 left-0 w-full animate-glitch opacity-30 z-0">
-                        ENIGMA
-                    </h1>
+                    <div className="relative w-full max-w-4xl mx-auto h-32 md:h-48 mb-4">
+                        <Image
+                            src="/images/enigma-logo.png"
+                            alt="ENIGMA"
+                            fill
+                            className="object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                            priority
+                        />
+                    </div>
                     <div className="flex items-center justify-center gap-4 mt-2">
                         <span className="h-px w-12 bg-neon-magenta" />
                         <span className="text-4xl md:text-6xl font-display font-bold text-neon-magenta">1.0</span>
@@ -59,7 +68,7 @@ export default function Hero() {
                     >
                         <div className="inline-block px-6 py-2 border border-neon-cyan/50 bg-neon-cyan/10 rounded-full backdrop-blur-sm">
                             <span className="text-xl md:text-2xl font-mono font-bold text-neon-cyan tracking-widest drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
-                                FEB 27 & 28
+                                FEB 26 & 27
                             </span>
                         </div>
                     </motion.div>
@@ -82,12 +91,12 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.2 }}
-                    className="flex flex-col md:flex-row gap-6 justify-center items-center"
+                    className="flex flex-col md:flex-row gap-8 justify-center items-center"
                 >
-                    <CyberButton variant="primary" icon={<ArrowRight size={20} />}>
+                    <CyberButton variant="primary" icon={<ArrowRight size={20} />} className="w-56 justify-center">
                         Explore Events
                     </CyberButton>
-                    <CyberButton variant="secondary" onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })}>
+                    <CyberButton variant="secondary" onClick={() => document.getElementById("register")?.scrollIntoView({ behavior: "smooth" })} className="w-56 justify-center">
                         Register Now
                     </CyberButton>
                 </motion.div>

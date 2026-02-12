@@ -78,7 +78,7 @@ export default function About() {
 
                     <div className="grid grid-cols-2 gap-4 pt-4">
                         <div className="p-4 border border-white/10 bg-white/5 rounded-lg">
-                            <span className="block text-2xl font-display font-bold text-neon-magenta mb-1">Feb 27-28</span>
+                            <span className="block text-2xl font-display font-bold text-neon-magenta mb-1">Feb 26-27</span>
                             <span className="text-xs font-mono text-gray-400 uppercase tracking-wider">System Runtime</span>
                         </div>
                         <div className="p-4 border border-white/10 bg-white/5 rounded-lg">

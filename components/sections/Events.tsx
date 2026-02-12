@@ -13,7 +13,7 @@ const events = [
         id: "vibe-coding",
         title: "Vibe Coding Sprint",
         day: "Day 1",
-        date: "Feb 27",
+        date: "Feb 26",
         category: "Coding",
         icon: Code,
         color: "text-neon-cyan",
@@ -35,7 +35,7 @@ const events = [
         id: "ui-ux",
         title: "UI/UX Redesign",
         day: "Day 1",
-        date: "Feb 27",
+        date: "Feb 26",
         category: "Design",
         icon: Palette,
         color: "text-neon-magenta",
@@ -56,7 +56,7 @@ const events = [
         id: "blind-coding",
         title: "Blind Coding Challenge",
         day: "Day 1",
-        date: "Feb 27",
+        date: "Feb 26",
         category: "Coding",
         icon: Terminal,
         color: "text-neon-cyan",
@@ -77,7 +77,7 @@ const events = [
         id: "code-quest",
         title: "CodeQuest",
         day: "Day 2",
-        date: "Feb 28",
+        date: "Feb 27",
         category: "Coding",
         icon: Map,
         color: "text-neon-blue",
@@ -97,7 +97,7 @@ const events = [
         id: "data-science",
         title: "End-to-End Data Science",
         day: "Day 2",
-        date: "Feb 28",
+        date: "Feb 27",
         category: "Data",
         icon: Laptop,
         color: "text-neon-violet",
@@ -117,7 +117,7 @@ const events = [
         id: "asphalt-9",
         title: "Asphalt 9 Legends",
         day: "Day 2",
-        date: "Feb 28",
+        date: "Feb 27",
         category: "Gaming",
         icon: Gamepad,
         color: "text-neon-blue",
@@ -151,8 +151,8 @@ export default function Events() {
                         key={day}
                         onClick={() => setActiveDay(day)}
                         className={`relative px-8 py-3 rounded-xl font-display uppercase tracking-wider text-xl transition-all duration-300 border overflow-hidden group ${activeDay === day
-                                ? "border-neon-cyan text-black"
-                                : "border-white/10 text-gray-400 hover:border-white/30"
+                            ? "border-neon-cyan text-black"
+                            : "border-white/10 text-gray-400 hover:border-white/30"
                             }`}
                     >
                         {activeDay === day && (
@@ -164,7 +164,7 @@ export default function Events() {
                             />
                         )}
                         <span className="relative z-10 flex items-center gap-2">
-                            {day === "Day 1" ? "Feb 27" : "Feb 28"}
+                            {day === "Day 1" ? "Feb 26" : "Feb 27"}
                             <span className="text-xs opacity-60 font-mono">/ {day}</span>
                         </span>
                     </button>

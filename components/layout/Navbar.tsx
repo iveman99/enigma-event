@@ -33,8 +33,13 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <a href="#" className="text-2xl font-display font-bold text-white tracking-widest hover:text-neon-cyan transition-colors">
-                    ENIGMA<span className="text-neon-cyan">1.0</span>
+                <a href="#" className="flex flex-col items-start leading-tight group">
+                    <span className="text-sm md:text-base font-display font-bold text-white tracking-widest group-hover:text-neon-cyan transition-colors">
+                        University Of Mumbai
+                    </span>
+                    <span className="text-xs md:text-sm font-mono text-gray-400 group-hover:text-neon-cyan transition-colors">
+                        Department of Computer Science
+                    </span>
                 </a>
 
                 {/* Desktop Links */}
