@@ -32,7 +32,7 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/QfcskSuJvwsFVUNs6",
         volunteers: [
-            { name: "Volunteer 1", phone: "+91 XXXXX XXXXX" },
+            { name: "Pranay Kokane", phone: "+91 88508 43581" },
             { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
         ]
     },
@@ -86,7 +86,7 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
-            { name: "Volunteer 1", phone: "+91 XXXXX XXXXX" },
+            { name: "Panav More", phone: "+91 75885 52573" },
             { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
         ]
     },
@@ -168,8 +168,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
         volunteers: [
-            { name: "Volunteer 1", phone: "+91 XXXXX XXXXX" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Ankita Goyal", phone: "+91 93233 88342" },
+            { name: "Mahesh Kairnar", phone: "+91 75885 52573" }
         ]
     }
 ];
