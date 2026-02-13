@@ -8,7 +8,7 @@ import clsx from "clsx";
 const navLinks = [
     { name: "About", href: "#about" },
     { name: "Events", href: "#events" },
-    { name: "Schedule", href: "#schedule" },
+    { name: "Schedule", href: "#timeline" },
     { name: "Team", href: "#team" },
 ];
 
@@ -55,10 +55,10 @@ export default function Navbar() {
                         </a>
                     ))}
                     <a
-                        href="#register"
+                        href="#timeline"
                         className="px-6 py-2 border border-neon-cyan text-neon-cyan font-display text-sm uppercase hover:bg-neon-cyan hover:text-black transition-all duration-300"
                     >
-                        Register
+                        Explore Timeline
                     </a>
                 </div>
 
@@ -92,11 +92,11 @@ export default function Navbar() {
                                 </a>
                             ))}
                             <a
-                                href="#register"
+                                href="#timeline"
                                 className="px-8 py-3 border border-neon-cyan text-neon-cyan font-display text-lg uppercase hover:bg-neon-cyan hover:text-black transition-all duration-300"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Register Now
+                                Explore Timeline
                             </a>
                         </div>
                     </motion.div>

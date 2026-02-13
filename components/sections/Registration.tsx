@@ -209,6 +209,7 @@ export default function Registration() {
 
     return (
         <SectionWrapper id="register">
+            <div id="timeline" className="absolute -top-20" />
             <SectionHeader title="Access Protocol" subtitle="Join The Network" />
 
             <div className="max-w-4xl mx-auto">

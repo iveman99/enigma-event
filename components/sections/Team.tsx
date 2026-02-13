@@ -19,12 +19,13 @@ const volunteers = [
     { name: "Kunal Mahale", role: "Volunteer", linkedin: "https://www.linkedin.com/in/kunal11/", image: "/images/team/Kunal.jpeg" },
     { name: "Vansh Lad", role: "Volunteer", linkedin: "https://www.linkedin.com/in/vansh-lad-012b90259/", image: "/images/team/Vansh.jpeg" },
     { name: "Pranay Kokane", role: "Volunteer", linkedin: "https://www.linkedin.com/in/pranay-kokane-20351b261/", image: "/images/team/Pranay.jpeg" },
-    { name: "Tehreen Shaikh", role: "Volunteer", linkedin: "https://www.linkedin.com/in/tehreen-shaikh-b791ab337/", image: "/images/team/Tehreen.jpg" },
+    { name: "Tehreen Shaikh", role: "Volunteer", linkedin: "https://www.linkedin.com/in/tehreen-shaikh-b791ab337/" },
     { name: "Shweta Parmar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/shweta-parmar-4a202a362/", image: "/images/team/Shweta.jpeg" },
     { name: "Rahul Patel", role: "Volunteer", linkedin: "https://www.linkedin.com/in/rahul-patel-a80480377/", image: "/images/team/Rahul.jpeg" },
     { name: "Aryan Palekar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/aryan-palekar-3ba736285/", image: "/images/team/Aryan.jpeg" },
     { name: "Mahesh Khairnar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/khairnarmahesh11/", image: "/images/team/Mahesh.jpeg" },
     { name: "Utkarsha Patil", role: "Volunteer", linkedin: "https://www.linkedin.com/in/utkarsha-patil-9854412b6/", image: "/images/team/Utkarsha.jpg" },
+    { name: "Ankita Goyal", role: "Volunteer", linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", image: "/images/team/Ankita.jpeg" },
 ];
 
 export default function Team() {
