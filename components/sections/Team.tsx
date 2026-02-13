@@ -24,7 +24,7 @@ const volunteers = [
     { name: "Rahul Patel", role: "Volunteer", linkedin: "https://www.linkedin.com/in/rahul-patel-a80480377/", image: "/images/team/Rahul.jpeg" },
     { name: "Aryan Palekar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/aryan-palekar-3ba736285/", image: "/images/team/Aryan.jpeg" },
     { name: "Mahesh Khairnar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/khairnarmahesh11/", image: "/images/team/Mahesh.jpeg" },
-    { name: "Utkarsha Patil", role: "Volunteer", linkedin: "https://www.linkedin.com/in/utkarsha-patil-9854412b6/", image: "/images/team/Utkarsha.jpg" },
+    { name: "Utkarsha Patil", role: "Volunteer", linkedin: "https://www.linkedin.com/in/utkarsha-patil-9854412b6/", image: "/images/team/Utkarsha.jpeg" },
     { name: "Ankita Goyal", role: "Volunteer", linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", image: "/images/team/Ankita.jpeg" },
 ];
 
