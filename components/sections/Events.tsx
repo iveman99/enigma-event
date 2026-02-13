@@ -11,7 +11,7 @@ const events = [
     // Day 1 - Feb 26
     {
         id: "compile-vibes",
-        title: "Compile The Vibes",
+        title: "Vibe Coding",
         day: "Day 1",
         date: "Feb 26",
         category: "Coding",
@@ -38,7 +38,7 @@ const events = [
     },
     {
         id: "blind-dates",
-        title: "Blind Dates With Code",
+        title: "Blind Coding",
         day: "Day 1",
         date: "Feb 26",
         category: "Coding",
@@ -64,34 +64,59 @@ const events = [
         ]
     },
     {
-        id: "ui-niverse",
-        title: "UI-niverse",
+        id: "data-dash",
+        title: "Data Dash",
         day: "Day 1",
         date: "Feb 26",
-        category: "Design",
+        category: "Data Science",
         badge: "Team",
-        icon: Palette,
-        color: "text-neon-blue",
-        description: "Design Beyond Limits.",
-        fullDescription: "Reimagine and redesign digital experiences with creativity and clarity. Work as a team to craft intuitive interfaces. Balance aesthetics with usability. Let your design thinking stand out.",
+        icon: Database,
+        color: "text-neon-violet",
+        description: "Decode Data. Deliver Insights.",
+        fullDescription: "Analyze datasets and uncover meaningful insights. Work in teams to solve real-world data problems. Smart interpretation is the key to winning. Turn numbers into impact.",
         rules: [
             "Team Size: 2-3 Members.",
-            "Time Limit: 2.5 Hours.",
-            "Tools: Figma / Adobe XD.",
-            "Design must be original."
+            "Dataset provided on spot.",
+            "Submission: Notebook + Presentation."
         ],
         fee: "₹199",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
+        registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
         volunteers: [
-            { name: "Panav More", phone: "+91 75885 52573" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Ankita Goyal", phone: "+91 93233 88342" },
+            { name: "Mahesh Kairnar", phone: "+91 75885 52573" }
         ]
     },
 
     // Day 2 - Feb 27
+    {
+        id: "decode-hunt",
+        title: "Decode The Hunt",
+        day: "Day 2",
+        date: "Feb 27",
+        category: "Problem Solving",
+        badge: "Team",
+        icon: Search,
+        color: "text-neon-magenta",
+        description: "Crack Clues. Race Against Time.",
+        fullDescription: "A competitive team-based challenge that tests logic and coordination. Solve clues and progress through elimination rounds. Speed and strategy will define your journey. Only the sharpest team will decode the final stage.",
+        rules: [
+            "Team Size: 2-3 Members.",
+            "Solve riddles to get next location.",
+            "Fastest team to finish wins."
+        ],
+        fee: "₹199",
+        prizePool: "₹8,000",
+        venue: "Department of Computer Science, University of Mumbai",
+        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        registrationLink: "https://forms.gle/nRRxc185qJu9JvD16",
+        volunteers: [
+            { name: "Aryan", phone: "+91 89282 21297" },
+            { name: "Om", phone: "+91 99677 03018" }
+        ]
+    },
     {
         id: "fifa-addicts",
         title: "FIFA Addicts",
@@ -121,55 +146,30 @@ const events = [
         ]
     },
     {
-        id: "decode-hunt",
-        title: "Decode The Hunt",
+        id: "ui-niverse",
+        title: "UI/UX Re-Design",
         day: "Day 2",
         date: "Feb 27",
-        category: "Problem Solving",
+        category: "Design",
         badge: "Team",
-        icon: Search,
-        color: "text-neon-magenta",
-        description: "Crack Clues. Race Against Time.",
-        fullDescription: "A competitive team-based challenge that tests logic and coordination. Solve clues and progress through elimination rounds. Speed and strategy will define your journey. Only the sharpest team will decode the final stage.",
+        icon: Palette,
+        color: "text-neon-blue",
+        description: "Design Beyond Limits.",
+        fullDescription: "Reimagine and redesign digital experiences with creativity and clarity. Work as a team to craft intuitive interfaces. Balance aesthetics with usability. Let your design thinking stand out.",
         rules: [
             "Team Size: 2-3 Members.",
-            "Solve riddles to get next location.",
-            "Fastest team to finish wins."
+            "Time Limit: 2.5 Hours.",
+            "Tools: Figma / Adobe XD.",
+            "Design must be original."
         ],
         fee: "₹199",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "https://forms.gle/nRRxc185qJu9JvD16",
+        registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
-            { name: "Aryan", phone: "+91 89282 21297" },
-            { name: "Om", phone: "+91 99677 03018" }
-        ]
-    },
-    {
-        id: "data-dash",
-        title: "Data Dash",
-        day: "Day 2",
-        date: "Feb 27",
-        category: "Data Science",
-        badge: "Team",
-        icon: Database,
-        color: "text-neon-violet",
-        description: "Decode Data. Deliver Insights.",
-        fullDescription: "Analyze datasets and uncover meaningful insights. Work in teams to solve real-world data problems. Smart interpretation is the key to winning. Turn numbers into impact.",
-        rules: [
-            "Team Size: 2-3 Members.",
-            "Dataset provided on spot.",
-            "Submission: Notebook + Presentation."
-        ],
-        fee: "₹199",
-        prizePool: "₹8,000",
-        venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
-        volunteers: [
-            { name: "Ankita Goyal", phone: "+91 93233 88342" },
-            { name: "Mahesh Kairnar", phone: "+91 75885 52573" }
+            { name: "Panav More", phone: "+91 75885 52573" },
+            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
         ]
     }
 ];

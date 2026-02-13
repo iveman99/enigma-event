@@ -11,62 +11,90 @@ import { useState, useEffect, useRef } from "react";
 const scheduleData = {
     "Day 1": [
         {
+            time: "08:30 AM",
+            title: "Reporting & Registration",
+            category: "Registration",
+            description: "On-spot registration allowed.",
+            color: "text-neon-cyan"
+        },
+        {
             time: "09:00 AM",
             title: "Inauguration Ceremony",
             category: "General",
-            description: "Kickstarting ENIGMA 1.0 with energy and vision.",
-            color: "text-neon-cyan"
-        },
-        {
-            time: "10:00 AM",
-            title: "Compile The Vibes",
-            category: "Coding Competition",
-            description: "High-octane coding sprint.",
-            color: "text-neon-cyan"
-        },
-        {
-            time: "01:00 PM",
-            title: "Blind Dates With Code",
-            category: "Coding Competition",
-            description: "Coding without a monitor. Pure logic.",
+            description: "Banner Drop, HOD Speech.",
             color: "text-neon-magenta"
         },
         {
-            time: "03:00 PM",
-            title: "UI-niverse",
-            category: "Design Competition",
-            description: "Redesigning the digital world.",
+            time: "09:30 AM - 12:00 PM",
+            title: "Vibe Coding",
+            category: "Coding Competition",
+            description: "3 Hours Coding Sprint.",
             color: "text-neon-blue"
+        },
+        {
+            time: "12:10 PM - 01:10 PM",
+            title: "Guest Session: Agentic AI",
+            category: "Guest Session",
+            description: "Speaker: Hera Khan.",
+            color: "text-neon-violet"
+        },
+        {
+            time: "01:30 PM - 03:00 PM",
+            title: "Blind Coding",
+            category: "Coding Competition",
+            description: "1 Hour Coding Challenge.",
+            color: "text-neon-green"
+        },
+        {
+            time: "02:00 PM - 05:00 PM",
+            title: "Data Dash",
+            category: "Data Science",
+            description: "Judges review at 4:30 PM.",
+            color: "text-neon-orange" // Assuming neon-orange exists or fallback to something else, checking colors. Let's stick to existing palette: cyan, magenta, blue, violet, green.
         }
     ],
     "Day 2": [
         {
-            time: "09:00 AM",
-            title: "FIFA Addicts",
-            category: "Gaming Competition",
-            description: "The ultimate football showdown.",
+            time: "08:30 AM",
+            title: "Reporting & Registration",
+            category: "Registration",
+            description: "On-spot registration allowed.",
             color: "text-neon-cyan"
         },
         {
-            time: "11:00 AM",
+            time: "09:00 AM - 10:15 AM",
             title: "Decode The Hunt",
-            category: "Problem Solving Competition",
-            description: "Campus-wide treasure hunt.",
+            category: "Treasure Hunt",
+            description: "1 Hr 15 Min Campus Hunt.",
             color: "text-neon-magenta"
         },
         {
-            time: "02:00 PM",
-            title: "Data Dash",
-            category: "Data Science Competition",
-            description: "Unlocking insights from data.",
+            time: "10:30 AM - 11:30 AM",
+            title: "FIFA Addicts",
+            category: "Gaming",
+            description: "Gaming Event.",
+            color: "text-neon-green"
+        },
+        {
+            time: "11:45 AM - 12:45 PM",
+            title: "Guest Session: AI in Data",
+            category: "Guest Session",
+            description: "Creating Dashboards with AI.",
+            color: "text-neon-blue"
+        },
+        {
+            time: "01:15 PM - 03:45 PM",
+            title: "UI/UX Re-Design",
+            category: "Design Competition",
+            description: "2.5 Hours. Judges review at 4:30 PM.",
             color: "text-neon-violet"
         },
         {
-            time: "05:00 PM",
+            time: "04:00 PM Onwards",
             title: "Award Ceremony",
             category: "Celebration",
-            description: "Honoring the champions of ENIGMA.",
-            color: "text-neon-green"
+            description: "Prize Distribution.",
+            color: "text-neon-cyan"
         }
     ]
 };
