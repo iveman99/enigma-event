@@ -71,7 +71,7 @@ export default function Footer() {
                     </a>
                 </div>
 
-                <div className="text-xs text-gray-600 font-mono uppercase tracking-widest flex flex-col md:flex-row items-center justify-center gap-4">
+                <div className="text-xs text-white font-mono uppercase tracking-widest flex flex-col md:flex-row items-center justify-center gap-4">
                     <p>&copy; 2026 Placement Cell, UDCS. All rights reserved.</p>
                     <div className="h-px w-8 bg-gray-800 md:h-4 md:w-px" />
 
@@ -84,7 +84,7 @@ export default function Footer() {
                         <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] animate-spin-slow opacity-50 group-hover:opacity-100 transition-opacity" />
 
                         <div className="relative flex items-center gap-2.5 px-6 py-3 rounded-full bg-black/90 backdrop-blur-xl">
-                            <span className="text-gray-500 text-xs font-mono tracking-widest uppercase">Built with</span>
+                            <span className="text-white text-xs font-mono tracking-widest uppercase">Built with</span>
 
                             <motion.span
                                 className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-500 to-red-600 drop-shadow-[0_0_10px_rgba(255,69,0,0.8)] text-sm tracking-wider"
@@ -97,7 +97,7 @@ export default function Footer() {
                                 PASSION
                             </motion.span>
 
-                            <span className="text-gray-500 text-xs font-mono tracking-widest uppercase">by</span>
+                            <span className="text-white text-xs font-mono tracking-widest uppercase">by</span>
 
                             <a
                                 href="https://www.linkedin.com/in/veman-chippa"
@@ -105,6 +105,18 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                             >
                                 <ScrambleText text="iVeman" />
+                            </a>
+
+                            <span className="text-gray-600 mx-2">|</span>
+
+                            <span className="text-white text-xs font-mono tracking-widest uppercase">Illustrated by</span>
+
+                            <a
+                                href="https://www.linkedin.com/in/ahadarshx/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <ScrambleText text="Adarsh" />
                             </a>
                         </div>
                     </motion.div>

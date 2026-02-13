@@ -56,7 +56,9 @@ const events = [
         venue: "Auditorium, Department of Computer Science",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "#",
-        volunteers: []
+        volunteers: [
+            { name: "Hera Khan", phone: "+91 79771 97156" }
+        ]
     },
     {
         id: "blind-dates",
@@ -102,7 +104,7 @@ const events = [
             "Submission: Notebook + Presentation."
         ],
         fee: "₹199",
-        prizePool: "₹8,000",
+        prizePool: "₹10,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
@@ -130,7 +132,7 @@ const events = [
             "Fastest team to finish wins."
         ],
         fee: "₹199",
-        prizePool: "₹8,000",
+        prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/nRRxc185qJu9JvD16",
@@ -159,7 +161,9 @@ const events = [
         venue: "Auditorium, Department of Computer Science",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "#",
-        volunteers: []
+        volunteers: [
+            { name: "Utkarsha Patil", phone: "+91 79721 34987" }
+        ]
     },
     {
         id: "fifa-addicts",

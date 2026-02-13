@@ -50,41 +50,26 @@ export default function About() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
+                        className="space-y-6"
                     >
-                        <p className="text-gray-300 leading-relaxed text-lg">
-                            <strong className="text-white font-semibold">ENIGMA 1.0</strong> is a two-day flagship techfest organized by the <span className="text-neon-cyan">Department of Computer Science, University of Mumbai</span>, and initiated by the Placement Cell.
+                        <h3 className="text-2xl font-bold text-white mb-4">ENIGMA 1.0 – Official Tech Fest of UDCS</h3>
+                        <p className="text-gray-300 leading-relaxed text-xl">
+                            <strong className="text-neon-cyan">ENIGMA 1.0</strong> is a two-day flagship tech fest organized by the Department of Computer Science, University of Mumbai, initiated by the Placement Cell.
+                        </p>
+
+                        <div className="flex items-center gap-3 text-neon-magenta font-mono uppercase tracking-wider text-lg">
+                            <Calendar size={20} />
+                            <span>February 26 & 27</span>
+                        </div>
+
+                        <p className="text-gray-400 leading-relaxed text-lg">
+                            Open to Bachelor’s and Master’s students passionate about technology, innovation, and problem-solving, ENIGMA challenges participants to solve real-world problems, collaborate in teams, and compete under dynamic conditions.
+                        </p>
+
+                        <p className="text-gray-400 leading-relaxed text-lg">
+                            Beyond competition, ENIGMA offers a platform to connect with industry speakers, gain practical insights, and expand your professional network.
                         </p>
                     </motion.div>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="text-gray-400 leading-relaxed"
-                    >
-                        Happening on <span className="text-neon-magenta">February 26 & 27</span>, the event is open to students pursuing Bachelor’s and Master’s degrees who are passionate about technology, innovation, and problem-solving.
-                    </motion.p>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="text-gray-400 leading-relaxed"
-                    >
-                        ENIGMA challenges participants to work on real-world problem statements, collaborate in teams, and develop practical solutions under competitive conditions.
-                    </motion.p>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="text-gray-400 leading-relaxed"
-                    >
-                        Beyond competition, ENIGMA provides a platform to connect with industry-leading speakers, gain insights from experts, and expand your professional network.
-                    </motion.p>
                 </div>
 
                 {/* Right: Info Cards */}
