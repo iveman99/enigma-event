@@ -32,8 +32,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/QfcskSuJvwsFVUNs6",
         volunteers: [
-            { name: "Pranay Kokane", phone: "+91 88508 43581" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Ankita Goyal", phone: "+91 93233 88342" },
+            { name: "Mahesh Khairnar", phone: "+91 75885 52573" }
         ]
     },
     {
@@ -85,8 +85,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
         volunteers: [
-            { name: "Ankita Goyal", phone: "+91 93233 88342" },
-            { name: "Mahesh Kairnar", phone: "+91 75885 52573" }
+            { name: "Priyanshi Dubey", phone: "+91 72194 27357" },
+            { name: "Aryan Palekar", phone: "+91 89282 21297" }
         ]
     },
 
@@ -113,8 +113,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/nRRxc185qJu9JvD16",
         volunteers: [
-            { name: "Aryan", phone: "+91 89282 21297" },
-            { name: "Om", phone: "+91 99677 03018" }
+            { name: "Aryan Palekar", phone: "+91 89282 21297" },
+            { name: "Utkarsha Patil", phone: "+91 79721 34987" }
         ]
     },
     {
@@ -141,8 +141,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/Mpt3v86gh4kamQQA6",
         volunteers: [
-            { name: "Om", phone: "+91 99677 03018" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Rawket", phone: "+91 99677 03018" },
+            { name: "Vansh Lad", phone: "+91 90282 80757" }
         ]
     },
     {
@@ -168,8 +168,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
-            { name: "Panav More", phone: "+91 75885 52573" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
+            { name: "Adarsh Mishra", phone: "+91 99751 17332" }
         ]
     }
 ];
