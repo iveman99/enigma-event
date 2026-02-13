@@ -4,7 +4,7 @@ import { useState } from "react";
 import SectionWrapper from "../ui/SectionWrapper";
 import SectionHeader from "../ui/SectionHeader";
 import GlassCard from "../ui/GlassCard";
-import { Code, Palette, Gamepad, Search, Database, Terminal, Users, Clock, ChevronDown, ChevronUp, User, Filter, X } from "lucide-react";
+import { Code, Palette, Gamepad, Search, Database, Terminal, Users, Clock, ChevronDown, ChevronUp, User, Filter, X, Mic } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const events = [
@@ -35,6 +35,28 @@ const events = [
             { name: "Ankita Goyal", phone: "+91 93233 88342" },
             { name: "Mahesh Khairnar", phone: "+91 75885 52573" }
         ]
+    },
+    {
+        id: "guest-agentic-ai",
+        title: "Agentic AI",
+        day: "Day 1",
+        date: "Feb 26",
+        category: "Guest Session",
+        badge: "Open For All",
+        icon: Mic,
+        color: "text-neon-violet",
+        description: "Explore the Future of Autonomous AI Agents.",
+        fullDescription: "Dive into the world of Agentic AI with an exclusive session by industry leaders. Understand how autonomous agents are reshaping technology and automation. A must-attend for AI enthusiasts.",
+        rules: [
+            "Open to all students.",
+            "No prior registration required for entry.",
+            "Seating on first-come-first-serve basis."
+        ],
+        fee: "Free",
+        venue: "Auditorium, Department of Computer Science",
+        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        registrationLink: "#",
+        volunteers: []
     },
     {
         id: "blind-dates",
@@ -118,6 +140,28 @@ const events = [
         ]
     },
     {
+        id: "guest-ai-dashboards",
+        title: "AI-Powered Dashboards",
+        day: "Day 2",
+        date: "Feb 27",
+        category: "Guest Session",
+        badge: "Open For All",
+        icon: Mic,
+        color: "text-neon-blue",
+        description: "Building Smarter Analytics with AI.",
+        fullDescription: "Learn how to integrate AI into data visualization. This session covers the creation of dynamic, AI-powered dashboards that provide deeper insights and predictive analytics.",
+        rules: [
+            "Open to all students.",
+            "No prior registration required for entry.",
+            "Seating on first-come-first-serve basis."
+        ],
+        fee: "Free",
+        venue: "Auditorium, Department of Computer Science",
+        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        registrationLink: "#",
+        volunteers: []
+    },
+    {
         id: "fifa-addicts",
         title: "FIFA Addicts",
         day: "Day 2",
@@ -174,7 +218,7 @@ const events = [
     }
 ];
 
-const categories = ["All", "Coding", "Design", "Gaming", "Data Science", "Problem Solving"];
+const categories = ["All", "Coding", "Design", "Gaming", "Data Science", "Problem Solving", "Guest Session"];
 const days = ["All Days", "Day 1", "Day 2"];
 
 export default function Events() {
@@ -291,7 +335,15 @@ export default function Events() {
                                                             <div className={`px-3 py-1 rounded bg-white/5 border border-white/10 backdrop-blur-md text-xs font-mono uppercase tracking-wider ${event.color}`}>
                                                                 {event.category}
                                                             </div>
-                                                            <div className={`font-bold ${event.color} text-lg px-2 py-0.5 rounded bg-black/20 backdrop-blur-sm`}>{event.fee}</div>
+                                                            <div className="flex flex-col items-end gap-1">
+                                                                <div className={`font-bold ${event.color} text-lg px-2 py-0.5 rounded bg-black/20 backdrop-blur-sm`}>{event.fee}</div>
+                                                                {(event as any).prizePool && (
+                                                                    <div className="flex items-center gap-1 text-xs font-mono text-neon-cyan bg-neon-cyan/10 px-2 py-0.5 rounded border border-neon-cyan/20">
+                                                                        <Gamepad size={12} />
+                                                                        <span>{(event as any).prizePool}</span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
                                                         </div>
 
                                                         {/* Title & Desc */}
