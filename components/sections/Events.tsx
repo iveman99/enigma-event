@@ -11,7 +11,7 @@ const events = [
     // Day 1 - Feb 26
     {
         id: "compile-vibes",
-        title: "Vibe Coding",
+        title: "Compile The Vibes ",
         day: "Day 1",
         date: "Feb 26",
         category: "Coding",
@@ -62,7 +62,7 @@ const events = [
     },
     {
         id: "blind-dates",
-        title: "Blind Coding",
+        title: "Blind Date with Code",
         day: "Day 1",
         date: "Feb 26",
         category: "Coding",
@@ -195,7 +195,7 @@ const events = [
     },
     {
         id: "ui-niverse",
-        title: "UI/UX Re-Design",
+        title: "UI-niverse",
         day: "Day 2",
         date: "Feb 27",
         category: "Design",
