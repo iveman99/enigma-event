@@ -125,12 +125,17 @@ const events = [
         badge: "Team",
         icon: Search,
         color: "text-neon-magenta",
-        description: "Crack Clues. Race Against Time.",
-        fullDescription: "A competitive team-based challenge that tests logic and coordination. Solve clues and progress through elimination rounds. Speed and strategy will define your journey. Only the sharpest team will decode the final stage.",
+        description: "Decode the Hunt is not just a game—it is a battle of logic, speed, and sharp observation.",
+        fullDescription: "Decode the Hunt is not just a game—it is a battle of logic, speed, and sharp observation. Scan, solve, and unlock hidden clues as your team races against time to crack the final challenge and win exciting cash prizes.",
         rules: [
             "Team Size: 2-3 Members.",
             "Solve riddles to get next location.",
-            "Fastest team to finish wins."
+            "Fastest team to finish wins.",
+            "The first five teams to successfully complete the final login will win cash prizes.",
+            "All clues are hidden within the hunt, so participants should carefully explore each page.",
+            "Each team must stay together and use only one device during the event.",
+            "Sharing answers or using unfair means will result in disqualification.",
+            "The decision of the organizers will be final in all cases."
         ],
         fee: "₹199",
         prizePool: "₹6,000",
