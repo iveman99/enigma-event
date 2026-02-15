@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Events from "@/components/sections/Events";
+import TheArcade from "@/components/sections/TheArcade";
 
 import Registration from "@/components/sections/Registration";
 import Team from "@/components/sections/Team";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <About />
       <Events />
+      <TheArcade />
 
       <Registration />
       <Team />

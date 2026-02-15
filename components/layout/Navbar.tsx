@@ -8,6 +8,7 @@ import clsx from "clsx";
 const navLinks = [
     { name: "About", href: "#about" },
     { name: "Events", href: "#events" },
+    { name: "Arcade", href: "#arcade" },
     { name: "Schedule", href: "#timeline" },
     { name: "Team", href: "#team" },
 ];
