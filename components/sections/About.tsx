@@ -52,22 +52,13 @@ export default function About() {
                         transition={{ duration: 0.5 }}
                         className="space-y-6"
                     >
-                        <h3 className="text-2xl font-bold text-white mb-4">ENIGMA 1.0 – Official Tech Fest of UDCS</h3>
+                        <h3 className="text-2xl font-bold text-white mb-4">Code. Create. Conquer.</h3>
                         <p className="text-gray-300 leading-relaxed text-xl">
-                            <strong className="text-neon-cyan">ENIGMA 1.0</strong> is a two-day flagship tech fest organized by the Department of Computer Science, University of Mumbai, initiated by the Placement Cell.
+                            <strong className="text-neon-cyan">ENIGMA 1.0</strong> is the definitive tech fest of the Department of Computer Science, University of Mumbai.
                         </p>
 
-                        <div className="flex items-center gap-3 text-neon-magenta font-mono uppercase tracking-wider text-lg">
-                            <Calendar size={20} />
-                            <span>February 26 & 27</span>
-                        </div>
-
-                        <p className="text-gray-400 leading-relaxed text-lg">
-                            Open to Bachelor’s and Master’s students passionate about technology, innovation, and problem-solving, ENIGMA challenges participants to solve real-world problems, collaborate in teams, and compete under dynamic conditions.
-                        </p>
-
-                        <p className="text-gray-400 leading-relaxed text-lg">
-                            Beyond competition, ENIGMA offers a platform to connect with industry speakers, gain practical insights, and expand your professional network.
+                        <p className="text-gray-400 leading-relaxed text-lg mt-6">
+                            A high-octane arena for students to showcase innovation and problem-solving skills. Compete in dynamic challenges, collaborate with peers, and connect with industry leaders to expand your professional horizon.
                         </p>
                     </motion.div>
                 </div>

@@ -331,8 +331,15 @@ export default function Events() {
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.9 }}
                                                 transition={{ duration: 0.3 }}
+                                            // Removed md:col-span-2 md:row-span-2 for standard grid size
                                             >
-                                                <GlassCard className="h-full group relative overflow-hidden flex flex-col hover:shadow-[0_0_30px_rgba(0,255,255,0.1)] transition-shadow duration-500">
+                                                <GlassCard
+                                                    className={`h-full group relative overflow-hidden flex flex-col transition-shadow duration-500
+                                                    ${event.id === 'data-dash'
+                                                            ? 'border-neon-violet/50 shadow-[0_0_30px_rgba(188,19,254,0.3)] hover:shadow-[0_0_50px_rgba(188,19,254,0.5)]'
+                                                            : 'hover:shadow-[0_0_30px_rgba(0,255,255,0.1)]'
+                                                        }`}
+                                                >
                                                     {/* Decor */}
                                                     <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity duration-300 z-0`}>
                                                         <event.icon size={120} className={event.color} strokeWidth={0.5} />
@@ -341,17 +348,38 @@ export default function Events() {
                                                     <div className="p-6 flex flex-col flex-1 relative z-10">
                                                         {/* Header */}
                                                         <div className="flex justify-between items-start mb-6">
-                                                            <div className={`px-3 py-1 rounded bg-white/5 border border-white/10 backdrop-blur-md text-xs font-mono uppercase tracking-wider ${event.color}`}>
-                                                                {event.category}
-                                                            </div>
-                                                            <div className="flex flex-col items-end gap-1">
-                                                                <div className={`font-bold ${event.color} text-lg px-2 py-0.5 rounded bg-black/20 backdrop-blur-sm`}>{event.fee}</div>
-                                                                {(event as any).prizePool && (
-                                                                    <div className="flex items-center gap-1 text-xs font-mono text-neon-cyan bg-neon-cyan/10 px-2 py-0.5 rounded border border-neon-cyan/20">
-                                                                        <Gamepad size={12} />
-                                                                        <span>{(event as any).prizePool}</span>
+                                                            <div className="flex flex-col gap-2 items-start">
+                                                                <div className={`px-3 py-1 rounded bg-white/5 border border-white/10 backdrop-blur-md text-xs font-mono uppercase tracking-wider ${event.color}`}>
+                                                                    {event.category}
+                                                                </div>
+
+                                                                {/* Flagship Badge aligned with category */}
+                                                                {event.id === 'data-dash' && (
+                                                                    <div className="px-2 py-0.5 rounded bg-gradient-to-r from-neon-violet to-neon-blue text-white text-[10px] font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(188,19,254,0.4)]">
+                                                                        Flagship Event
                                                                     </div>
                                                                 )}
+                                                            </div>
+
+                                                            <div className="flex flex-col items-end gap-2">
+                                                                {/* Prize Pool - Prominent */}
+                                                                {(event as any).prizePool ? (
+                                                                    <div className="flex flex-col items-end">
+                                                                        <span className="text-[10px] uppercase tracking-wider text-gray-400 font-mono">Prize Pool</span>
+                                                                        <div className="flex items-center gap-1 text-xl font-bold text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">
+                                                                            <Gamepad size={16} />
+                                                                            <span>{(event as any).prizePool}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="h-8" /> /* Spacer if no prize pool */
+                                                                )}
+
+                                                                {/* Entry Fee - Subtler */}
+                                                                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">
+                                                                    <span>Entry Fee:</span>
+                                                                    <span className={`${event.fee === 'Free' ? 'text-neon-green' : 'text-white'} font-bold`}>{event.fee}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -442,16 +470,39 @@ export default function Events() {
                                         </div>
 
                                         <div className="relative z-10">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <span className={`px-3 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider ${event.color}`}>
-                                                    {event.category}
-                                                </span>
-                                                <span className="text-3xl font-bold text-neon-cyan drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">{event.fee}</span>
+                                            <div className="flex flex-col gap-1 mb-4">
+                                                <div className="flex items-center gap-3">
+                                                    {event.id === 'data-dash' && (
+                                                        <span className="px-3 py-1 rounded bg-gradient-to-r from-neon-violet to-neon-blue text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_10px_rgba(188,19,254,0.4)]">
+                                                            Flagship Event
+                                                        </span>
+                                                    )}
+                                                    <span className={`px-3 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-wider ${event.color}`}>
+                                                        {event.category}
+                                                    </span>
+                                                </div>
+
+                                                {/* Prize Pool Display */}
+                                                {(event as any).prizePool && (
+                                                    <div className="mt-2">
+                                                        <span className="text-xs uppercase tracking-wider text-gray-400 font-mono block mb-1">Prize Pool</span>
+                                                        <div className="flex items-center gap-2 text-4xl font-bold text-neon-cyan drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]">
+                                                            <Gamepad size={32} />
+                                                            <span>{(event as any).prizePool}</span>
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
+
                                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{event.title}</h2>
-                                            <div className="flex items-center gap-4 text-xs font-mono text-gray-400">
-                                                <span className="flex items-center gap-1"><Clock size={14} className="text-neon-blue" /> {event.day}</span>
-                                                <span className="flex items-center gap-1"><Users size={14} className="text-neon-magenta" /> {event.badge}</span>
+
+                                            <div className="flex flex-wrap items-center gap-4 text-sm font-mono text-gray-400 mt-2">
+                                                <div className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded border border-white/5">
+                                                    <span className="text-gray-500">Entry:</span>
+                                                    <span className={`${event.fee === 'Free' ? 'text-neon-green' : 'text-white'} font-bold`}>{event.fee}</span>
+                                                </div>
+                                                <span className="flex items-center gap-1"><Clock size={16} className="text-neon-blue" /> {event.day}</span>
+                                                <span className="flex items-center gap-1"><Users size={16} className="text-neon-magenta" /> {event.badge}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -482,14 +533,7 @@ export default function Events() {
                                             {/* Meta Info: Prize, Venue, Organizers */}
                                             <div className="space-y-4">
                                                 {/* Prize Pool */}
-                                                {(event as any).prizePool && (
-                                                    <div className="bg-gradient-to-br from-neon-cyan/20 to-transparent p-5 rounded-xl border border-neon-cyan/30">
-                                                        <h4 className="text-neon-cyan flex items-center gap-2 mb-2 font-mono uppercase text-sm font-bold">
-                                                            <Gamepad size={16} /> Prize Pool
-                                                        </h4>
-                                                        <p className="text-2xl font-bold text-white">{(event as any).prizePool}</p>
-                                                    </div>
-                                                )}
+
 
                                                 {/* Venue */}
                                                 {(event as any).venue && (

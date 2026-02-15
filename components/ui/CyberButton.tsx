@@ -23,7 +23,7 @@ export default function CyberButton({
             whileTap={{ scale: 0.95 }}
             className={clsx(
                 "relative group px-8 py-3 font-display font-medium tracking-wider uppercase overflow-hidden transition-all duration-300",
-                "clip-path-slant border lg:text-lg",
+                "clip-path-slant border lg:text-lg flex items-center justify-center",
                 variant === "primary"
                     ? "bg-transparent border-neon-cyan text-neon-cyan hover:bg-neon-cyan/10"
                     : "bg-transparent border-neon-magenta text-neon-magenta hover:bg-neon-magenta/10",

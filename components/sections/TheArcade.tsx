@@ -73,14 +73,28 @@ export default function TheArcade() {
                     <h3 className="text-xl font-bold text-white uppercase tracking-wider mb-2">Interested in participating?</h3>
                     <p className="text-gray-400 text-sm mb-8">Contact us to book your spot in The Arcade.</p>
 
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-16 h-16 rounded-full bg-neon-magenta/10 flex items-center justify-center mb-2 animate-pulse">
-                            <Phone className="text-neon-magenta w-8 h-8" />
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+                        {/* Pranav */}
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-16 h-16 rounded-full bg-neon-cyan/10 flex items-center justify-center mb-2 animate-pulse">
+                                <Phone className="text-neon-cyan w-8 h-8" />
+                            </div>
+                            <p className="text-2xl font-bold text-white">Pranav</p>
+                            <a href="tel:+918108544239" className="text-lg font-mono text-neon-cyan hover:text-white transition-colors">
+                                +91 81085 44239
+                            </a>
                         </div>
-                        <p className="text-2xl font-bold text-white">Mayur</p>
-                        <a href="tel:+918828069553" className="text-lg font-mono text-neon-magenta hover:text-white transition-colors">
-                            +91 88280 69553
-                        </a>
+
+                        {/* Mayur */}
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="w-16 h-16 rounded-full bg-neon-magenta/10 flex items-center justify-center mb-2 animate-pulse">
+                                <Phone className="text-neon-magenta w-8 h-8" />
+                            </div>
+                            <p className="text-2xl font-bold text-white">Mayur</p>
+                            <a href="tel:+918828069553" className="text-lg font-mono text-neon-magenta hover:text-white transition-colors">
+                                +91 88280 69553
+                            </a>
+                        </div>
                     </div>
                 </GlassCard>
             </div>
