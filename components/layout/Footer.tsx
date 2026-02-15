@@ -71,55 +71,38 @@ export default function Footer() {
                     </a>
                 </div>
 
-                <div className="text-xs text-white font-mono uppercase tracking-widest flex flex-col md:flex-row items-center justify-center gap-4">
-                    <p>&copy; 2026 Placement Cell, UDCS. All rights reserved.</p>
-                    <div className="h-px w-8 bg-gray-800 md:h-4 md:w-px" />
+                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <p className="text-xs text-gray-500 font-mono text-center md:text-left">
+                        &copy; 2026 Placement Cell, UDCS.<br className="hidden md:block" /> All rights reserved.
+                    </p>
 
-                    {/* Unique Creator Credit */}
-                    <motion.div
-                        className="relative p-[1px] rounded-full overflow-hidden group"
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        {/* Spinning Border */}
-                        <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] animate-spin-slow opacity-50 group-hover:opacity-100 transition-opacity" />
-
-                        <div className="relative flex flex-wrap items-center justify-center gap-2 md:gap-2.5 px-4 py-2 md:px-6 md:py-3 rounded-2xl md:rounded-full bg-black/90 backdrop-blur-xl text-center">
-                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">Built with</span>
-
+                    {/* Creative Credits */}
+                    <div className="flex flex-col items-center md:items-end gap-2">
+                        <motion.div
+                            className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/5 hover:border-neon-cyan/30 transition-colors group"
+                            whileHover={{ scale: 1.02 }}
+                        >
+                            <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">Built with</span>
                             <motion.span
-                                className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-500 to-red-600 drop-shadow-[0_0_10px_rgba(255,69,0,0.8)] text-xs md:text-sm tracking-wider"
-                                animate={{
-                                    textShadow: ["0 0 10px rgba(255,69,0,0.6)", "0 0 25px rgba(255,69,0,1)", "0 0 10px rgba(255,69,0,0.6)"],
-                                    scale: [1, 1.1, 1]
-                                }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                className="font-bold text-xs bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-orange-500 to-red-500 animate-gradient-x"
                             >
                                 PASSION
                             </motion.span>
-
-                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">by</span>
-
-                            <a
-                                href="https://www.linkedin.com/in/veman-chippa"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                            <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">by</span>
+                            <a href="https://www.linkedin.com/in/veman-chippa" target="_blank" rel="noopener noreferrer">
                                 <ScrambleText text="iVeman" />
                             </a>
+                        </motion.div>
 
-                            <span className="text-gray-600 hidden md:inline">|</span>
-
-                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">Illustrated by</span>
-
-                            <a
-                                href="https://www.linkedin.com/in/ahadarshx/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <ScrambleText text="Adarsh" />
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Illustrated by</span>
+                            <a href="https://www.linkedin.com/in/ahadarshx/" target="_blank" rel="noopener noreferrer">
+                                <span className="text-sm font-display font-bold text-neon-magenta hover:text-white transition-colors cursor-pointer">
+                                    ADARSH
+                                </span>
                             </a>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </footer>

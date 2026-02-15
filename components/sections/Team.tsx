@@ -4,8 +4,9 @@
 import SectionWrapper from "../ui/SectionWrapper";
 import SectionHeader from "../ui/SectionHeader";
 import { User, Linkedin, Github } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import TextDecrypt from "../ui/TextDecrypt";
+import { useState, useEffect, useRef } from "react";
 
 const volunteers = [
     { name: "iVeman", role: "Tech Head", linkedin: "https://www.linkedin.com/in/veman-chippa", image: "/images/team/iveman.jpeg" },
@@ -16,7 +17,7 @@ const volunteers = [
     { name: "Mayur Shewale", role: "Finance Head", linkedin: "https://www.linkedin.com/in/mayur-shewale312003/", image: "/images/team/Mayur.jpeg" },
     { name: "Deeksha Singh", role: "PR Marketing Head", linkedin: "https://www.linkedin.com/in/deeksha-singh-951024376/", image: "/images/team/Deeksha.jpeg" },
     { name: "Priyanshi Dubey", role: "Creative Head Co-ordinator", linkedin: "https://www.linkedin.com/in/priyanshi-d-ba759b246/", image: "/images/team/Priyanshi.jpeg" },
-    { name: "Kunal Mahale", role: "Volunteer", linkedin: "https://www.linkedin.com/in/kunal11/", image: "/images/team/Kunal.jpeg" },
+    { name: "Kunal Mahale", role: "Editor", linkedin: "https://www.linkedin.com/in/kunal11/", image: "/images/team/Kunal.jpeg" },
     { name: "Vansh Lad", role: "Volunteer", linkedin: "https://www.linkedin.com/in/vansh-lad-012b90259/", image: "/images/team/Vansh.jpeg" },
     { name: "Pranay Kokane", role: "Volunteer", linkedin: "https://www.linkedin.com/in/pranay-kokane-20351b261/", image: "/images/team/Pranay.jpeg" },
 
@@ -29,6 +30,19 @@ const volunteers = [
 ];
 
 export default function Team() {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(scrollRef, { once: true, margin: "-100px" });
+    const [startScroll, setStartScroll] = useState(false);
+
+    useEffect(() => {
+        if (isInView) {
+            const timer = setTimeout(() => {
+                setStartScroll(true);
+            }, 2500); // 2.5s delay
+            return () => clearTimeout(timer);
+        }
+    }, [isInView]);
+
     return (
         <SectionWrapper id="team" className="z-[105]">
             <SectionHeader title="The Team" subtitle="The Force Behind Enigma" />
@@ -38,8 +52,8 @@ export default function Team() {
                 <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-                <div className="flex overflow-hidden relative w-full">
-                    <div className="flex gap-6 animate-scroll hover:[animation-play-state:paused] py-8">
+                <div className="flex overflow-hidden relative w-full" ref={scrollRef}>
+                    <div className={`flex gap-6 py-8 ${startScroll ? 'animate-scroll' : ''} hover:[animation-play-state:paused]`}>
                         {[...volunteers, ...volunteers].map((member, index) => (
                             <div
                                 key={index}

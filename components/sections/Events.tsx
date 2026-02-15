@@ -18,13 +18,13 @@ const events = [
         badge: "Team",
         icon: Code,
         color: "text-neon-cyan",
-        description: "High-Energy Coding Sprint.",
-        fullDescription: "Turn ideas into working digital solutions in this fast-paced team coding challenge. Collaborate, brainstorm, and build within a limited timeframe. Creativity and execution will define your success. Build smart. Build fast. Build impactful.",
+        description: "Join this fast-paced team challenge where innovation meets execution.",
+        fullDescription: "Join this fast-paced team challenge where innovation meets execution. Brainstorm, collaborate, and transform concepts into working digital solutions before time runs out. Think bold. Code smart. Ship fast.",
         rules: [
-            "Team Size: 2-3 Members.",
-            "Time Limit: 3 Hours.",
-            "Internet access allowed.",
-            "Plagiarism leads to immediate disqualification."
+            "Team Composition: 2-3 participants per team.",
+            "Internet Usage: Permitted for development and research.",
+            "Fair Play Policy: Any form of plagiarism will result in immediate disqualification.",
+            "Duration: 3 Hours."
         ],
         fee: "₹199",
         prizePool: "₹8,000",
@@ -69,13 +69,14 @@ const events = [
         badge: "Solo",
         icon: Terminal,
         color: "text-neon-magenta",
-        description: "Test Your Programming Fundamentals.",
-        fullDescription: "A solo coding challenge designed to test your logic and problem-solving skills. Solve curated problems under time pressure. Speed and accuracy will set you apart. Only the sharpest coders will dominate.",
+        description: "A solo coding challenge crafted to test your logic and problem-solving abilities.",
+        fullDescription: "A solo coding challenge crafted to test your logic and problem-solving abilities. Tackle carefully curated problems under strict time constraints. Speed, precision, and clarity of thought will determine the winner.",
         rules: [
-            "Individual Participation.",
-            "Monitor will be turned off.",
-            "Three rounds of increasing difficulty.",
-            "Syntax errors will penalize score."
+            "Solo Entry Only.",
+            "Screen Will Remain Turned Off During the Challenge.",
+            "Three Progressive Rounds with Increasing Difficulty.",
+            "Syntax Errors Will Result in Score Deductions.",
+            "Duration: 90 Minutes."
         ],
         fee: "₹99",
         prizePool: "₹6,000",
@@ -83,8 +84,8 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/SgtEjoAUFM8pU5YEA",
         volunteers: [
-            { name: "Volunteer 1", phone: "+91 XXXXX XXXXX" },
-            { name: "Volunteer 2", phone: "+91 XXXXX XXXXX" }
+            { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
+            { name: "Kunal Mahale", phone: "+91 93708 00040" }
         ]
     },
     {
@@ -96,13 +97,14 @@ const events = [
         badge: "Team",
         icon: Palette,
         color: "text-neon-blue",
-        description: "Design Beyond Limits.",
-        fullDescription: "Reimagine and redesign digital experiences with creativity and clarity. Work as a team to craft intuitive interfaces. Balance aesthetics with usability. Let your design thinking stand out.",
+        description: "Transform ideas into seamless digital experiences. Blend creativity with usability.",
+        fullDescription: "Transform ideas into seamless digital experiences. Blend creativity with usability and build interfaces that speak for themselves. Where design meets purpose.",
         rules: [
-            "Team Size: 2-3 Members.",
-            "Time Limit: 2.5 Hours.",
-            "Tools: Figma / Adobe XD.",
-            "Design must be original."
+            "Team Composition: 2-3 participants per team.",
+            "Redesign an assigned popular website, from concept to prototype.",
+            "Permitted Tools: Figma / Adobe XD / Photoshop / Canva.",
+            "Authenticity Rule: Submissions must be entirely original.",
+            "Duration: 2 Hours 30 Minutes."
         ],
         fee: "₹199",
         prizePool: "₹8,000",
@@ -110,7 +112,7 @@ const events = [
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
         registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
-            { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
+            { name: "Vansh Lad", phone: "+91 90282 80757" },
             { name: "Adarsh Mishra", phone: "+91 99751 17332" }
         ]
     },
@@ -125,17 +127,13 @@ const events = [
         badge: "Team",
         icon: Search,
         color: "text-neon-magenta",
-        description: "Decode the Hunt is not just a game—it is a battle of logic, speed, and sharp observation.",
-        fullDescription: "Decode the Hunt is not just a game—it is a battle of logic, speed, and sharp observation. Scan, solve, and unlock hidden clues as your team races against time to crack the final challenge and win exciting cash prizes.",
+        description: "A competitive team-based challenge designed to test logic, coordination, and strategic thinking.",
+        fullDescription: "A competitive team-based challenge designed to test logic, coordination, and strategic thinking. Solve clues, advance through elimination rounds, and race against time. Precision and teamwork will determine who reaches the final stage.",
         rules: [
-            "Team Size: 2-3 Members.",
-            "Solve riddles to get next location.",
-            "Fastest team to finish wins.",
-            "The first five teams to successfully complete the final login will win cash prizes.",
-            "All clues are hidden within the hunt, so participants should carefully explore each page.",
-            "Each team must stay together and use only one device during the event.",
-            "Sharing answers or using unfair means will result in disqualification.",
-            "The decision of the organizers will be final in all cases."
+            "Team Composition: 2-3 participants per team.",
+            "Each clue solved will lead you to the next one.",
+            "The team that completes the entire challenge in the shortest time will be declared the winner.",
+            "Duration: 75 Minutes."
         ],
         fee: "₹199",
         prizePool: "₹6,000",
@@ -179,15 +177,16 @@ const events = [
         category: "Gaming",
         badge: "Solo",
         icon: Gamepad,
-        color: "text-neon-cyan",
-        description: "Step into the arena and compete in an intense head-to-head FIFA tournament.",
-        fullDescription: "Knockout Gaming Showdown. Battle through knockout rounds where every match decides your survival. Show your skills, strategy, and composure under pressure. Only one player will rise as the ultimate champion.",
+        color: "text-neon-green",
+        description: "Enter the EA Sports FIFA Mobile arena. No second chances.",
+        fullDescription: "Enter the EA Sports FIFA Mobile arena. No second chances. Battle through thrilling knockout rounds where every match is do-or-die. Outsmart, outplay, and outlast your opponents, because only one gamer will claim the crown.",
         rules: [
-            "H2H Mode Only.",
-            "No back-passing or time wasting.",
-            "Disconnection after 15th min = 3–0 loss (unless rematch agreed).",
-            "Basic tutorial must be completed.",
-            "Tie-breaker: Shots on target > Corners > Possession %."
+            "Solo entry only, Head-to-Head (H2H) mode.",
+            "Each match is 5 minutes (real-time).",
+            "Knockout format - winner advances, loser gets eliminated.",
+            "Ties decided by higher ball possession.",
+            "No backpassing or time-wasting; violation leads to disqualification.",
+            "Total Duration: 90 Minutes."
         ],
         fee: "₹99",
         prizePool: "₹6,000",
@@ -208,12 +207,14 @@ const events = [
         badge: "Team",
         icon: Database,
         color: "text-neon-violet",
-        description: "Decode Data. Deliver Insights.",
-        fullDescription: "Analyze datasets and uncover meaningful insights. Work in teams to solve real-world data problems. Smart interpretation is the key to winning. Turn numbers into impact.",
+        description: "Work in teams to decode datasets and tackle real-world challenges.",
+        fullDescription: "Work in teams to decode datasets and tackle real-world challenges. It's not just about numbers - it's about insight, strategy, and smart decisions. Analyze deep. Think sharp. Impact big.",
         rules: [
-            "Team Size: 2-3 Members.",
-            "Dataset provided on spot.",
-            "Submission: Notebook + Presentation."
+            "Team Composition: 2-3 members per team.",
+            "Dataset: Will be provided on the spot.",
+            "Develop a complete, insight-driven solution with clear, measurable outcomes.",
+            "Deploy a fully functional solution accessible to judges for evaluation.",
+            "Duration: 3 Hours."
         ],
         fee: "₹199",
         prizePool: "₹10,000",
