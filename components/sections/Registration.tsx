@@ -46,11 +46,11 @@ const scheduleData = {
             color: "text-neon-green"
         },
         {
-            time: "02:00 PM - 05:00 PM",
-            title: "Data Dash",
-            category: "Data Science",
-            description: "Judges review at 4:30 PM.",
-            color: "text-neon-orange" // Assuming neon-orange exists or fallback to something else, checking colors. Let's stick to existing palette: cyan, magenta, blue, violet, green.
+            time: "02:00 PM - 04:30 PM",
+            title: "UI-niverse",
+            category: "Design Competition",
+            description: "2.5 Hours. Judges review at 4:30 PM.",
+            color: "text-neon-violet"
         }
     ],
     "Day 2": [
@@ -83,11 +83,11 @@ const scheduleData = {
             color: "text-neon-blue"
         },
         {
-            time: "01:15 PM - 03:45 PM",
-            title: "UI/UX Re-Design",
-            category: "Design Competition",
-            description: "2.5 Hours. Judges review at 4:30 PM.",
-            color: "text-neon-violet"
+            time: "01:00 PM - 04:00 PM",
+            title: "Data Dash",
+            category: "Data Science",
+            description: "Judges review at 4:30 PM.",
+            color: "text-neon-orange"
         },
         {
             time: "04:00 PM Onwards",

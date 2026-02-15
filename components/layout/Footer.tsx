@@ -83,11 +83,11 @@ export default function Footer() {
                         {/* Spinning Border */}
                         <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] animate-spin-slow opacity-50 group-hover:opacity-100 transition-opacity" />
 
-                        <div className="relative flex items-center gap-2.5 px-6 py-3 rounded-full bg-black/90 backdrop-blur-xl">
-                            <span className="text-white text-xs font-mono tracking-widest uppercase">Built with</span>
+                        <div className="relative flex flex-wrap items-center justify-center gap-2 md:gap-2.5 px-4 py-2 md:px-6 md:py-3 rounded-2xl md:rounded-full bg-black/90 backdrop-blur-xl text-center">
+                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">Built with</span>
 
                             <motion.span
-                                className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-500 to-red-600 drop-shadow-[0_0_10px_rgba(255,69,0,0.8)] text-sm tracking-wider"
+                                className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-500 to-red-600 drop-shadow-[0_0_10px_rgba(255,69,0,0.8)] text-xs md:text-sm tracking-wider"
                                 animate={{
                                     textShadow: ["0 0 10px rgba(255,69,0,0.6)", "0 0 25px rgba(255,69,0,1)", "0 0 10px rgba(255,69,0,0.6)"],
                                     scale: [1, 1.1, 1]
@@ -97,7 +97,7 @@ export default function Footer() {
                                 PASSION
                             </motion.span>
 
-                            <span className="text-white text-xs font-mono tracking-widest uppercase">by</span>
+                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">by</span>
 
                             <a
                                 href="https://www.linkedin.com/in/veman-chippa"
@@ -107,9 +107,9 @@ export default function Footer() {
                                 <ScrambleText text="iVeman" />
                             </a>
 
-                            <span className="text-gray-600 mx-2">|</span>
+                            <span className="text-gray-600 hidden md:inline">|</span>
 
-                            <span className="text-white text-xs font-mono tracking-widest uppercase">Illustrated by</span>
+                            <span className="text-white text-[10px] md:text-xs font-mono tracking-widest uppercase whitespace-nowrap">Illustrated by</span>
 
                             <a
                                 href="https://www.linkedin.com/in/ahadarshx/"

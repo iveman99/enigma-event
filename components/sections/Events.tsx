@@ -88,29 +88,30 @@ const events = [
         ]
     },
     {
-        id: "data-dash",
-        title: "Data Dash",
+        id: "ui-niverse",
+        title: "UI-niverse",
         day: "Day 1",
         date: "Feb 26",
-        category: "Data Science",
+        category: "Design",
         badge: "Team",
-        icon: Database,
-        color: "text-neon-violet",
-        description: "Decode Data. Deliver Insights.",
-        fullDescription: "Analyze datasets and uncover meaningful insights. Work in teams to solve real-world data problems. Smart interpretation is the key to winning. Turn numbers into impact.",
+        icon: Palette,
+        color: "text-neon-blue",
+        description: "Design Beyond Limits.",
+        fullDescription: "Reimagine and redesign digital experiences with creativity and clarity. Work as a team to craft intuitive interfaces. Balance aesthetics with usability. Let your design thinking stand out.",
         rules: [
             "Team Size: 2-3 Members.",
-            "Dataset provided on spot.",
-            "Submission: Notebook + Presentation."
+            "Time Limit: 2.5 Hours.",
+            "Tools: Figma / Adobe XD.",
+            "Design must be original."
         ],
         fee: "₹199",
-        prizePool: "₹10,000",
+        prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
+        registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
-            { name: "Priyanshi Dubey", phone: "+91 72194 27357" },
-            { name: "Aryan Palekar", phone: "+91 89282 21297" }
+            { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
+            { name: "Adarsh Mishra", phone: "+91 99751 17332" }
         ]
     },
 
@@ -194,30 +195,29 @@ const events = [
         ]
     },
     {
-        id: "ui-niverse",
-        title: "UI-niverse",
+        id: "data-dash",
+        title: "Data Dash",
         day: "Day 2",
         date: "Feb 27",
-        category: "Design",
+        category: "Data Science",
         badge: "Team",
-        icon: Palette,
-        color: "text-neon-blue",
-        description: "Design Beyond Limits.",
-        fullDescription: "Reimagine and redesign digital experiences with creativity and clarity. Work as a team to craft intuitive interfaces. Balance aesthetics with usability. Let your design thinking stand out.",
+        icon: Database,
+        color: "text-neon-violet",
+        description: "Decode Data. Deliver Insights.",
+        fullDescription: "Analyze datasets and uncover meaningful insights. Work in teams to solve real-world data problems. Smart interpretation is the key to winning. Turn numbers into impact.",
         rules: [
             "Team Size: 2-3 Members.",
-            "Time Limit: 2.5 Hours.",
-            "Tools: Figma / Adobe XD.",
-            "Design must be original."
+            "Dataset provided on spot.",
+            "Submission: Notebook + Presentation."
         ],
         fee: "₹199",
-        prizePool: "₹8,000",
+        prizePool: "₹10,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
+        registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
         volunteers: [
-            { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
-            { name: "Adarsh Mishra", phone: "+91 99751 17332" }
+            { name: "Priyanshi Dubey", phone: "+91 72194 27357" },
+            { name: "Aryan Palekar", phone: "+91 89282 21297" }
         ]
     }
 ];
