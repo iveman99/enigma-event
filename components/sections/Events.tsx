@@ -55,7 +55,7 @@ const events = [
         fee: "Free",
         venue: "Auditorium, Department of Computer Science",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "#",
+        registrationLink: "https://forms.gle/Cp1Pbc2aA3vA38ia6",
         volunteers: [
             { name: "Hera Khan", phone: "+91 79771 97156" }
         ]
@@ -164,7 +164,7 @@ const events = [
         fee: "Free",
         venue: "Auditorium, Department of Computer Science",
         venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
-        registrationLink: "#",
+        registrationLink: "https://forms.gle/U7qWtigJWP4gtSbc9",
         volunteers: [
             { name: "Utkarsha Patil", phone: "+91 79721 34987" }
         ]
