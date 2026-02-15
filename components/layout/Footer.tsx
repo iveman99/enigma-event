@@ -77,7 +77,7 @@ export default function Footer() {
                     </p>
 
                     {/* Creative Credits */}
-                    <div className="flex flex-col items-center md:items-end gap-2">
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
                         <motion.div
                             className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/5 hover:border-neon-cyan/30 transition-colors group"
                             whileHover={{ scale: 1.02 }}
@@ -94,14 +94,17 @@ export default function Footer() {
                             </a>
                         </motion.div>
 
-                        <div className="flex items-center gap-2">
-                            <span className="text-[10px] text-gray-500 font-mono uppercase tracking-wider">Illustrated by</span>
+                        <motion.div
+                            className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/5 hover:border-neon-magenta/30 transition-colors group"
+                            whileHover={{ scale: 1.02 }}
+                        >
+                            <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">Illustrated by</span>
                             <a href="https://www.linkedin.com/in/ahadarshx/" target="_blank" rel="noopener noreferrer">
-                                <span className="text-sm font-display font-bold text-neon-magenta hover:text-white transition-colors cursor-pointer">
+                                <span className="text-sm font-display font-bold text-neon-magenta group-hover:text-white transition-colors cursor-pointer">
                                     ADARSH
                                 </span>
                             </a>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>
