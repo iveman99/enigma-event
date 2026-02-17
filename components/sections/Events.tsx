@@ -565,7 +565,12 @@ export default function Events() {
                                                         {event.volunteers.map((vol, i) => (
                                                             <div key={i} className="flex justify-between items-center text-sm">
                                                                 <span className="text-gray-400">{vol.name}</span>
-                                                                <span className="text-white font-mono bg-white/10 px-2 py-0.5 rounded text-xs">{vol.phone}</span>
+                                                                <a 
+                                                                    href={`tel:${vol.phone.replace(/\s/g, "")}`}
+                                                                    className="text-white font-mono bg-white/10 px-2 py-0.5 rounded text-xs hover:bg-white/20 hover:text-neon-cyan transition-colors"
+                                                                >
+                                                                    {vol.phone}
+                                                                </a>
                                                             </div>
                                                         ))}
                                                     </div>
