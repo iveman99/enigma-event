@@ -29,7 +29,7 @@ const events = [
         fee: "₹199",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/QfcskSuJvwsFVUNs6",
         volunteers: [
             { name: "Ankita Goyal", phone: "+91 93233 88342" },
@@ -54,7 +54,7 @@ const events = [
         ],
         fee: "Free",
         venue: "Auditorium, Department of Computer Science",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/Cp1Pbc2aA3vA38ia6",
         volunteers: [
             { name: "Hera Khan", phone: "+91 79771 97156" }
@@ -81,7 +81,7 @@ const events = [
         fee: "₹99",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/SgtEjoAUFM8pU5YEA",
         volunteers: [
             { name: "Mahesh Khairnar", phone: "+91 75885 52573" },
@@ -109,7 +109,7 @@ const events = [
         fee: "₹199",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
         volunteers: [
             { name: "Vansh Lad", phone: "+91 90282 80757" },
@@ -138,7 +138,7 @@ const events = [
         fee: "₹199",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/nRRxc185qJu9JvD16",
         volunteers: [
             { name: "Aryan Palekar", phone: "+91 89282 21297" },
@@ -163,7 +163,7 @@ const events = [
         ],
         fee: "Free",
         venue: "Auditorium, Department of Computer Science",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/U7qWtigJWP4gtSbc9",
         volunteers: [
             { name: "Utkarsha Patil", phone: "+91 79721 34987" }
@@ -191,7 +191,7 @@ const events = [
         fee: "₹99",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/Mpt3v86gh4kamQQA6",
         volunteers: [
             { name: "Rawket", phone: "+91 99677 03018" },
@@ -219,7 +219,7 @@ const events = [
         fee: "₹199",
         prizePool: "₹10,000",
         venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.app.goo.gl/q55Dxhdcyq75djwx5",
+        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
         volunteers: [
             { name: "Priyanshi Dubey", phone: "+91 72194 27357" },
