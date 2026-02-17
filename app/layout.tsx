@@ -71,6 +71,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: "/images/enigma-logo.png",
+    shortcut: "/images/enigma-logo.png",
+    apple: "/images/enigma-logo.png",
+  },
 };
 
 const jsonLd = {
