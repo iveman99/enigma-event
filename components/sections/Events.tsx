@@ -207,14 +207,16 @@ const events = [
         badge: "Team",
         icon: Database,
         color: "text-neon-violet",
-        description: "Work in teams to decode datasets and tackle real-world challenges.",
-        fullDescription: "Work in teams to decode datasets and tackle real-world challenges. It's not just about numbers - it's about insight, strategy, and smart decisions. Analyze deep. Think sharp. Impact big.",
+        description: "Solve real-world Machine Learning challenges. Build, train, and deploy models to predict outcomes on unseen data.",
+        fullDescription: "Dive into real-world Machine Learning and Deep Learning problems. Participants will handle datasets (text, CSV, or images), perform data preparation, and build models to make accurate predictions on unseen test data using Python and standard ML libraries.",
         rules: [
-            "Team Composition: 2-3 members per team.",
-            "Dataset: Will be provided on the spot.",
-            "Develop a complete, insight-driven solution with clear, measurable outcomes.",
-            "Deploy a fully functional solution accessible to judges for evaluation.",
-            "Duration: 3 Hours."
+            "Team Size: Max 3 members. Bring your own laptops.",
+            "Task: Solve ML/DL problems using Python (NumPy, Pandas, TF, etc.).",
+            "Allowed: Stack Overflow, Documentation, local IDEs.",
+            "Prohibited: GenAI tools (ChatGPT, etc.), pre-trained models, plagiarism.",
+            "Submission: GitHub Repo + Model Deployment + Viva.",
+            "Evaluation: Accuracy (60%), Code Quality (30%), Format (10%).",
+            "Duration: 3-4 Hours."
         ],
         fee: "₹199",
         prizePool: "₹10,000",
@@ -565,7 +567,7 @@ export default function Events() {
                                                         {event.volunteers.map((vol, i) => (
                                                             <div key={i} className="flex justify-between items-center text-sm">
                                                                 <span className="text-gray-400">{vol.name}</span>
-                                                                <a 
+                                                                <a
                                                                     href={`tel:${vol.phone.replace(/\s/g, "")}`}
                                                                     className="text-white font-mono bg-white/10 px-2 py-0.5 rounded text-xs hover:bg-white/20 hover:text-neon-cyan transition-colors"
                                                                 >
