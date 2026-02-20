@@ -26,7 +26,7 @@ const volunteers = [
     { name: "Aryan Palekar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/aryan-palekar-3ba736285/", image: "/images/team/Aryan.jpeg" },
     { name: "Mahesh Khairnar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/khairnarmahesh11/", image: "/images/team/Mahesh.jpeg" },
     { name: "Utkarsha Patil", role: "Volunteer", linkedin: "https://www.linkedin.com/in/utkarsha-patil-9854412b6/", image: "/images/team/Utkarsha.jpeg" },
-    { name: "Ankita Goyal", role: "Volunteer", linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", image: "/images/team/Ankita.jpeg" },
+    { name: "Ankita Goyal", role: "Decor Head", linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", image: "/images/team/Ankita.jpeg" },
 ];
 
 export default function Team() {
