@@ -146,7 +146,7 @@ const TimelineView = ({ onBack }: { onBack: () => void }) => {
                                 />
                             )}
                             <span className="relative z-10">
-                                {day === "Day 1" ? "FEB 26" : "FEB 27"}
+                                {day === "Day 1" ? "MAR 11" : "MAR 12"}
                             </span>
                         </button>
                     ))}

@@ -68,7 +68,7 @@ export default function Hero() {
                     >
                         <div className="inline-block px-6 py-2 border border-neon-cyan/50 bg-neon-cyan/10 rounded-full backdrop-blur-sm">
                             <span className="text-xl md:text-2xl font-mono font-bold text-neon-cyan tracking-widest drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
-                                FEB 26 & 27
+                                MAR 11 & 12
                             </span>
                         </div>
                     </motion.div>

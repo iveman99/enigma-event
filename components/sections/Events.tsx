@@ -13,7 +13,7 @@ const events = [
         id: "compile-vibes",
         title: "Compile The Vibes ",
         day: "Day 1",
-        date: "Feb 26",
+        date: "Mar 11",
         category: "Coding",
         badge: "Team",
         icon: Code,
@@ -26,7 +26,7 @@ const events = [
             "Fair Play Policy: Any form of plagiarism will result in immediate disqualification.",
             "Duration: 3 Hours."
         ],
-        fee: "₹199",
+        fee: "Free",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -40,7 +40,7 @@ const events = [
         id: "guest-agentic-ai",
         title: "Agentic AI",
         day: "Day 1",
-        date: "Feb 26",
+        date: "Mar 11",
         category: "Guest Session",
         badge: "Open For All",
         icon: Mic,
@@ -64,7 +64,7 @@ const events = [
         id: "blind-dates",
         title: "Blind Date with Code",
         day: "Day 1",
-        date: "Feb 26",
+        date: "Mar 11",
         category: "Coding",
         badge: "Solo",
         icon: Terminal,
@@ -78,7 +78,7 @@ const events = [
             "Syntax Errors Will Result in Score Deductions.",
             "Duration: 90 Minutes."
         ],
-        fee: "₹99",
+        fee: "Free",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -92,7 +92,7 @@ const events = [
         id: "ui-niverse",
         title: "UI-niverse",
         day: "Day 1",
-        date: "Feb 26",
+        date: "Mar 11",
         category: "Design",
         badge: "Team",
         icon: Palette,
@@ -106,7 +106,7 @@ const events = [
             "Authenticity Rule: Submissions must be entirely original.",
             "Duration: 2 Hours 30 Minutes."
         ],
-        fee: "₹199",
+        fee: "Free",
         prizePool: "₹8,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -117,12 +117,12 @@ const events = [
         ]
     },
 
-    // Day 2 - Feb 27
+    // Day 2 - Mar 12
     {
         id: "decode-hunt",
         title: "Decode The Hunt",
         day: "Day 2",
-        date: "Feb 27",
+        date: "Mar 12",
         category: "Problem Solving",
         badge: "Team",
         icon: Search,
@@ -135,7 +135,7 @@ const events = [
             "The team that completes the entire challenge in the shortest time will be declared the winner.",
             "Duration: 75 Minutes."
         ],
-        fee: "₹199",
+        fee: "Free",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -149,7 +149,7 @@ const events = [
         id: "guest-ai-dashboards",
         title: "AI-Powered Dashboards",
         day: "Day 2",
-        date: "Feb 27",
+        date: "Mar 12",
         category: "Guest Session",
         badge: "Open For All",
         icon: Mic,
@@ -173,7 +173,7 @@ const events = [
         id: "fifa-addicts",
         title: "FIFA Addicts",
         day: "Day 2",
-        date: "Feb 27",
+        date: "Mar 12",
         category: "Gaming",
         badge: "Solo",
         icon: Gamepad,
@@ -188,7 +188,7 @@ const events = [
             "No backpassing or time-wasting; violation leads to disqualification.",
             "Total Duration: 90 Minutes."
         ],
-        fee: "₹99",
+        fee: "Free",
         prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -202,7 +202,7 @@ const events = [
         id: "data-dash",
         title: "Data Dash",
         day: "Day 2",
-        date: "Feb 27",
+        date: "Mar 12",
         category: "Data Science",
         badge: "Team",
         icon: Database,
@@ -218,7 +218,7 @@ const events = [
             "Evaluation: Accuracy (60%), Code Quality (30%), Format (10%).",
             "Duration: 3-4 Hours."
         ],
-        fee: "₹199",
+        fee: "Free",
         prizePool: "₹10,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
@@ -279,7 +279,7 @@ export default function Events() {
                                     />
                                 )}
                                 <span className="relative z-10">
-                                    {day === "All Days" ? "All Days" : day === "Day 1" ? "Feb 26" : "Feb 27"}
+                                    {day === "All Days" ? "All Days" : day === "Day 1" ? "Mar 11" : "Mar 12"}
                                 </span>
                             </button>
                         ))}
@@ -319,7 +319,7 @@ export default function Events() {
                                 >
                                     <div className="h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent flex-1 opacity-50" />
                                     <h3 className="text-2xl font-display font-bold text-white uppercase tracking-widest">
-                                        {dayGroup === "Day 1" ? "FEB 26 / DAY 1" : "FEB 27 / DAY 2"}
+                                        {dayGroup === "Day 1" ? "MAR 11 / DAY 1" : "MAR 12 / DAY 2"}
                                     </h3>
                                     <div className="h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent flex-1 opacity-50" />
                                 </motion.div>

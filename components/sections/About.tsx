@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const infoCards = [
     {
         icon: Calendar,
-        title: "Feb 26–27",
+        title: "Mar 11–12",
         subtitle: "Two-Day Techfest",
         color: "text-neon-cyan",
         border: "border-neon-cyan"
