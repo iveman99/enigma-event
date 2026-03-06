@@ -19,7 +19,7 @@ const events = [
         icon: Code,
         color: "text-neon-cyan",
         description: "Vibe Coding is a fast-paced coding challenge where creativity, smart AI usage, and execution matter more than complex algorithms.",
-        fullDescription: "Vibe Coding is a fast-paced coding challenge where creativity, smart AI usage, and execution matter more than complex algorithms. Participants must build a working prototype within 3 hours.",
+        fullDescription: "Vibe Coding is a fast-paced coding challenge where creativity, smart AI usage, and execution matter more than complex algorithms. Participants must build a working prototype within 2.5 hours.",
         rules: [
             "Allowed Tools: AI tools (ChatGPT, Gemini, etc.), No-code / Low-code tools, Any programming language, Open-source libraries.",
             "Copying complete existing products is not allowed.",
