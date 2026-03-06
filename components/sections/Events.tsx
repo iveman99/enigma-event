@@ -23,7 +23,7 @@ const events = [
         rules: [
             "Allowed Tools: AI tools (ChatGPT, Gemini, etc.), No-code / Low-code tools, Any programming language, Open-source libraries.",
             "Copying complete existing products is not allowed.",
-            "Duration: 3 Hours.",
+            "Duration: 2.5 Hours.",
             "Participation: Solo or Max-3 members. (Note: bring your own laptops)",
             "Deliverable: Working prototype."
         ],
