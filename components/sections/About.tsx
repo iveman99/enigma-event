@@ -54,7 +54,7 @@ export default function About() {
                     >
                         <h3 className="text-2xl font-bold text-white mb-4">Code. Create. Conquer.</h3>
                         <p className="text-gray-300 leading-relaxed text-xl">
-                            <strong className="text-neon-cyan">ENIGMA 1.0</strong> is the definitive tech fest of the Department of Computer Science, University of Mumbai.
+                            <strong className="text-neon-cyan">ENIGMA@2026</strong> is the definitive tech fest of the Department of Computer Science, University of Mumbai.
                         </p>
 
                         <p className="text-gray-400 leading-relaxed text-lg mt-6">
