@@ -11,96 +11,59 @@ import { useState, useEffect, useRef } from "react";
 const scheduleData = {
     "Day 1": [
         {
-            time: "08:30 AM",
-            title: "Reporting & Registration",
-            category: "Registration",
-            description: "On-spot registration allowed.",
+            time: "09:00 AM",
+            title: "Registration",
+            category: "General",
+            description: "Participant Registration.",
             color: "text-neon-cyan"
         },
         {
-            time: "09:00 AM",
-            title: "Inauguration Ceremony",
+            time: "09:30 AM",
+            title: "Inauguration",
             category: "General",
-            description: "Banner Drop, HOD Speech.",
-            color: "text-neon-magenta"
+            description: "Opening Ceremony.",
+            color: "text-neon-cyan"
         },
         {
-            time: "09:30 AM - 12:00 PM",
-            title: "Vibe Coding",
-            category: "Coding Competition",
+            time: "10:00 AM - 01:00 PM",
+            title: "Compile the Vibes",
+            category: "Coding",
             description: "3 Hours Coding Sprint.",
             color: "text-neon-blue"
         },
         {
-            time: "12:10 PM - 01:10 PM",
-            title: "Guest Session: Agentic AI",
-            category: "Guest Session",
-            description: "Speaker: Hera Khan.",
-            color: "text-neon-violet"
-        },
-        {
-            time: "01:30 PM - 03:00 PM",
-            title: "Blind Coding",
-            category: "Coding Competition",
+            time: "01:00 PM - 02:00 PM",
+            title: "Blind Date with Code",
+            category: "Coding",
             description: "1 Hour Coding Challenge.",
             color: "text-neon-green"
         },
         {
-            time: "02:00 PM - 04:30 PM",
-            title: "UI-niverse",
-            category: "Design Competition",
-            description: "2.5 Hours. Judges review at 4:30 PM.",
-            color: "text-neon-violet"
-        }
-    ],
-    "Day 2": [
-        {
-            time: "08:30 AM",
-            title: "Reporting & Registration",
-            category: "Registration",
-            description: "On-spot registration allowed.",
-            color: "text-neon-cyan"
-        },
-        {
-            time: "09:00 AM - 10:15 AM",
-            title: "Decode The Hunt",
-            category: "Treasure Hunt",
-            description: "1 Hr 15 Min Campus Hunt.",
+            time: "02:00 PM - 03:00 PM",
+            title: "FIFA Addicts",
+            category: "Gaming",
+            description: "EA Sports FIFA Mobile Arena.",
             color: "text-neon-magenta"
         },
         {
-            time: "10:30 AM - 11:30 AM",
-            title: "FIFA Addicts",
-            category: "Gaming",
-            description: "Gaming Event.",
-            color: "text-neon-green"
-        },
-        {
-            time: "11:45 AM - 12:45 PM",
-            title: "Guest Session: AI in Data",
-            category: "Guest Session",
-            description: "Creating Dashboards with AI.",
-            color: "text-neon-blue"
-        },
-        {
-            time: "01:00 PM - 04:00 PM",
-            title: "Data Dash",
-            category: "Data Science",
-            description: "Judges review at 4:30 PM.",
-            color: "text-neon-orange"
-        },
-        {
-            time: "04:00 PM Onwards",
-            title: "Award Ceremony",
-            category: "Celebration",
-            description: "Prize Distribution.",
+            time: "03:00 PM - 04:15 PM",
+            title: "Decode the Hunt",
+            category: "Problem Solving",
+            description: "75 Minutes Campus Hunt.",
             color: "text-neon-cyan"
+        },
+        {
+            time: "04:30 PM - 05:30 PM",
+            title: "Valedictory & Prize Distribution",
+            category: "Ceremony",
+            description: "Closing Ceremony & Prize Distribution.",
+            color: "text-neon-violet"
         }
     ]
 };
 
 const TimelineView = ({ onBack }: { onBack: () => void }) => {
-    const [activeDay, setActiveDay] = useState<"Day 1" | "Day 2">("Day 1");
+    const activeDay = "Day 1" as const;
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -128,28 +91,17 @@ const TimelineView = ({ onBack }: { onBack: () => void }) => {
                 </h3>
             </div>
 
-            {/* Day Toggles */}
+            {/* Day Header */}
             <div className="flex justify-center mb-12">
                 <div className="flex p-1 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm relative">
-                    {(["Day 1", "Day 2"] as const).map((day) => (
-                        <button
-                            key={day}
-                            onClick={() => setActiveDay(day)}
-                            className={`relative px-6 py-2 rounded-xl text-xs md:text-sm font-display uppercase tracking-wider transition-all duration-300 z-10 ${activeDay === day ? "text-black font-bold" : "text-gray-400 hover:text-white"
-                                }`}
-                        >
-                            {activeDay === day && (
-                                <motion.div
-                                    layoutId="activeTimelineTab"
-                                    className="absolute inset-0 bg-neon-cyan rounded-xl box-shadow-[0_0_20px_rgba(0,243,255,0.4)]"
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                />
-                            )}
-                            <span className="relative z-10">
-                                {day === "Day 1" ? "MAR 11" : "MAR 12"}
-                            </span>
-                        </button>
-                    ))}
+                    <div className="relative px-8 py-2.5 rounded-xl text-sm font-display uppercase tracking-widest z-10 text-black font-bold">
+                        <div
+                            className="absolute inset-0 bg-neon-cyan rounded-xl shadow-[0_0_20px_rgba(0,243,255,0.4)]"
+                        />
+                        <span className="relative z-10">
+                            MARCH 11
+                        </span>
+                    </div>
                 </div>
             </div>
 

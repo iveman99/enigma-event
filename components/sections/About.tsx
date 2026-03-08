@@ -8,8 +8,8 @@ import { motion } from "framer-motion";
 const infoCards = [
     {
         icon: Calendar,
-        title: "Mar 11–12",
-        subtitle: "Two-Day Techfest",
+        title: "Mar 11",
+        subtitle: "One-Day Techfest",
         color: "text-neon-cyan",
         border: "border-neon-cyan"
     },
@@ -29,7 +29,7 @@ const infoCards = [
     },
     {
         icon: Award,
-        title: "₹44K",
+        title: "₹21K",
         subtitle: "Cash Prize worth",
         color: "text-neon-violet",
         border: "border-neon-violet"
@@ -77,7 +77,7 @@ export default function About() {
                             <div className={`p-3 rounded-lg bg-black/30 w-fit mb-4 ${card.color} group-hover:scale-110 transition-transform`}>
                                 <card.icon size={24} />
                             </div>
-                            <h4 className={`font-display font-bold text-white mb-1 ${card.title === "₹44K" ? "text-4xl drop-shadow-[0_0_10px_rgba(139,92,246,0.5)] leading-none" : "text-xl"}`}>
+                            <h4 className={`font-display font-bold text-white mb-1 ${card.title === "₹21K" ? "text-4xl drop-shadow-[0_0_10px_rgba(139,92,246,0.5)] leading-none" : "text-xl"}`}>
                                 {card.title}
                             </h4>
                             <p className="text-sm text-gray-400 font-mono">{card.subtitle}</p>

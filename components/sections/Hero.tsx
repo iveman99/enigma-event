@@ -68,7 +68,7 @@ export default function Hero() {
                     >
                         <div className="inline-block px-6 py-2 border border-neon-cyan/50 bg-neon-cyan/10 rounded-full backdrop-blur-sm">
                             <span className="text-xl md:text-2xl font-mono font-bold text-neon-cyan tracking-widest drop-shadow-[0_0_10px_rgba(0,243,255,0.5)]">
-                                MAR 11 & 12
+                                MAR 11
                             </span>
                         </div>
                     </motion.div>
@@ -83,7 +83,7 @@ export default function Hero() {
                         <div className="relative group cursor-default">
                             <div className="absolute -inset-4 bg-neon-magenta/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-500 animate-pulse-slow"></div>
                             <h2 className="relative text-5xl md:text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-magenta via-white to-neon-magenta drop-shadow-[0_0_15px_rgba(255,0,85,0.8)] z-10">
-                                ₹44,000+
+                                ₹21,000+
                             </h2>
                             <div className="absolute top-0 left-0 w-full h-full border-t border-b border-neon-magenta/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                         </div>

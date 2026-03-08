@@ -8,7 +8,7 @@ import { Code, Palette, Gamepad, Search, Database, Terminal, Users, Clock, Chevr
 import { motion, AnimatePresence } from "framer-motion";
 
 const events = [
-    // Day 1 - Feb 26
+    // Day 1 - Mar 11
     {
         id: "compile-vibes",
         title: "Compile The Vibes ",
@@ -28,37 +28,13 @@ const events = [
             "Deliverable: Working prototype."
         ],
         fee: "Free",
-        prizePool: "₹8,000",
+        prizePool: "₹6,000",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/QfcskSuJvwsFVUNs6",
         volunteers: [
             { name: "Ankita Goyal", phone: "+91 93233 88342" },
             { name: "Mahesh Khairnar", phone: "+91 75885 52573" }
-        ]
-    },
-    {
-        id: "guest-agentic-ai",
-        title: "Agentic AI",
-        day: "Day 1",
-        date: "Mar 11",
-        category: "Guest Session",
-        badge: "Open For All",
-        icon: Mic,
-        color: "text-neon-violet",
-        description: "Explore the Future of Autonomous AI Agents.",
-        fullDescription: "Dive into the world of Agentic AI with an exclusive session by industry leaders. Understand how autonomous agents are reshaping technology and automation. A must-attend for AI enthusiasts.",
-        rules: [
-            "Open to all students.",
-            "No prior registration required for entry.",
-            "Seating on first-come-first-serve basis."
-        ],
-        fee: "Free",
-        venue: "Auditorium, Department of Computer Science",
-        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
-        registrationLink: "https://forms.gle/Cp1Pbc2aA3vA38ia6",
-        volunteers: [
-            { name: "Hera Khan", phone: "+91 79771 97156" }
         ]
     },
     {
@@ -80,7 +56,7 @@ const events = [
             "Duration: 90 Minutes."
         ],
         fee: "Free",
-        prizePool: "₹6,000",
+        prizePool: "₹4,500",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/SgtEjoAUFM8pU5YEA",
@@ -90,40 +66,10 @@ const events = [
         ]
     },
     {
-        id: "ui-niverse",
-        title: "UI-niverse",
-        day: "Day 1",
-        date: "Mar 11",
-        category: "Design",
-        badge: "Team",
-        icon: Palette,
-        color: "text-neon-blue",
-        description: "Transform ideas into seamless digital experiences. Blend creativity with usability.",
-        fullDescription: "Transform ideas into seamless digital experiences. Blend creativity with usability and build interfaces that speak for themselves. Where design meets purpose.",
-        rules: [
-            "Team Composition: 2-3 participants per team.",
-            "Redesign an assigned popular website, from concept to prototype.",
-            "Permitted Tools: Figma / Adobe XD / Photoshop / Canva.",
-            "Authenticity Rule: Submissions must be entirely original.",
-            "Duration: 2 Hours 30 Minutes."
-        ],
-        fee: "Free",
-        prizePool: "₹8,000",
-        venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
-        registrationLink: "https://forms.gle/hBxL85dXYb1XsFaX6",
-        volunteers: [
-            { name: "Vansh Lad", phone: "+91 90282 80757" },
-            { name: "Adarsh Mishra", phone: "+91 99751 17332" }
-        ]
-    },
-
-    // Day 2 - Mar 12
-    {
         id: "decode-hunt",
         title: "Decode The Hunt",
-        day: "Day 2",
-        date: "Mar 12",
+        day: "Day 1",
+        date: "Mar 11",
         category: "Problem Solving",
         badge: "Team",
         icon: Search,
@@ -147,34 +93,10 @@ const events = [
         ]
     },
     {
-        id: "guest-ai-dashboards",
-        title: "AI-Powered Dashboards",
-        day: "Day 2",
-        date: "Mar 12",
-        category: "Guest Session",
-        badge: "Open For All",
-        icon: Mic,
-        color: "text-neon-blue",
-        description: "Building Smarter Analytics with AI.",
-        fullDescription: "Learn how to integrate AI into data visualization. This session covers the creation of dynamic, AI-powered dashboards that provide deeper insights and predictive analytics.",
-        rules: [
-            "Open to all students.",
-            "No prior registration required for entry.",
-            "Seating on first-come-first-serve basis."
-        ],
-        fee: "Free",
-        venue: "Auditorium, Department of Computer Science",
-        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
-        registrationLink: "https://forms.gle/U7qWtigJWP4gtSbc9",
-        volunteers: [
-            { name: "Utkarsha Patil", phone: "+91 79721 34987" }
-        ]
-    },
-    {
         id: "fifa-addicts",
         title: "FIFA Addicts",
-        day: "Day 2",
-        date: "Mar 12",
+        day: "Day 1",
+        date: "Mar 11",
         category: "Gaming",
         badge: "Solo",
         icon: Gamepad,
@@ -190,7 +112,7 @@ const events = [
             "Total Duration: 90 Minutes."
         ],
         fee: "Free",
-        prizePool: "₹6,000",
+        prizePool: "₹4,500",
         venue: "Department of Computer Science, University of Mumbai",
         venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
         registrationLink: "https://forms.gle/Mpt3v86gh4kamQQA6",
@@ -198,44 +120,14 @@ const events = [
             { name: "Rawket", phone: "+91 99677 03018" },
             { name: "Vansh Lad", phone: "+91 90282 80757" }
         ]
-    },
-    {
-        id: "data-dash",
-        title: "Data Dash",
-        day: "Day 2",
-        date: "Mar 12",
-        category: "Data Science",
-        badge: "Team",
-        icon: Database,
-        color: "text-neon-violet",
-        description: "Solve real-world Machine Learning challenges. Build, train, and deploy models to predict outcomes on unseen data.",
-        fullDescription: "Dive into real-world Machine Learning and Deep Learning problems. Participants will handle datasets (text, CSV, or images), perform data preparation, and build models to make accurate predictions on unseen test data using Python and standard ML libraries.",
-        rules: [
-            "Team Size: Max 3 members. Bring your own laptops.",
-            "Task: Solve ML/DL problems using Python (NumPy, Pandas, TF, etc.).",
-            "Allowed: Stack Overflow, Documentation, local IDEs.",
-            "Prohibited: GenAI tools (ChatGPT, etc.), pre-trained models, plagiarism.",
-            "Submission: GitHub Repo + Model Deployment + Viva.",
-            "Evaluation: Accuracy (60%), Code Quality (30%), Format (10%).",
-            "Duration: 3-4 Hours."
-        ],
-        fee: "Free",
-        prizePool: "₹10,000",
-        venue: "Department of Computer Science, University of Mumbai",
-        venueMapLink: "https://maps.google.com?q=19.0684708,72.8603468&entry=gps&shh=CAE&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869,100796589&g_st=iw",
-        registrationLink: "https://forms.gle/LHXVrgQPNkoVc9PGA",
-        volunteers: [
-            { name: "Priyanshi Dubey", phone: "+91 72194 27357" },
-            { name: "Aryan Palekar", phone: "+91 89282 21297" }
-        ]
     }
 ];
 
-const categories = ["All", "Coding", "Design", "Gaming", "Data Science", "Problem Solving", "Guest Session"];
-const days = ["All Days", "Day 1", "Day 2"];
+const categories = ["All", "Coding", "Gaming", "Problem Solving"];
+const days = ["Day 1"];
 
 export default function Events() {
-    const [selectedDay, setSelectedDay] = useState("All Days");
+    const [selectedDay, setSelectedDay] = useState("Day 1");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
 
@@ -249,22 +141,21 @@ export default function Events() {
 
     // Grouping for "All Days" view
     const groupedEvents = {
-        "Day 1": filteredEvents.filter(e => e.day === "Day 1"),
-        "Day 2": filteredEvents.filter(e => e.day === "Day 2")
+        "Day 1": filteredEvents.filter(e => e.day === "Day 1")
     };
 
-    const displayGroups = selectedDay === "All Days" ? ["Day 1", "Day 2"] : [selectedDay];
+    const displayGroups = ["Day 1"];
 
     return (
         <>
             <SectionWrapper id="events">
-                <SectionHeader title="Explore Events" subtitle="Two Days. Six Challenges. One Stage." />
+                <SectionHeader title="Explore Events" subtitle="One Day. Epic Challenges. One Stage." />
 
                 {/* Controls Container */}
                 <div className="flex flex-col items-center gap-8 mb-16">
 
-                    {/* Level 1: Day Toggles */}
-                    <div className="flex p-1 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm relative">
+                    {/* Level 1: Day Toggles (Hidden as it is only 1 day) */}
+                    <div className="hidden p-1 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm relative">
                         {days.map((day) => (
                             <button
                                 key={day}
@@ -320,7 +211,7 @@ export default function Events() {
                                 >
                                     <div className="h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent flex-1 opacity-50" />
                                     <h3 className="text-2xl font-display font-bold text-white uppercase tracking-widest">
-                                        {dayGroup === "Day 1" ? "MAR 11 / DAY 1" : "MAR 12 / DAY 2"}
+                                        MAR 11 / DAY 1
                                     </h3>
                                     <div className="h-px bg-gradient-to-r from-transparent via-neon-cyan to-transparent flex-1 opacity-50" />
                                 </motion.div>
@@ -335,7 +226,7 @@ export default function Events() {
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.9 }}
                                                 transition={{ duration: 0.3 }}
-                                            // Removed md:col-span-2 md:row-span-2 for standard grid size
+                                                className="h-full"
                                             >
                                                 <GlassCard
                                                     className={`h-full group relative overflow-hidden flex flex-col transition-shadow duration-500
@@ -350,9 +241,10 @@ export default function Events() {
                                                     </div>
 
                                                     <div className="p-6 flex flex-col flex-1 relative z-10">
-                                                        {/* Header */}
+                                                        {/* Header: Category and Stats area */}
                                                         <div className="flex justify-between items-start mb-6">
-                                                            <div className="flex flex-col gap-2 items-start">
+                                                            {/* Left: Category and Badge */}
+                                                            <div className="flex flex-col gap-2 items-start shrink-0">
                                                                 <div className={`px-3 py-1 rounded bg-white/5 border border-white/10 backdrop-blur-md text-xs font-mono uppercase tracking-wider ${event.color}`}>
                                                                     {event.category}
                                                                 </div>
@@ -365,31 +257,37 @@ export default function Events() {
                                                                 )}
                                                             </div>
 
-                                                            <div className="flex flex-col items-end gap-2">
+                                                            {/* Right: Stats (Prize Pool & Fee) */}
+                                                            <div className="flex flex-col items-end gap-2 text-right">
                                                                 {/* Prize Pool - Prominent */}
                                                                 {(event as any).prizePool ? (
                                                                     <div className="flex flex-col items-end">
                                                                         <span className="text-[10px] uppercase tracking-wider text-gray-400 font-mono">Prize Pool</span>
-                                                                        <div className="flex items-center gap-1 text-xl font-bold text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">
+                                                                        <div className="flex items-center gap-1 text-xl font-bold text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.4)] h-[28px]">
                                                                             <Gamepad size={16} />
                                                                             <span>{(event as any).prizePool}</span>
                                                                         </div>
                                                                     </div>
                                                                 ) : (
-                                                                    <div className="h-8" /> /* Spacer if no prize pool */
+                                                                    <div className="flex flex-col items-end">
+                                                                        <span className="text-[10px] uppercase tracking-wider opacity-0 font-mono">Prize Pool</span>
+                                                                        <div className="h-[28px]" /> {/* Invisible spacer matching actual prize pool space */}
+                                                                    </div>
                                                                 )}
 
                                                                 {/* Entry Fee - Subtler */}
-                                                                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">
+                                                                <div className="mt-1 flex items-center gap-2 text-xs font-mono text-gray-400 bg-white/5 px-2 py-1 rounded border border-white/5">
                                                                     <span>Entry Fee:</span>
                                                                     <span className={`${event.fee === 'Free' ? 'text-neon-green' : 'text-white'} font-bold`}>{event.fee}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        {/* Title & Desc */}
-                                                        <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-neon-cyan transition-colors">{event.title}</h3>
-                                                        <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">{event.description}</p>
+                                                        {/* Title & Desc Container with flex-1 to push the bottom elements down */}
+                                                        <div className="flex flex-col flex-1">
+                                                            <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-neon-cyan transition-colors">{event.title}</h3>
+                                                            <p className="text-gray-400 text-sm mb-6 leading-relaxed line-clamp-3 group-hover:text-gray-300 transition-colors">{event.description}</p>
+                                                        </div>
 
                                                         {/* Meta */}
                                                         <div className="mt-auto flex items-center justify-between text-xs font-mono text-gray-500 mb-6 border-t border-white/5 pt-4">
