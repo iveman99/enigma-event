@@ -79,14 +79,16 @@ export default function Footer() {
                         </p>
 
                         <Link
-                            href="/enigma2"
+                            href="/enigma-access"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon-cyan/10 border border-neon-cyan/50 text-neon-cyan hover:bg-neon-cyan hover:text-black font-mono text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)] hover:shadow-[0_0_25px_rgba(0,243,255,0.6)] group"
                         >
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan group-hover:bg-black"></span>
                             </span>
-                            <span className="font-bold">ENIGMA 2.0</span>
+                            <span className="font-bold">ENIGMA</span>
                             <span className="text-[10px] opacity-75 group-hover:opacity-100">VISIT</span>
                             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </Link>
