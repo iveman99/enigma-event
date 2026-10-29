@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 
-import { Linkedin, Instagram } from "lucide-react";
+import { Linkedin, Instagram, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 
 const ScrambleText = ({ text }: { text: string }) => {
@@ -72,9 +73,24 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <p className="text-xs text-gray-500 font-mono text-center md:text-left">
-                        &copy; 2026 Placement Cell, UDCS.<br className="hidden md:block" /> All rights reserved.
-                    </p>
+                    <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                        <p className="text-xs text-gray-500 font-mono">
+                            &copy; 2026 Placement Cell, UDCS.<br className="hidden md:block" /> All rights reserved.
+                        </p>
+
+                        <Link
+                            href="/enigma2"
+                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon-cyan/10 border border-neon-cyan/50 text-neon-cyan hover:bg-neon-cyan hover:text-black font-mono text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)] hover:shadow-[0_0_25px_rgba(0,243,255,0.6)] group"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan group-hover:bg-black"></span>
+                            </span>
+                            <span className="font-bold">ENIGMA 2.0</span>
+                            <span className="text-[10px] opacity-75 group-hover:opacity-100">VISIT</span>
+                            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                    </div>
 
                     {/* Creative Credits */}
                     <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
@@ -91,18 +107,6 @@ export default function Footer() {
                             <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">by</span>
                             <a href="https://www.linkedin.com/in/veman-chippa" target="_blank" rel="noopener noreferrer">
                                 <ScrambleText text="iVeman" />
-                            </a>
-                        </motion.div>
-
-                        <motion.div
-                            className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/5 hover:border-neon-magenta/30 transition-colors group"
-                            whileHover={{ scale: 1.02 }}
-                        >
-                            <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider">Illustrated by</span>
-                            <a href="https://www.linkedin.com/in/ahadarshx/" target="_blank" rel="noopener noreferrer">
-                                <span className="text-sm font-display font-bold text-neon-magenta group-hover:text-white transition-colors cursor-pointer">
-                                    ADARSH
-                                </span>
                             </a>
                         </motion.div>
                     </div>

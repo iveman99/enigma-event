@@ -31,23 +31,23 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ENIGMA 2026 | Official Techfest of UDCS | University of Mumbai",
-  description: "ENIGMA 2026 is the official techfest of the Department of Computer Science, University of Mumbai. Participate in coding competitions, workshops, and innovative tech challenges.",
-  keywords: ["ENIGMA 2026", "UDCS Techfest", "University of Mumbai Techfest", "coding competition Mumbai", "tech fest 2026", "ENIGMA UDCS"],
+  title: "ENIGMA 2.0 | Official Techfest of UDCS | University of Mumbai",
+  description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Experience premier coding sprints, esports tournaments, campus hunts, and ₹44,000 in rewards.",
+  keywords: ["ENIGMA 2.0", "ENIGMA 2027", "UDCS Techfest", "University of Mumbai Techfest", "coding competition Mumbai", "tech fest", "ENIGMA UDCS"],
   authors: [{ name: "Department of Computer Science, University of Mumbai" }],
   creator: "Department of Computer Science, University of Mumbai",
   publisher: "University of Mumbai",
   openGraph: {
-    title: "ENIGMA 2026 | Official Techfest of UDCS | University of Mumbai",
-    description: "ENIGMA 2026 is the official techfest of the Department of Computer Science, University of Mumbai. Participate in coding competitions, workshops, and exciting technical events.",
+    title: "ENIGMA 2.0 | Official Techfest of UDCS | University of Mumbai",
+    description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Participate in coding competitions, workshops, and exciting technical events.",
     url: "https://enigmaudcs.in",
-    siteName: "ENIGMA 2026",
+    siteName: "ENIGMA 2.0",
     images: [
       {
-        url: "/images/enigma-logo.png",
+        url: "/images/enigma2-brand-banner.png",
         width: 1200,
         height: 630,
-        alt: "ENIGMA 2026 Logo",
+        alt: "ENIGMA 2.0 Logo",
       },
     ],
     locale: "en_US",
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ENIGMA 2026 | UDCS Techfest",
+    title: "ENIGMA 2.0 | UDCS Techfest",
     description: "Official techfest of Department of Computer Science, University of Mumbai.",
-    images: ["/images/enigma-logo.png"],
+    images: ["/images/enigma2-brand-banner.png"],
     creator: "@enigmaudcs",
   },
   robots: {
@@ -72,9 +72,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/enigma-logo.png",
-    shortcut: "/images/enigma-logo.png",
-    apple: "/images/enigma-logo.png",
+    icon: "/images/logo-udcs-clean.png",
+    shortcut: "/images/logo-udcs-clean.png",
+    apple: "/images/logo-udcs-clean.png",
   },
 };
 
@@ -138,7 +138,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           strategy="afterInteractive" // Load structured data after interactive to prioritize meaningful paint
         />
-        <ScanlineOverlay />
         {children}
       </body>
     </html >

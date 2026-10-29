@@ -10,23 +10,14 @@ import { useState, useEffect, useRef } from "react";
 
 const volunteers = [
     { name: "iVeman", role: "Technical Head", linkedin: "https://www.linkedin.com/in/veman-chippa", image: "/images/team/iveman.jpeg" },
-    { name: "Adarsh Mishra", role: "Creative & Media Head", linkedin: "https://www.linkedin.com/in/ahadarshx/", image: "/images/team/Adarsh.jpeg" },
-    { name: "Hera Khan", role: "Social Media Head", linkedin: "https://www.linkedin.com/in/hera-h-khan/", image: "/images/team/hera.jpg" },
-    { name: "Rawket", role: "Logistics Head", linkedin: "https://www.linkedin.com/in/om-mahadik-22208525a/", image: "/images/team/Om.jpeg" },
-    { name: "Pranav More", role: "Operations Head", linkedin: "https://www.linkedin.com/in/pranav-more-a66423378", image: "/images/team/Pranav.jpeg" },
-    { name: "Mayur Shewale", role: "Finance Head", linkedin: "https://www.linkedin.com/in/mayur-shewale312003/", image: "/images/team/Mayur.jpeg" },
+    { name: "Mayur Shewale", role: "Finance Head", linkedin: "https://www.linkedin.com/in/mayur-shewale312003/", image: "/images/team/mayur-2027.jpg" },
     { name: "Deeksha Singh", role: "Marketing & PR Head", linkedin: "https://www.linkedin.com/in/deeksha-singh-951024376/", image: "/images/team/Deeksha.jpeg" },
-    { name: "Priyanshi Dubey", role: "Creative Coordinator", linkedin: "https://www.linkedin.com/in/priyanshi-d-ba759b246/", image: "/images/team/Priyanshi.jpeg" },
-    { name: "Kunal Mahale", role: "Volunteer", linkedin: "https://www.linkedin.com/in/kunal11/", image: "/images/team/Kunal.jpeg" },
-    { name: "Vansh Lad", role: "Volunteer", linkedin: "https://www.linkedin.com/in/vansh-lad-012b90259/", image: "/images/team/Vansh.jpeg" },
-    { name: "Pranay Kokane", role: "Volunteer", linkedin: "https://www.linkedin.com/in/pranay-kokane-20351b261/", image: "/images/team/Pranay.jpeg" },
-
-    { name: "Gaurav Prajapati", role: "Volunteer", linkedin: "https://www.linkedin.com/in/shweta-parmar-4a202a362/", image: "/images/team/Gaurav.jpeg" },
-    { name: "Rahul Patel", role: "Volunteer", linkedin: "https://www.linkedin.com/in/rahul-patel-a80480377/", image: "/images/team/Rahul.jpeg" },
-    { name: "Aryan Palekar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/aryan-palekar-3ba736285/", image: "/images/team/Aryan.jpeg" },
-    { name: "Mahesh Khairnar", role: "Volunteer", linkedin: "https://www.linkedin.com/in/khairnarmahesh11/", image: "/images/team/Mahesh.jpeg" },
-    { name: "Utkarsha Patil", role: "Volunteer", linkedin: "https://www.linkedin.com/in/utkarsha-patil-9854412b6/", image: "/images/team/Utkarsha.jpeg" },
     { name: "Ankita Goyal", role: "Decor Head", linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", image: "/images/team/Ankita.jpeg" },
+    { name: "Aryan Palekar", role: "Core Volunteer", linkedin: "https://www.linkedin.com/in/aryan-palekar-3ba736285/", image: "/images/team/Aryan.jpeg" },
+    { name: "Aditya Pawar", role: "Core Volunteer", linkedin: "https://www.linkedin.com/", image: "/images/team/Aditya.jpeg" },
+    { name: "Prajwal Sonawane", role: "Core Volunteer", linkedin: "https://www.linkedin.com/", image: "/images/team/Prajwal.jpeg" },
+    { name: "Nikita Tiwari", role: "Core Volunteer", linkedin: "https://www.linkedin.com/", image: "/images/team/Nikita.jpeg" },
+    { name: "Priyanka Kunchikorve", role: "Core Volunteer", linkedin: "https://www.linkedin.com/", image: "/images/team/Priyanka.jpeg" },
 ];
 
 export default function Team() {

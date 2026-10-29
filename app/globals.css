@@ -2,23 +2,38 @@
 
 :root {
   /* Core Colors */
-  --background: #050505;
-  --foreground: #ededed;
+  --background: #08090d;
+  --foreground: #f3f4f6;
 
-  /* Brand Colors */
-  --neon-cyan: #00f3ff;
-  --neon-blue: #0066ff;
-  --neon-violet: #bc13fe;
-  --neon-magenta: #ff0055;
-  --neon-green: #00ff00;
-  --neon-orange: #ff9900;
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.05);
+  /* Techfest Clean Luxury Palette */
+  --techfest-gold: #f59e0b;
+  --techfest-amber: #fbbf24;
+  --techfest-coral: #f83a5e;
+  --techfest-azure: #38bdf8;
+  --techfest-surface: rgba(13, 16, 24, 0.78);
+  --techfest-border: rgba(255, 255, 255, 0.09);
+
+  /* Legacy brand references cleanly mapped */
+  --neon-cyan: #38bdf8;
+  --neon-blue: #2563eb;
+  --neon-violet: #818cf8;
+  --neon-magenta: #f83a5e;
+  --neon-green: #34d399;
+  --neon-orange: #f59e0b;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(15, 18, 28, 0.65);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-techfest-gold: var(--techfest-gold);
+  --color-techfest-amber: var(--techfest-amber);
+  --color-techfest-coral: var(--techfest-coral);
+  --color-techfest-azure: var(--techfest-azure);
+  --color-techfest-surface: var(--techfest-surface);
+  --color-techfest-border: var(--techfest-border);
 
   --color-neon-cyan: var(--neon-cyan);
   --color-neon-blue: var(--neon-blue);
@@ -31,41 +46,21 @@
   --color-glass-bg: var(--glass-bg);
 
   --font-sans: var(--font-inter);
-  --font-display: var(--font-orbitron);
+  --font-display: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-jetbrains-mono);
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-glitch: glitch 1s linear infinite;
   --animate-scroll: scroll 60s linear infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
 }
 
 @keyframes float {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
-
   50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes glitch {
-
-  2%,
-  64% {
-    transform: translate(2px, 0) skew(0deg);
-  }
-
-  4%,
-  60% {
-    transform: translate(-2px, 0) skew(0deg);
-  }
-
-  62% {
-    transform: translate(0, 0) skew(5deg);
+    transform: translateY(-8px);
   }
 }
 
@@ -73,36 +68,156 @@
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translateX(-50%);
   }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes scroll-drop {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  50.1% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+
+@keyframes teamMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes teamMarqueeReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-team-marquee {
+  display: flex;
+  width: max-content;
+  animation: teamMarquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-team-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: teamMarqueeReverse 35s linear infinite;
+  will-change: transform;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  background-image:
-    radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 0%, rgba(188, 19, 254, 0.1) 0%, transparent 50%);
   min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(245, 158, 11, 0.3);
+  color: white;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #08090d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-blue);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Clean Techfest Glass Morphism */
+.techfest-dock {
+  background: rgba(14, 16, 24, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* Techfest Sci-Fi Cockpit Bridge Nav Container */
+.techfest-nav-bridge {
+  background: rgba(15, 18, 28, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  );
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Metallic Text Treatment for Enigma */
+.techfest-title-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #94a3b8 70%, #64748b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8));
+}
+
+/* Sci-Fi Solid Orbitron Cyber Font */
+.enigma-broken-font {
+  font-family: var(--font-orbitron), -apple-system, sans-serif;
+  letter-spacing: 0.08em;
+  background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 38%, #94a3b8 68%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(56, 189, 248, 0.25));
 }
