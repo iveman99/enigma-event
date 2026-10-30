@@ -40,6 +40,7 @@ export default function Enigma2Hero({
       ref={heroRef}
       className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-[#07080b] pt-2 sm:pt-4 md:pt-5 pb-8 sm:pb-12"
     >
+      <h1 className="sr-only">Enigma 2.0 — UDCS Techfest, University of Mumbai</h1>
       {/* Epic Cinematic Background - Pure Monumental Sci-Fi Landscape (No Soldier/Character) */}
       <motion.div
         className="absolute inset-0 w-full h-full pointer-events-none"

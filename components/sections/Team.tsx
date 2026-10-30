@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 
+import Link from "next/link";
 import SectionWrapper from "../ui/SectionWrapper";
 import SectionHeader from "../ui/SectionHeader";
 import { User, Linkedin, Github } from "lucide-react";
@@ -44,7 +45,7 @@ export default function Team() {
                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
                 <div className="flex overflow-hidden relative w-full" ref={scrollRef}>
-                    <div className={`flex gap-6 py-8 ${startScroll ? 'animate-scroll' : ''} hover:[animation-play-state:paused]`}>
+                    <div className={`flex gap-6 py-8 ${startScroll ? 'animate-scroll' : ''} hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]`}>
                         {[...volunteers, ...volunteers].map((member, index) => (
                             <div
                                 key={index}
@@ -58,7 +59,11 @@ export default function Team() {
                                     {/* Avatar / Photo Placeholder */}
                                     <div className="w-40 h-40 mb-6 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-105 group-hover:border-neon-cyan transition-all duration-500 relative overflow-hidden shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] z-[105]">
                                         {member.image ? (
-                                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                            member.name === "iVeman" ? (
+                                                <Link href="/enigma2" aria-label="Visit Enigma 2.0" className="block w-full h-full rounded-full focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-cyan-300">
+                                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                                </Link>
+                                            ) : <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                                         ) : (
                                             <User size={48} className="text-gray-400 group-hover:text-neon-cyan transition-colors" />
                                         )}

@@ -1,4 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Enigma UDCS
+
+Use **Node 24** for this Next.js project. The Enigma 2.0 signup uses Supabase
+for verified email OTP, Google/GitHub login and persistent student profiles.
+Follow [the authentication setup guide](docs/AUTH_SETUP.md) before activating
+signups. Copy the variable names from `.env.example` into your private
+`.env.local`; never commit credentials.
+
+`npm test` checks the auth routes and PostgreSQL ownership policies.
+`npm run auth:check` reports missing configuration without printing secrets.
 
 ## Getting Started
 

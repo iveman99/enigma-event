@@ -41,7 +41,7 @@ export default function Enigma2RegistrationModal({
   onSuccess,
   onOpenAuth
 }: RegistrationModalProps) {
-  const { user, signIn, refreshMyRegistrations } = useAuth();
+  const { user, refreshMyRegistrations } = useAuth();
 
   const [selectedEventId, setSelectedEventId] = useState<string>(
     preselectedEventId || ENIGMA2_EVENTS[0].id
@@ -143,6 +143,12 @@ export default function Enigma2RegistrationModal({
     setError(null);
     cyberAudio.playClick();
 
+    if (!user) {
+      onClose();
+      onOpenAuth?.();
+      return;
+    }
+
     const finalName = user ? user.name : leaderName.trim();
     const finalEmail = user ? user.email : email.trim();
     const finalPhone = user ? user.phone : phone.trim();
@@ -151,22 +157,6 @@ export default function Enigma2RegistrationModal({
     if (!finalName || !finalEmail || !finalPhone || !finalCollege) {
       setError("Please fill in your name, email, phone, and college.");
       return;
-    }
-
-    if (!user) {
-      const parts = finalName.split(" ");
-      signIn({
-        name: finalName,
-        firstName: parts[0] || finalName,
-        lastName: parts.slice(1).join(" ") || "",
-        email: finalEmail,
-        phone: finalPhone,
-        college: finalCollege,
-        department: "Computer Science",
-        course: "B.Tech Computer Science",
-        year: "Final Year (BE / Final)",
-        prn: "ENG27-001"
-      });
     }
 
     setLoading(true);

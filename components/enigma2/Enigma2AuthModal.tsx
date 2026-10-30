@@ -1,26 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  Mail,
-  Building2,
-  GraduationCap,
-  ChevronDown,
-  Check,
-  Edit3,
-  Ticket,
-  QrCode,
-  LogOut,
-  RefreshCw,
-  ExternalLink,
-  CheckCircle2,
-  PhoneCall
-} from "lucide-react";
-import { useAuth } from "@/lib/authContext";
-import { cyberAudio } from "@/lib/audio";
-import { MUMBAI_COLLEGES, STUDENT_COURSES, ACADEMIC_YEARS, CollegeItem } from "@/lib/colleges";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, Ticket, X } from "lucide-react";
+import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
+import { basicProfileSchema, requestOtpSchema } from "@/lib/auth/validation";
+import { ACADEMIC_YEARS, MUMBAI_COLLEGES, STUDENT_COURSES } from "@/lib/colleges";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -29,993 +13,205 @@ interface AuthModalProps {
   initialMessage?: string;
 }
 
-export default function Enigma2AuthModal({
-  isOpen,
-  onClose,
-  onSuccess,
-  initialMessage
-}: AuthModalProps) {
-  const {
-    user,
-    myRegistrations,
-    signInWithGoogle,
-    signInWithGithub,
-    completeOnboarding,
-    updateProfile,
-    signIn,
-    signOut,
-    onboardingStep,
-    setOnboardingStep
-  } = useAuth();
+const fieldClass = "w-full rounded-xl border border-white/15 bg-white/[0.04] px-3.5 py-3 text-sm text-white outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/15 disabled:opacity-50";
+const buttonClass = "inline-flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-4 py-3 text-sm font-semibold text-[#071015] transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300";
 
-  // Tab switch: "signup" or "signin"
-  const [authMode, setAuthMode] = useState<"signup" | "signin">("signup");
+export default function Enigma2AuthModal({ isOpen, onClose, onSuccess, initialMessage }: AuthModalProps) {
+  const { user } = useAuth();
+  return isOpen ? <AuthDialog key={user?.id || "guest"} isOpen={isOpen} onClose={onClose} onSuccess={onSuccess} initialMessage={initialMessage} /> : null;
+}
 
-  // Form Fields
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [college, setCollege] = useState("");
-  const [customCollege, setCustomCollege] = useState("");
-  const [course, setCourse] = useState(STUDENT_COURSES[0]);
-  const [customCourse, setCustomCourse] = useState("");
-  const [year, setYear] = useState(ACADEMIC_YEARS[3]); // Default Final Year
-  const [prn, setPrn] = useState("");
-
-  // Searchable College Dropdown state
-  const [collegeSearch, setCollegeSearch] = useState("");
-  const [isCollegeDropdownOpen, setIsCollegeDropdownOpen] = useState(false);
-  const collegeDropdownRef = useRef<HTMLDivElement>(null);
-
-  // Status & loaders
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
+function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalProps) {
+  const { user, myRegistrations, configured, isLoading, authError, onboardingStep, setOnboardingStep,
+    requestEmailOtp, verifyEmailOtp, signInWithGoogle, signInWithGithub, completeOnboarding, updateProfile, signOut } = useAuth();
+  const [mode, setMode] = useState<"signup" | "signin">("signup");
+  const [stage, setStage] = useState<"details" | "otp">("details");
+  const [firstName, setFirstName] = useState(user?.firstName || "");
+  const [lastName, setLastName] = useState(user?.lastName || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [phone, setPhone] = useState(user?.phone || "");
+  const [college, setCollege] = useState(user?.college || "");
+  const [course, setCourse] = useState(user?.course || "");
+  const [year, setYear] = useState(user?.year || "");
+  const [otp, setOtp] = useState("");
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [cooldown, setCooldown] = useState(0);
+  const [sentTo, setSentTo] = useState("");
+  const dialog = useRef<HTMLDivElement>(null);
 
-  // Sync incoming user
   useEffect(() => {
-    if (user) {
-      if (user.firstName) setFirstName(user.firstName);
-      if (user.lastName) setLastName(user.lastName);
-      if (!user.firstName && !user.lastName && user.name) {
-        const parts = user.name.split(" ");
-        setFirstName(parts[0] || "");
-        setLastName(parts.slice(1).join(" ") || "");
+    if (!isOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialog.current?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key !== "Tab") return;
+      const nodes = dialog.current?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href]');
+      if (!nodes?.length) return;
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog.current)) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || document.activeElement === dialog.current)) {
+        event.preventDefault(); first.focus();
       }
-      if (user.email) setEmail(user.email);
-      if (user.phone) setPhone(user.phone);
-      if (user.college) {
-        setCollege(user.college);
-        setCollegeSearch(user.college);
-      }
-      if (user.course) setCourse(user.course);
-      if (user.year) setYear(user.year);
-      if (user.prn && user.prn !== "N/A") setPrn(user.prn);
-    }
-  }, [user]);
-
-  // Click outside listener for college combobox
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (collegeDropdownRef.current && !collegeDropdownRef.current.contains(e.target as Node)) {
-        setIsCollegeDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const filteredColleges = MUMBAI_COLLEGES.filter((c) => {
-    const q = collegeSearch.toLowerCase().trim();
-    if (!q) return true;
-    return (
-      c.name.toLowerCase().includes(q) ||
-      c.shortName.toLowerCase().includes(q) ||
-      c.area.toLowerCase().includes(q)
-    );
-  });
-
-  const handleSelectCollege = (col: CollegeItem) => {
-    if (col.id === "other") {
-      setCollege("Other");
-      setCollegeSearch("Other College / University");
-    } else {
-      setCollege(col.name);
-      setCollegeSearch(col.name);
-      setCustomCollege("");
-    }
-    setIsCollegeDropdownOpen(false);
-    cyberAudio.playClick();
-  };
-
-  const handleGoogleLogin = () => {
-    cyberAudio.playClick();
-    signInWithGoogle();
-  };
-
-  const handleGithubLogin = () => {
-    cyberAudio.playClick();
-    signInWithGithub();
-  };
-
-  // Direct manual submit (Sign up or Sign in)
-  const handleDirectAuthSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (authMode === "signup") {
-      if (!firstName.trim() || !lastName.trim()) {
-        setError("Please enter your first and last name.");
-        return;
-      }
-      if (!email.trim() || !email.includes("@")) {
-        setError("Please enter a valid email address.");
-        return;
-      }
-
-      cyberAudio.playClick();
-      signIn({
-        name: `${firstName.trim()} ${lastName.trim()}`,
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim(),
-        phone: phone.trim() || "+91 98201 54321",
-        college: college.trim() || "University Department of Computer Science (UDCS, Kalina)",
-        department: "Computer Science",
-        course: course || "M.Sc Computer Science",
-        year: year || "Final Year (BE / Final)",
-        prn: prn.trim() || "ENG27-001"
-      });
-
-      if (!college.trim()) {
-        setOnboardingStep("profile");
-      } else {
-        setOnboardingStep("portfolio");
-      }
-    } else {
-      // Sign in mode
-      if (!email.trim()) {
-        setError("Please enter your registered email address.");
-        return;
-      }
-      cyberAudio.playClick();
-      signIn({
-        name: email.split("@")[0].toUpperCase(),
-        firstName: email.split("@")[0],
-        lastName: "Student",
-        email: email.trim(),
-        phone: "+91 98201 54321",
-        college: "University Department of Computer Science (UDCS, Kalina)",
-        department: "Computer Science",
-        course: "M.Sc Computer Science",
-        year: "Final Year (BE / Final)",
-        prn: "ENG27-001"
-      });
-      setOnboardingStep("portfolio");
-    }
-  };
-
-  // Profile save (onboarding or edit)
-  const handleSubmitProfile = async (e: React.FormEvent, isEditing = false) => {
-    e.preventDefault();
-    setError(null);
-    setSaveSuccess(false);
-    cyberAudio.playClick();
-
-    const selectedCollege = college === "Other" ? customCollege.trim() : college.trim();
-    const selectedCourse = course === "Other Course" ? customCourse.trim() : course.trim();
-
-    if (!firstName.trim() || !lastName.trim()) {
-      setError("Please provide both First Name and Last Name.");
-      return;
-    }
-    if (!selectedCollege) {
-      setError("Please select or specify your Mumbai College.");
-      return;
-    }
-    if (!selectedCourse) {
-      setError("Please specify your current course.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    const payload = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      college: selectedCollege,
-      course: selectedCourse,
-      year: year.trim(),
-      phone: phone.trim() || "+91 99999 99999",
-      prn: prn.trim() || "ENG-" + Math.floor(1000 + Math.random() * 9000),
     };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKey);
+      previousFocus?.focus();
+    };
+  }, [isOpen, onClose]);
 
-    const result = isEditing ? await updateProfile(payload) : await completeOnboarding(payload);
-    setIsSubmitting(false);
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
 
-    if (result.success) {
-      cyberAudio.playSuccess();
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 3000);
-    } else {
-      setError(result.error || "Failed to update profile. Please try again.");
+  const run = async (action: () => Promise<AuthResult>) => {
+    setPending(true); setError(null);
+    try {
+      const result = await action();
+      if (!result.success) setError(result.error || "Please try again.");
+      return result;
+    } finally { setPending(false); }
+  };
+
+  const sendCode = async (event?: React.FormEvent) => {
+    event?.preventDefault();
+    if (pending || cooldown > 0) return;
+    const input: OtpRequest = mode === "signup"
+      ? { mode, email: email.trim(), firstName, lastName, phone }
+      : { mode, email: email.trim() };
+    const parsed = requestOtpSchema.safeParse(input);
+    if (!parsed.success) { setError(parsed.error.issues[0].message); return; }
+    const result = await run(() => requestEmailOtp(parsed.data));
+    if (result?.success) {
+      setSentTo(parsed.data.email); setStage("otp"); setOtp("");
+      setCooldown(result.retryAfter || 60);
     }
+  };
+
+  const verifyCode = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const result = await run(() => verifyEmailOtp(sentTo, otp));
+    if (result?.success) { setStage("details"); setOtp(""); onSuccess?.(); }
+  };
+
+  const saveProfile = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const parsed = basicProfileSchema.safeParse({ firstName, lastName, phone });
+    if (!parsed.success) { setError(parsed.error.issues[0].message); return; }
+    const payload = { ...parsed.data, college, course, year };
+    const result = await run(() => onboardingStep === "edit" ? updateProfile(payload) : completeOnboarding(payload));
+    if (result?.success) onSuccess?.();
   };
 
   if (!isOpen) return null;
+  const profileView = Boolean(user) && (onboardingStep === "profile" || onboardingStep === "edit");
+  const portfolio = Boolean(user) && !profileView;
+  const ready = configured === true && !isLoading;
+  const title = profileView ? "Make it yours." : portfolio ? "Your Enigma account." : stage === "otp" ? "Check your inbox." : mode === "signup" ? "Your next challenge starts here." : "Good to see you again.";
 
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        {/* Full Screen Dark Backdrop with Glossy Chromatic Horizon Animation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-[#050608]/94 backdrop-blur-2xl flex items-center justify-center pointer-events-auto overflow-hidden"
-        >
-          {/* Ambient Glowing Aurora Flares (Exact colors from Dribbble shot) */}
-          <motion.div
-            animate={{
-              scale: [1, 1.12, 1],
-              opacity: [0.18, 0.28, 0.18],
-            }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute right-[-10%] top-[30%] w-[700px] h-[700px] bg-gradient-to-br from-[#d91e5a]/30 via-[#8b1e5a]/20 to-transparent rounded-full blur-[140px] pointer-events-none"
-          />
-
-          <motion.div
-            animate={{
-              scale: [1, 1.15, 1],
-              opacity: [0.12, 0.22, 0.12],
-            }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute left-[-10%] bottom-[15%] w-[700px] h-[700px] bg-gradient-to-tr from-[#00d2ff]/25 via-[#1d4ed8]/20 to-transparent rounded-full blur-[140px] pointer-events-none"
-          />
-
-          {/* Ethereal Glowing Curved Chromatic Horizon Wave (Dribbble Signature) */}
-          <motion.div
-            animate={{
-              y: [0, -5, 0],
-              rotate: [-1.2, -1.6, -1.2],
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute w-[220%] h-[4px] bottom-[37%] left-[-60%] pointer-events-none"
-          >
-            {/* The razor-thin iridescent beam */}
-            <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#00f3ff] via-[#3b82f6] via-[#9333ea] via-[#ec4899] to-transparent shadow-[0_0_20px_#00f3ff,0_0_50px_#3b82f6,0_0_80px_#ec4899]" />
-            {/* Diffuse secondary rainbow dispersion */}
-            <div className="w-full h-[12px] -mt-1.5 bg-gradient-to-r from-transparent via-[#00f3ff]/40 via-[#3b82f6]/40 via-[#a855f7]/40 via-[#ec4899]/40 to-transparent blur-[8px]" />
-          </motion.div>
-        </motion.div>
-
-        {/* Modal Window: Smoked Luxury Glass Container with Specular Top Highlight */}
-        <motion.div
-          initial={{ scale: 0.94, opacity: 0, y: 16 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.94, opacity: 0, y: 16 }}
-          transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            background: "linear-gradient(145deg, rgba(28, 30, 36, 0.96) 0%, rgba(14, 15, 19, 0.98) 100%)",
-            boxShadow: "0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), 0 35px 80px -15px rgba(0, 0, 0, 0.85)"
-          }}
-          className="relative w-full max-w-[420px] rounded-[28px] p-7 sm:p-8 backdrop-blur-2xl z-10 my-4 text-zinc-100"
-        >
-          {/* Top Row: Pill Switcher [Sign up | Sign in] + Circular Close Button */}
-          <div className="flex items-center justify-between mb-6">
-            {onboardingStep === "choice" ? (
-              <div
-                style={{
-                  background: "rgba(10, 11, 14, 0.85)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  boxShadow: "inset 0 2px 4px rgba(0, 0, 0, 0.5)"
-                }}
-                className="inline-flex items-center p-1 rounded-full"
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signup");
-                    cyberAudio.playClick();
-                  }}
-                  style={
-                    authMode === "signup"
-                      ? {
-                          background: "linear-gradient(180deg, #2b2e36 0%, #1e2027 100%)",
-                          border: "1px solid rgba(255, 255, 255, 0.18)",
-                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.22)"
-                        }
-                      : {}
-                  }
-                  className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all cursor-pointer ${
-                    authMode === "signup"
-                      ? "text-white"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
-                >
-                  Sign up
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("signin");
-                    cyberAudio.playClick();
-                  }}
-                  style={
-                    authMode === "signin"
-                      ? {
-                          background: "linear-gradient(180deg, #2b2e36 0%, #1e2027 100%)",
-                          border: "1px solid rgba(255, 255, 255, 0.18)",
-                          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.22)"
-                        }
-                      : {}
-                  }
-                  className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all cursor-pointer ${
-                    authMode === "signin"
-                      ? "text-white"
-                      : "text-zinc-400 hover:text-white"
-                  }`}
-                >
-                  Sign in
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span className="text-[11px] font-mono tracking-wider uppercase text-zinc-400">
-                  {onboardingStep === "profile" && "Academic Onboarding"}
-                  {onboardingStep === "portfolio" && "Student Passport"}
-                  {onboardingStep === "edit" && "Edit Profile"}
-                  {onboardingStep === "success" && "Passport Activated"}
-                </span>
-              </div>
-            )}
-
-            {/* Circular Close Button with Specular Ring */}
-            <button
-              onClick={onClose}
-              style={{
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)",
-                border: "1px solid rgba(255, 255, 255, 0.12)",
-                boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.2)"
-              }}
-              className="w-8 h-8 rounded-full text-zinc-400 hover:text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
-            >
-              <X size={15} />
-            </button>
+    <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-[#03060c]/90 p-3 backdrop-blur-xl sm:p-6">
+      <div aria-hidden="true" className="absolute inset-0" onClick={onClose} />
+      <div ref={dialog} role="dialog" aria-modal="true" aria-labelledby="enigma-auth-title" tabIndex={-1}
+        className="relative my-auto grid w-full max-w-[920px] overflow-hidden rounded-[28px] border border-white/15 bg-[#0b101b] shadow-[0_30px_100px_rgba(0,0,0,0.7)] outline-none md:grid-cols-[0.8fr_1.2fr]">
+        <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-white/10 bg-[#0b1624] p-8 md:flex">
+          <div aria-hidden="true" className="absolute -left-20 top-12 h-72 w-72 rounded-full border border-cyan-300/25 shadow-[0_0_90px_rgba(34,211,238,0.12)]" />
+          <div aria-hidden="true" className="absolute -left-8 top-24 h-48 w-48 rounded-full border border-cyan-300/15" />
+          <div className="relative">
+            <span className="font-display text-2xl font-bold tracking-wider text-white">ENIGMA <span className="text-amber-300">2.0</span></span>
+            <p className="mt-2 text-xs leading-relaxed text-slate-400">Department of Computer Science<br />University of Mumbai</p>
           </div>
+          <div className="relative my-16 space-y-5">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-cyan-200"><ShieldCheck size={25} /></div>
+            <h2 className="text-3xl font-semibold leading-tight text-white">One account.<br />Every possibility.</h2>
+            <p className="text-sm leading-relaxed text-slate-300">Your place to discover events, manage your details, and follow your registration journey.</p>
+          </div>
+          <div className="relative flex items-center gap-2 text-xs text-slate-400"><LockKeyhole size={14} /> Your details stay in your control.</div>
+        </aside>
+        <section className="max-h-[88dvh] overflow-y-auto p-6 sm:p-9">
+          <div className="mb-7 flex items-center justify-between gap-4">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-cyan-200">{user ? "Student account" : "Welcome to Enigma"}</span>
+            <button type="button" onClick={onClose} aria-label="Close sign-in" className="rounded-full border border-white/10 p-2 text-slate-400 hover:bg-white/10 hover:text-white"><X size={18} /></button>
+          </div>
+          <h2 id="enigma-auth-title" className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+          {!user && <p className="mt-3 text-sm leading-relaxed text-slate-400">{stage === "otp" ? "Enter the six-digit code sent to " + sentTo + ". Never share your code." : "Continue with an existing account or verify your email. No password to remember."}</p>}
+          {initialMessage && <p className="mt-3 text-sm text-slate-300">{initialMessage}</p>}
+          {(error || authError) && <p role="alert" className="mt-5 rounded-xl border border-rose-400/25 bg-rose-400/10 p-3 text-sm text-rose-200">{error || authError}</p>}
+          {!user && configured === false && <p role="status" className="mt-5 rounded-xl border border-amber-300/20 bg-amber-300/10 p-3 text-sm text-amber-100">Sign-in is being connected. Please check back shortly.</p>}
 
-          {/* Error Banner */}
-          {error && (
-            <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-400 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
-              <span>{error}</span>
+          {!user && stage === "details" && <>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <button disabled={pending || !ready} type="button" onClick={() => void run(signInWithGoogle)} className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-3 py-3 text-sm text-white hover:bg-white/5 disabled:opacity-50"><span aria-hidden="true" className="font-bold text-cyan-200">G</span> Google</button>
+              <button disabled={pending || !ready} type="button" onClick={() => void run(signInWithGithub)} className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-3 py-3 text-sm text-white hover:bg-white/5 disabled:opacity-50"><Github size={17} /> GitHub</button>
             </div>
-          )}
-
-          {/* Success Banner */}
-          {saveSuccess && (
-            <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 flex items-center gap-2">
-              <CheckCircle2 size={15} className="shrink-0" />
-              <span>Changes saved successfully!</span>
+            <div className="my-5 flex items-center gap-3 text-xs text-slate-500"><div className="h-px flex-1 bg-white/10" />or continue with email<div className="h-px flex-1 bg-white/10" /></div>
+            <div className="mb-5 flex gap-5 border-b border-white/10" role="group" aria-label="Account action">
+              {(["signup", "signin"] as const).map((value) => <button key={value} type="button" disabled={pending} aria-pressed={mode === value} onClick={() => { setMode(value); setError(null); }} className={"border-b-2 pb-2 text-sm " + (mode === value ? "border-cyan-300 text-white" : "border-transparent text-slate-400")}>{value === "signup" ? "Create account" : "Sign in"}</button>)}
             </div>
-          )}
-
-          {/* ====================================================================== */}
-          {/* VIEW 1: SIGN UP & SIGN IN (Dribbble 1:1 Design)                        */}
-          {/* ====================================================================== */}
-          {onboardingStep === "choice" && (
-            <div>
-              <h2 className="text-xl font-semibold text-white tracking-tight mb-5">
-                {authMode === "signup" ? "Create an account" : "Welcome back"}
-              </h2>
-
-              <form onSubmit={handleDirectAuthSubmit} className="space-y-3">
-                {authMode === "signup" && (
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        required
-                        placeholder="First name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        style={{
-                          background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                          border: "1px solid rgba(255, 255, 255, 0.08)",
-                          boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                        }}
-                        className="w-full px-3.5 py-3 focus:border-white/30 focus:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_0_15px_rgba(255,255,255,0.08)] rounded-xl text-white placeholder-zinc-500 text-xs outline-none transition-all"
-                      />
-                    </div>
-                    <div className="relative group">
-                      <input
-                        type="text"
-                        required
-                        placeholder="Last name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        style={{
-                          background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                          border: "1px solid rgba(255, 255, 255, 0.08)",
-                          boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                        }}
-                        className="w-full px-3.5 py-3 focus:border-white/30 focus:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_0_15px_rgba(255,255,255,0.08)] rounded-xl text-white placeholder-zinc-500 text-xs outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Email Field with Mail Icon */}
-                <div className="relative group">
-                  <Mail size={15} className="absolute left-3.5 top-3.5 text-zinc-500 pointer-events-none" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="w-full pl-10 pr-3.5 py-3 focus:border-white/30 focus:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_0_15px_rgba(255,255,255,0.08)] rounded-xl text-white placeholder-zinc-500 text-xs outline-none transition-all"
-                  />
-                </div>
-
-                {/* Indian Phone Field: 🇮🇳 IN ▾ +91 */}
-                {authMode === "signup" && (
-                  <div
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="flex items-center focus-within:border-white/30 focus-within:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_0_15px_rgba(255,255,255,0.08)] rounded-xl overflow-hidden transition-all"
-                  >
-                    <div className="flex items-center gap-1.5 px-3 py-3 border-r border-white/[0.08] bg-black/20 text-xs text-zinc-300">
-                      <svg className="w-4 h-3 rounded-[2px] shrink-0" viewBox="0 0 640 480">
-                        <path fill="#FF9933" d="M0 0h640v160H0z" />
-                        <path fill="#FFFFFF" d="M0 160h640v160H0z" />
-                        <path fill="#138808" d="M0 320h640v160H0z" />
-                        <circle cx="320" cy="240" r="38" fill="#000080" />
-                        <circle cx="320" cy="240" r="32" fill="#FFFFFF" />
-                        <circle cx="320" cy="240" r="8" fill="#000080" />
-                      </svg>
-                      <span className="text-[11px] font-mono text-zinc-300 font-semibold">IN</span>
-                      <ChevronDown size={12} className="text-zinc-500 ml-0.5" />
-                    </div>
-                    <input
-                      type="tel"
-                      placeholder="+91 (982) 015-4321"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-3.5 py-3 bg-transparent text-white placeholder-zinc-500 text-xs outline-none"
-                    />
-                  </div>
-                )}
-
-                {/* Main Action Button (Solid White Pill with Specular Top Shine) */}
-                <button
-                  type="submit"
-                  style={{
-                    background: "linear-gradient(180deg, #ffffff 0%, #f1f2f5 100%)",
-                    boxShadow: "0 4px 22px rgba(255, 255, 255, 0.22), inset 0 1px 0 #ffffff"
-                  }}
-                  className="w-full mt-2 py-3.5 text-black font-semibold text-xs rounded-xl transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99] hover:bg-zinc-100"
-                >
-                  {authMode === "signup" ? "Create an account" : "Sign in to account"}
-                </button>
-              </form>
-
-              {/* Muted OR Divider */}
-              <div className="relative flex items-center justify-center my-5">
-                <div className="border-t border-white/[0.06] w-full" />
-                <span className="bg-[#141518] px-3 text-[10px] uppercase tracking-wider text-zinc-500 font-medium shrink-0">
-                  OR SIGN IN WITH
-                </span>
-                <div className="border-t border-white/[0.06] w-full" />
-              </div>
-
-              {/* Two Column OAuth: Google & GitHub */}
-              <div className="grid grid-cols-2 gap-3">
-                {/* Google Button */}
-                <button
-                  type="button"
-                  onClick={handleGoogleLogin}
-                  style={{
-                    background: "linear-gradient(180deg, rgba(28, 30, 36, 0.9) 0%, rgba(18, 19, 24, 0.9) 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.3)"
-                  }}
-                  className="py-3 px-4 hover:border-white/20 rounded-xl flex items-center justify-center transition-all cursor-pointer hover:scale-[1.01]"
-                  title="Continue with Google"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24">
-                    <path
-                      fill="#4285F4"
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    />
-                    <path
-                      fill="#34A853"
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    />
-                    <path
-                      fill="#FBBC05"
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                    />
-                    <path
-                      fill="#EA4335"
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                    />
-                  </svg>
-                </button>
-
-                {/* GitHub Button */}
-                <button
-                  type="button"
-                  onClick={handleGithubLogin}
-                  style={{
-                    background: "linear-gradient(180deg, rgba(28, 30, 36, 0.9) 0%, rgba(18, 19, 24, 0.9) 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.3)"
-                  }}
-                  className="py-3 px-4 hover:border-white/20 rounded-xl flex items-center justify-center transition-all cursor-pointer hover:scale-[1.01]"
-                  title="Continue with GitHub"
-                >
-                  <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Terms notice */}
-              <p className="text-zinc-500 text-[11px] text-center mt-4 leading-normal">
-                By creating an account, you agree to our Terms & Service
-              </p>
-
-              {/* Required Support One-Liner */}
-              <div className="mt-4 pt-3.5 border-t border-white/[0.08] text-center">
-                <p className="text-[11px] text-zinc-400 flex items-center justify-center gap-1.5 flex-wrap">
-                  <span>Problem in signing in your ID? Please reach out to:</span>
-                  <a
-                    href="tel:+918828069553"
-                    className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-2 flex items-center gap-1"
-                  >
-                    <PhoneCall size={11} />
-                    <span>Mayur Shewle +91 88280 69553</span>
-                  </a>
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* ====================================================================== */}
-          {/* VIEW 2: ACADEMIC DETAILS & EDIT (Consistent luxury design)            */}
-          {/* ====================================================================== */}
-          {(onboardingStep === "profile" || onboardingStep === "edit") && (
-            <form
-              onSubmit={(e) => handleSubmitProfile(e, onboardingStep === "edit")}
-              className="space-y-3.5 max-h-[70vh] overflow-y-auto custom-scrollbar pr-1"
-            >
-              <div>
-                <h2 className="text-xl font-semibold text-white tracking-tight">
-                  {onboardingStep === "edit" ? "Edit Academic Profile" : "Complete your profile"}
-                </h2>
-                <p className="text-zinc-400 text-xs mt-1">
-                  Connect your student details for passes & certificates.
-                </p>
-              </div>
-
-              {/* Names */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] text-zinc-400 mb-1">First name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="w-full px-3.5 py-2.5 focus:border-white/30 rounded-xl text-white placeholder-zinc-500 text-xs outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] text-zinc-400 mb-1">Last name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="w-full px-3.5 py-2.5 focus:border-white/30 rounded-xl text-white placeholder-zinc-500 text-xs outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Searchable Mumbai Colleges Dropdown */}
-              <div className="relative" ref={collegeDropdownRef}>
-                <label className="block text-[11px] text-zinc-400 mb-1 flex items-center justify-between">
-                  <span>Mumbai College / Institute</span>
-                  <span className="text-[10px] text-cyan-400 font-mono">50+ MMR Colleges</span>
-                </label>
-                <div className="relative">
-                  <Building2 size={14} className="absolute left-3.5 top-3 text-cyan-400" />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Search college (e.g. UDCS, VJTI, SPIT, DJSCE...)"
-                    value={collegeSearch}
-                    onFocus={() => setIsCollegeDropdownOpen(true)}
-                    onChange={(e) => {
-                      setCollegeSearch(e.target.value);
-                      setIsCollegeDropdownOpen(true);
-                      setCollege(e.target.value);
-                    }}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="w-full pl-9 pr-8 py-2.5 focus:border-cyan-400/50 rounded-xl text-white placeholder-zinc-500 text-xs outline-none transition-all"
-                  />
-                  <ChevronDown size={14} className="absolute right-3 top-3 text-zinc-500 pointer-events-none" />
-                </div>
-
-                {isCollegeDropdownOpen && (
-                  <div className="absolute z-50 left-0 right-0 mt-1 max-h-52 overflow-y-auto bg-[#18191d] border border-white/[0.12] rounded-xl shadow-2xl custom-scrollbar py-1 divide-y divide-white/[0.04]">
-                    {filteredColleges.map((c) => (
-                      <div
-                        key={c.id}
-                        onClick={() => handleSelectCollege(c)}
-                        className={`px-3 py-2 hover:bg-white/[0.06] cursor-pointer flex items-center justify-between text-xs transition-colors ${
-                          college === c.name ? "bg-white/[0.08] text-cyan-400" : "text-zinc-300"
-                        }`}
-                      >
-                        <div>
-                          <div className="font-medium flex items-center gap-1.5">
-                            <span>{c.name}</span>
-                            {college === c.name && <Check size={12} className="text-cyan-400" />}
-                          </div>
-                          <span className="text-[10px] text-zinc-500">{c.area} • {c.type}</span>
-                        </div>
-                        <span className="text-[10px] text-zinc-400 px-1.5 py-0.5 rounded bg-black/40">
-                          {c.shortName}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {college === "Other" && (
-                  <input
-                    type="text"
-                    required
-                    placeholder="Type your unlisted college name..."
-                    value={customCollege}
-                    onChange={(e) => setCustomCollege(e.target.value)}
-                    className="w-full mt-2 px-3.5 py-2.5 bg-[#18191d] border border-cyan-400/40 rounded-xl text-white placeholder-zinc-500 text-xs outline-none"
-                  />
-                )}
-              </div>
-
-              {/* Course Pursuing */}
-              <div>
-                <label className="block text-[11px] text-zinc-400 mb-1">Course pursuing</label>
-                <div className="relative">
-                  <GraduationCap size={14} className="absolute left-3.5 top-3 text-zinc-500" />
-                  <select
-                    value={course}
-                    onChange={(e) => setCourse(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)"
-                    }}
-                    className="w-full pl-9 pr-7 py-2.5 focus:border-white/30 rounded-xl text-white text-xs outline-none"
-                  >
-                    {STUDENT_COURSES.map((crs) => (
-                      <option key={crs} value={crs} className="bg-zinc-900 text-white">
-                        {crs}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Year of Study & Phone */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] text-zinc-400 mb-1">Study year</label>
-                  <select
-                    value={year}
-                    onChange={(e) => setYear(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)"
-                    }}
-                    className="w-full px-3 py-2.5 focus:border-white/30 rounded-xl text-white text-xs outline-none"
-                  >
-                    {ACADEMIC_YEARS.map((y) => (
-                      <option key={y} value={y} className="bg-zinc-900 text-white">
-                        {y}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[11px] text-zinc-400 mb-1">WhatsApp / Phone</label>
-                  <input
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    style={{
-                      background: "linear-gradient(180deg, rgba(24, 25, 30, 0.95) 0%, rgba(16, 17, 21, 0.95) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.08)",
-                      boxShadow: "inset 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05)"
-                    }}
-                    className="w-full px-3.5 py-2.5 focus:border-white/30 rounded-xl text-white placeholder-zinc-500 text-xs outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="pt-2 flex items-center justify-between gap-3">
-                {onboardingStep === "edit" ? (
-                  <button
-                    type="button"
-                    onClick={() => setOnboardingStep("portfolio")}
-                    className="px-4 py-2.5 rounded-xl border border-white/10 text-xs text-zinc-400 hover:text-white"
-                  >
-                    Back
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setOnboardingStep("choice")}
-                    className="text-xs text-zinc-400 hover:text-white"
-                  >
-                    ← Switch method
-                  </button>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  style={{
-                    background: "linear-gradient(180deg, #ffffff 0%, #f1f2f5 100%)",
-                    boxShadow: "0 4px 22px rgba(255, 255, 255, 0.22), inset 0 1px 0 #ffffff"
-                  }}
-                  className="flex-1 py-3 text-black font-semibold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <RefreshCw size={13} className="animate-spin" />
-                      <span>Saving...</span>
-                    </>
-                  ) : (
-                    <span>{onboardingStep === "edit" ? "Save Changes" : "Save & Activate Passport"}</span>
-                  )}
-                </button>
-              </div>
-
-              {/* Support One-Liner */}
-              <div className="mt-3 pt-3 border-t border-white/[0.08] text-center">
-                <p className="text-[11px] text-zinc-400 flex items-center justify-center gap-1.5 flex-wrap">
-                  <span>Problem in signing in your ID? Contact:</span>
-                  <a
-                    href="tel:+918828069553"
-                    className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-2 flex items-center gap-1"
-                  >
-                    <PhoneCall size={11} />
-                    <span>Mayur Shewle +91 88280 69553</span>
-                  </a>
-                </p>
-              </div>
+            <form onSubmit={sendCode} className="space-y-4">
+              {mode === "signup" && <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label className="space-y-1.5 text-xs text-slate-300"><span>First name</span><input className={fieldClass} autoComplete="given-name" required maxLength={80} value={firstName} onChange={(e) => setFirstName(e.target.value)} disabled={pending} /></label>
+                <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} autoComplete="family-name" required maxLength={80} value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={pending} /></label>
+              </div>}
+              <label className="block space-y-1.5 text-xs text-slate-300"><span>Email address</span><input className={fieldClass} type="email" autoComplete="email" required maxLength={254} value={email} onChange={(e) => setEmail(e.target.value)} disabled={pending} /></label>
+              {mode === "signup" && <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} type="tel" autoComplete="tel" required maxLength={30} placeholder="+91 98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={pending} /><span className="block text-[11px] text-slate-500">For event updates. We verify your email, not your phone.</span></label>}
+              <button className={buttonClass} disabled={pending || !ready || cooldown > 0} type="submit">{pending ? <LoaderCircle size={17} className="animate-spin" /> : <Mail size={17} />}{pending ? "Connecting…" : cooldown > 0 ? "Request another code in " + cooldown + "s" : "Send verification code"}</button>
             </form>
-          )}
+          </>}
 
-          {/* ====================================================================== */}
-          {/* VIEW 3: STUDENT COMMAND PORTFOLIO (Passes, Stats, Edit)                */}
-          {/* ====================================================================== */}
-          {onboardingStep === "portfolio" && user && (
-            <div className="space-y-4 max-h-[72vh] overflow-y-auto custom-scrollbar pr-1">
-              {/* Minimalist User Card */}
-              <div
-                style={{
-                  background: "linear-gradient(180deg, rgba(28, 30, 36, 0.95) 0%, rgba(18, 19, 24, 0.95) 100%)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.08)"
-                }}
-                className="p-4 rounded-2xl relative overflow-hidden"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {user.avatar ? (
-                      <img
-                        src={user.avatar}
-                        alt={user.name}
-                        className="w-12 h-12 rounded-xl object-cover border border-white/15"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center font-bold text-base text-white">
-                        {user.name[0]}
-                      </div>
-                    )}
-                    <div>
-                      <h3 className="font-semibold text-sm text-white">{user.name}</h3>
-                      <p className="text-[11px] text-zinc-400 truncate max-w-[200px]">
-                        {user.college || "UDCS, University of Mumbai"}
-                      </p>
-                      <p className="text-[10px] text-cyan-400 font-mono mt-0.5">
-                        {user.course || "M.Sc Computer Science"}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-2 bg-white rounded-lg text-black">
-                    <QrCode size={32} />
-                  </div>
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-zinc-400">
-                  <span>ID: {user.id}</span>
-                  <span className="text-emerald-400 flex items-center gap-1">
-                    <CheckCircle2 size={11} /> VERIFIED
-                  </span>
-                </div>
-              </div>
-
-              {/* Event Stats Counter */}
-              <div className="grid grid-cols-2 gap-3">
-                <div
-                  style={{
-                    background: "rgba(22, 24, 29, 0.8)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)"
-                  }}
-                  className="p-3 rounded-xl text-center"
-                >
-                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider block mb-0.5">
-                    Registered Passes
-                  </span>
-                  <span className="text-xl font-bold text-white flex items-center justify-center gap-1">
-                    <Ticket size={16} className="text-cyan-400" />
-                    <span>{myRegistrations.length}</span>
-                  </span>
-                </div>
-                <div
-                  style={{
-                    background: "rgba(22, 24, 29, 0.8)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)"
-                  }}
-                  className="p-3 rounded-xl text-center"
-                >
-                  <span className="text-[10px] text-zinc-400 uppercase tracking-wider block mb-0.5">
-                    Campus
-                  </span>
-                  <span className="text-xs font-semibold text-zinc-200 block truncate px-1">
-                    MUMBAI MMR
-                  </span>
-                </div>
-              </div>
-
-              {/* Tickets List */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs text-zinc-300 font-medium">
-                  <span>Your Passes ({myRegistrations.length})</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onClose();
-                      const el = document.getElementById("events");
-                      if (el) el.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="text-[11px] text-cyan-400 hover:underline flex items-center gap-1"
-                  >
-                    <span>Browse Events</span>
-                    <ExternalLink size={10} />
-                  </button>
-                </div>
-
-                {myRegistrations.length > 0 ? (
-                  myRegistrations.map((reg) => (
-                    <div
-                      key={reg.id}
-                      style={{
-                        background: "rgba(22, 24, 29, 0.8)",
-                        border: "1px solid rgba(255, 255, 255, 0.06)"
-                      }}
-                      className="p-3 rounded-xl flex items-center justify-between text-xs"
-                    >
-                      <div>
-                        <div className="font-medium text-white">{reg.eventTitle}</div>
-                        <div className="text-[10px] font-mono text-zinc-400 mt-0.5">
-                          Code: <span className="text-amber-400">{reg.ticketCode}</span>
-                        </div>
-                      </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        CONFIRMED
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <div className="p-4 rounded-xl bg-[#18191d] border border-dashed border-white/[0.08] text-center text-xs text-zinc-500">
-                    No active registrations yet.
-                  </div>
-                )}
-              </div>
-
-              {/* Footer Actions */}
-              <div className="pt-2 flex items-center justify-between gap-3">
-                <button
-                  type="button"
-                  onClick={() => signOut()}
-                  className="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-red-500/10 text-xs text-zinc-400 hover:text-red-400 transition-colors flex items-center gap-1.5"
-                >
-                  <LogOut size={13} />
-                  <span>Sign out</span>
-                </button>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      cyberAudio.playClick();
-                      setOnboardingStep("edit");
-                    }}
-                    className="px-4 py-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.14] text-white text-xs font-medium transition-all flex items-center gap-1.5"
-                  >
-                    <Edit3 size={13} />
-                    <span>Edit Profile</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    style={{
-                      background: "linear-gradient(180deg, #ffffff 0%, #f1f2f5 100%)",
-                      boxShadow: "0 4px 20px rgba(255, 255, 255, 0.2)"
-                    }}
-                    className="px-5 py-2.5 rounded-xl text-black font-semibold text-xs transition-all"
-                  >
-                    Done
-                  </button>
-                </div>
-              </div>
-
-              {/* Support One-Liner */}
-              <div className="pt-2 border-t border-white/[0.06] text-center">
-                <p className="text-[10px] text-zinc-400 flex items-center justify-center gap-1 flex-wrap">
-                  <span>Problem in signing in your ID? Contact:</span>
-                  <a
-                    href="tel:+918828069553"
-                    className="text-cyan-400 hover:text-cyan-300 font-medium underline underline-offset-2 flex items-center gap-1"
-                  >
-                    <PhoneCall size={10} />
-                    <span>Mayur Shewle +91 88280 69553</span>
-                  </a>
-                </p>
-              </div>
+          {!user && stage === "otp" && <form onSubmit={verifyCode} className="mt-6 space-y-5">
+            <label className="block space-y-2 text-xs text-slate-300"><span>Verification code</span><input className={fieldClass + " text-center text-2xl tracking-[0.35em]"} autoComplete="one-time-code" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))} disabled={pending} /></label>
+            <button type="submit" disabled={pending || otp.length !== 6} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ShieldCheck size={17} />}Verify & continue</button>
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+              <button type="button" disabled={pending} className="flex items-center gap-1 text-slate-300 hover:text-white" onClick={() => { setStage("details"); setOtp(""); setError(null); }}><ArrowLeft size={13} />Change details</button>
+              <button type="button" disabled={pending || cooldown > 0} className="text-cyan-200 disabled:text-slate-500" onClick={() => void sendCode()}>{cooldown ? "Resend in " + cooldown + "s" : "Resend code"}</button>
             </div>
-          )}
-        </motion.div>
+            <p className="text-xs leading-relaxed text-slate-500">Check spam or junk too. If you haven’t created an account yet, go back and choose Create account.</p>
+          </form>}
+
+          {profileView && <form onSubmit={saveProfile} className="mt-6 space-y-4">
+            <p className="text-sm text-slate-400">Confirm your name and phone. You can add college details now or when registering for an event.</p>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <label className="space-y-1.5 text-xs text-slate-300"><span>First name</span><input className={fieldClass} required maxLength={80} autoComplete="given-name" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></label>
+              <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} required maxLength={80} autoComplete="family-name" value={lastName} onChange={(e) => setLastName(e.target.value)} /></label>
+            </div>
+            <p className="flex items-center gap-2 text-sm text-emerald-200"><CheckCircle2 size={15} />Email verified: {user?.email}</p>
+            <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} required type="tel" autoComplete="tel" maxLength={30} value={phone} onChange={(e) => setPhone(e.target.value)} /></label>
+            <details className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
+              <summary className="cursor-pointer">College details (optional)</summary>
+              <div className="mt-4 space-y-3">
+                <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} list="enigma-colleges" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /><datalist id="enigma-colleges">{MUMBAI_COLLEGES.map((item) => <option key={item.id} value={item.name} />)}</datalist></label>
+                <label className="block space-y-1.5 text-xs"><span>Course</span><input className={fieldClass} list="enigma-courses" maxLength={120} value={course} onChange={(e) => setCourse(e.target.value)} /><datalist id="enigma-courses">{STUDENT_COURSES.map((item) => <option key={item} value={item} />)}</datalist></label>
+                <label className="block space-y-1.5 text-xs"><span>Study year</span><select className={fieldClass} value={year} onChange={(e) => setYear(e.target.value)}><option value="" className="bg-slate-900">Choose your year</option>{ACADEMIC_YEARS.map((item) => <option key={item} value={item} className="bg-slate-900">{item}</option>)}</select></label>
+              </div>
+            </details>
+            <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}Save profile</button>
+            {onboardingStep === "edit" && <button type="button" disabled={pending} className="w-full text-sm text-slate-400" onClick={() => setOnboardingStep("portfolio")}>Cancel</button>}
+          </form>}
+
+          {portfolio && user && <div className="mt-6 space-y-5">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <p className="text-xl font-semibold text-white">{user.name || "Welcome to Enigma"}</p>
+              <p className="mt-2 flex items-center gap-2 break-all text-sm text-emerald-200"><CheckCircle2 size={15} className="shrink-0" />{user.email}</p>
+              <p className="mt-2 text-sm text-slate-400">{user.phone || "Add your phone number"}{user.phone && " · Phone not verified"}</p>
+              {user.college && <p className="mt-3 text-sm text-slate-300">{user.college}</p>}
+            </div>
+            <div className="flex items-center gap-3 rounded-xl border border-white/10 p-4 text-sm text-slate-300"><Ticket size={19} className="text-cyan-200" />{myRegistrations.length ? myRegistrations.length + " event registrations" : "No event registrations yet."}</div>
+            <p className="text-xs leading-relaxed text-slate-500">Your account is ready. Event registration, document review and payment approval will be connected next.</p>
+            <button type="button" className={buttonClass} onClick={() => { setError(null); setOnboardingStep("edit"); }}>Edit profile<ArrowRight size={16} /></button>
+            <button type="button" disabled={pending} onClick={() => void run(async () => { const result = await signOut(); if (result.success) { setStage("details"); setEmail(""); setPhone(""); setFirstName(""); setLastName(""); } return result; })} className="flex w-full items-center justify-center gap-2 text-sm text-slate-400 hover:text-white"><LogOut size={15} />Sign out</button>
+          </div>}
+          <div className="mt-7 border-t border-white/10 pt-4 text-xs leading-relaxed text-slate-500">Need help? <a href="tel:+918828069553" className="text-slate-300 underline underline-offset-4">Contact the organising team</a>.</div>
+        </section>
       </div>
-    </AnimatePresence>
+    </div>
   );
 }

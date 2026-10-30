@@ -101,15 +101,7 @@ export default function Enigma2Footer() {
 
             {/* Interactive Cyber Quick Access Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <Link
-                href="/enigma2/terminal"
-                onClick={() => cyberAudio.playClick()}
-                className="group relative inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-950/80 to-[#0b1220] border border-cyan-500/40 hover:border-cyan-300 text-cyan-300 hover:text-white font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-[0_0_15px_rgba(6,182,212,0.25)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] cursor-pointer"
-              >
-                <Terminal size={15} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-                <span>TERMINAL ACCESS</span>
-                <span className="text-[10px] text-cyan-400/60 font-normal">&gt;_</span>
-              </Link>
+              <Link href="/account-information" className="inline-flex items-center gap-2 text-xs text-cyan-200 underline underline-offset-4">Student account information</Link>
 
               <div className="flex items-center gap-2">
                 <a

@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: '/private/',
+            disallow: ['/private/', '/api/', '/enigma2/terminal'],
         },
-        sitemap: 'https://enigmaudcs.in/sitemap.xml',
+        sitemap: 'https://www.enigmaudcs.in/sitemap.xml',
     };
 }

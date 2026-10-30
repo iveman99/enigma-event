@@ -119,15 +119,7 @@ export default function Enigma2Navbar({
                 onClick={() => openProfile("portfolio")}
                 className="px-3.5 py-1.5 rounded-xl bg-[#131722] hover:bg-[#1c2233] border border-cyan-500/30 hover:border-cyan-400 text-white font-sans font-bold text-xs uppercase tracking-widest shadow-lg transition-all flex items-center gap-2 cursor-pointer"
               >
-                {user.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-5 h-5 rounded-full object-cover border border-cyan-400"
-                  />
-                ) : (
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                )}
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span>{user.name.split(" ")[0].toUpperCase()}</span>
               </button>
 

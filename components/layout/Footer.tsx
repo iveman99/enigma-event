@@ -84,7 +84,7 @@ export default function Footer() {
                         </p>
 
                         <Link
-                            href="/enigma-access"
+                            href="/enigma2"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon-cyan/10 border border-neon-cyan/50 text-neon-cyan hover:bg-neon-cyan hover:text-black font-mono text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(0,243,255,0.25)] hover:shadow-[0_0_25px_rgba(0,243,255,0.6)] group"
