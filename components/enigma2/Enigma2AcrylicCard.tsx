@@ -333,7 +333,7 @@ export default function Enigma2AcrylicCard({
                   <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/15">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.9)]" />
                     <span className="text-[10px] font-mono font-bold text-emerald-300 tracking-wider">
-                      FREE ENTRY
+                      {event.fee}
                     </span>
                   </div>
                 </div>
@@ -404,7 +404,7 @@ export default function Enigma2AcrylicCard({
                     className="px-5 py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-[family-name:var(--font-orbitron)] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-emerald-500/10"
                   >
                     <CheckCircle2 size={15} />
-                    <span>PASS ACQUIRED</span>
+                    <span>ENTRY SUBMITTED</span>
                   </button>
                 ) : (
                   <button
@@ -414,7 +414,7 @@ export default function Enigma2AcrylicCard({
                     }}
                     className={`px-5 py-2.5 rounded-xl font-[family-name:var(--font-orbitron)] font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${theme.registerBtn}`}
                   >
-                    <span>{user ? "1-CLICK ENROLL" : "REGISTER NOW"}</span>
+                    <span>{user ? "REGISTER" : "REGISTER NOW"}</span>
                     <ArrowRight size={14} />
                   </button>
                 )}

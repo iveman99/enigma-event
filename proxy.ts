@@ -3,12 +3,6 @@ import { createServerClient } from "@supabase/ssr";
 import { getSupabaseConfig, isAuthConfigured } from "@/lib/supabase/config";
 
 export async function proxy(request: NextRequest) {
-  // The festival is public. The unfinished organiser terminal stays unavailable;
-  // API handlers independently enforce verified sessions and ownership rules.
-  if (request.nextUrl.pathname === "/enigma2/terminal" || request.nextUrl.pathname.startsWith("/enigma2/terminal/")) {
-    return new NextResponse(null, { status: 404, headers: { "Cache-Control": "private, no-store", "X-Robots-Tag": "noindex" } });
-  }
-
   let response = NextResponse.next({ request });
   response.headers.set("Cache-Control", "private, no-store");
   // Route handlers own auth writes; refresh only on page requests to avoid
@@ -35,9 +29,10 @@ export async function proxy(request: NextRequest) {
       // still validate the session and fail closed before accessing any data.
     }
   }
+  if (request.nextUrl.pathname.startsWith("/enigma2/terminal")) response.headers.set("X-Robots-Tag", "noindex, nofollow");
   return response;
 }
 
 export const config = {
-  matcher: ["/enigma2/:path*", "/api/auth/:path*", "/api/registrations", "/api/backup"],
+  matcher: ["/enigma2/:path*", "/api/auth/:path*", "/api/registrations", "/api/backup", "/api/organiser", "/api/documents", "/api/registration-settings"],
 };

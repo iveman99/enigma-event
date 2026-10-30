@@ -45,7 +45,7 @@ function Enigma2Content() {
   };
 
   const handleOpenPasses = () => {
-    openProfile(user ? "portfolio" : "choice");
+    if (user) setIsPassesOpen(true); else openProfile("choice");
     cyberAudio.playClick();
   };
 

@@ -21,11 +21,11 @@ describe("public festival access", () => {
     const response = await proxy(new NextRequest("https://www.enigmaudcs.in/api/auth/session"));
     expect(response.headers.get("x-middleware-next")).toBe("1");
   });
-  it("does not expose the unfinished organiser terminal", async () => {
+  it("marks the organiser shell as noindex; its API checks access", async () => {
     for (const path of ["/enigma2/terminal", "/enigma2/terminal/export"]) {
       const response = await proxy(new NextRequest("https://www.enigmaudcs.in" + path));
-      expect(response.status).toBe(404);
-      expect(response.headers.get("x-robots-tag")).toBe("noindex");
+      expect(response.status).toBe(200);
+      expect(response.headers.get("x-robots-tag")).toContain("noindex");
     }
   });
   it("keeps the festival visible during a provider outage", async () => {

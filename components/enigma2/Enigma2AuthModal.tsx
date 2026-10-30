@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, Ticket, X } from "lucide-react";
 import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
 import { basicProfileSchema, requestOtpSchema } from "@/lib/auth/validation";
+import DocumentUpload from "./DocumentUpload";
+import RegistrationList from "./RegistrationList";
 import { ACADEMIC_YEARS, MUMBAI_COLLEGES, STUDENT_COURSES } from "@/lib/colleges";
 
 interface AuthModalProps {
@@ -23,7 +25,7 @@ export default function Enigma2AuthModal({ isOpen, onClose, onSuccess, initialMe
 
 function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalProps) {
   const { user, myRegistrations, configured, isLoading, authError, onboardingStep, setOnboardingStep,
-    requestEmailOtp, verifyEmailOtp, signInWithGoogle, signInWithGithub, completeOnboarding, updateProfile, signOut } = useAuth();
+    requestEmailOtp, verifyEmailOtp, signInWithGoogle, signInWithGithub, completeOnboarding, updateProfile, signOut, refreshProfile } = useAuth();
   const [mode, setMode] = useState<"signup" | "signin">("signup");
   const [stage, setStage] = useState<"details" | "otp">("details");
   const [firstName, setFirstName] = useState(user?.firstName || "");
@@ -178,21 +180,23 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           </form>}
 
           {profileView && <form onSubmit={saveProfile} className="mt-6 space-y-4">
-            <p className="text-sm text-slate-400">Confirm your name and phone. You can add college details now or when registering for an event.</p>
+            <p className="text-sm text-slate-400">Complete your profile once. We reuse these details for every event; check that they are accurate.</p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <label className="space-y-1.5 text-xs text-slate-300"><span>First name</span><input className={fieldClass} required maxLength={80} autoComplete="given-name" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></label>
               <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} required maxLength={80} autoComplete="family-name" value={lastName} onChange={(e) => setLastName(e.target.value)} /></label>
             </div>
             <p className="flex items-center gap-2 text-sm text-emerald-200"><CheckCircle2 size={15} />Email verified: {user?.email}</p>
             <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} required type="tel" autoComplete="tel" maxLength={30} value={phone} onChange={(e) => setPhone(e.target.value)} /></label>
-            <details className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
-              <summary className="cursor-pointer">College details (optional)</summary>
+            <details open className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
+              <summary className="cursor-pointer">College & course</summary>
               <div className="mt-4 space-y-3">
-                <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} list="enigma-colleges" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /><datalist id="enigma-colleges">{MUMBAI_COLLEGES.map((item) => <option key={item.id} value={item.name} />)}</datalist></label>
-                <label className="block space-y-1.5 text-xs"><span>Course</span><input className={fieldClass} list="enigma-courses" maxLength={120} value={course} onChange={(e) => setCourse(e.target.value)} /><datalist id="enigma-courses">{STUDENT_COURSES.map((item) => <option key={item} value={item} />)}</datalist></label>
+                <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} required list="enigma-colleges" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /><datalist id="enigma-colleges">{MUMBAI_COLLEGES.map((item) => <option key={item.id} value={item.name} />)}</datalist></label>
+                <label className="block space-y-1.5 text-xs"><span>Course</span><input className={fieldClass} required list="enigma-courses" maxLength={120} value={course} onChange={(e) => setCourse(e.target.value)} /><datalist id="enigma-courses">{STUDENT_COURSES.map((item) => <option key={item} value={item} />)}</datalist></label>
                 <label className="block space-y-1.5 text-xs"><span>Study year</span><select className={fieldClass} value={year} onChange={(e) => setYear(e.target.value)}><option value="" className="bg-slate-900">Choose your year</option>{ACADEMIC_YEARS.map((item) => <option key={item} value={item} className="bg-slate-900">{item}</option>)}</select></label>
               </div>
             </details>
+            <p className="text-xs text-slate-400">Type your college and course manually, or use a suggestion. Your college ID is required before event registration.</p>
+            <DocumentUpload kind="id" label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} />
             <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}Save profile</button>
             {onboardingStep === "edit" && <button type="button" disabled={pending} className="w-full text-sm text-slate-400" onClick={() => setOnboardingStep("portfolio")}>Cancel</button>}
           </form>}
@@ -205,7 +209,8 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
               {user.college && <p className="mt-3 text-sm text-slate-300">{user.college}</p>}
             </div>
             <div className="flex items-center gap-3 rounded-xl border border-white/10 p-4 text-sm text-slate-300"><Ticket size={19} className="text-cyan-200" />{myRegistrations.length ? myRegistrations.length + " event registrations" : "No event registrations yet."}</div>
-            <p className="text-xs leading-relaxed text-slate-500">Your account is ready. Event registration, document review and payment approval will be connected next.</p>
+            <p className="text-xs leading-relaxed text-slate-400">{user.isRegistrationReady ? "Your profile is ready for event registration." : "Before registering, add your college, course and college ID in Edit profile."}</p>
+            <RegistrationList />
             <button type="button" className={buttonClass} onClick={() => { setError(null); setOnboardingStep("edit"); }}>Edit profile<ArrowRight size={16} /></button>
             <button type="button" disabled={pending} onClick={() => void run(async () => { const result = await signOut(); if (result.success) { setStage("details"); setEmail(""); setPhone(""); setFirstName(""); setLastName(""); } return result; })} className="flex w-full items-center justify-center gap-2 text-sm text-slate-400 hover:text-white"><LogOut size={15} />Sign out</button>
           </div>}

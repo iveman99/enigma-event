@@ -157,7 +157,7 @@ describe("OAuth and legacy access", () => {
     expect((await callback(new Request("http://localhost:3000/api/auth/callback?code=valid"))).headers.get("location")).toContain("auth=success");
   });
   it("never exposes seeded registrations or issues fake confirmed passes", async () => {
-    expect((await (await registrations()).json()).registrations).toEqual([]);
-    expect((await register(request({}))).status).toBe(503);
+    expect((await registrations()).status).toBe(503);
+    expect((await register(request({}))).status).toBe(400);
   });
 });

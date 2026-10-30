@@ -231,7 +231,7 @@ export default function Enigma2Events({ onSelectEventForRegister }: Enigma2Event
         {/* 2. Events Grid - 4 Bespoke 3D Acrylic Glass Box Showcase Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 pt-4 justify-items-center">
           {filteredEvents.map((event, idx) => {
-            const isRegistered = myRegistrations.some((r) => r.eventId === event.id);
+            const isRegistered = myRegistrations.some((r) => r.event_id === event.id && r.status !== "rejected");
 
             return (
               <Enigma2AcrylicCard

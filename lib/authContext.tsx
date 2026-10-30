@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
-import type { Registration } from "./db";
+import type { EventRegistration } from "./registration";
 import type { ProfileInput } from "./auth/validation";
 
 export interface OperativeUser {
@@ -20,6 +20,8 @@ export interface OperativeUser {
   emailVerified: boolean;
   phoneVerified: boolean;
   isProfileComplete: boolean;
+  hasIdCard: boolean;
+  isRegistrationReady: boolean;
   signedInAt: string;
 }
 
@@ -31,7 +33,8 @@ export type OtpRequest =
 
 interface AuthContextType {
   user: OperativeUser | null;
-  myRegistrations: Registration[];
+  myRegistrations: EventRegistration[];
+  registrationsError: string | null;
   isLoading: boolean;
   configured: boolean | null;
   authError: string | null;
@@ -47,6 +50,7 @@ interface AuthContextType {
   updateProfile: (data: ProfileInput) => Promise<AuthResult>;
   signOut: () => Promise<AuthResult>;
   refreshMyRegistrations: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
   openProfile: (mode?: AuthModalStep) => void;
 }
 
@@ -70,7 +74,8 @@ function message(error: unknown) {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<OperativeUser | null>(null);
-  const [myRegistrations, setMyRegistrations] = useState<Registration[]>([]);
+  const [myRegistrations, setMyRegistrations] = useState<EventRegistration[]>([]);
+  const [registrationsError, setRegistrationsError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
@@ -173,12 +178,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshMyRegistrations = useCallback(async () => {
-    if (!user) { setMyRegistrations([]); return; }
+    if (!user) { setMyRegistrations([]); setRegistrationsError(null); return; }
     const current = generation.current;
     try {
       const data = await authRequest("/api/registrations");
-      if (current === generation.current && data.success) setMyRegistrations(data.registrations);
-    } catch { if (current === generation.current) setMyRegistrations([]); }
+      if (current === generation.current && data.success) { setMyRegistrations(data.registrations); setRegistrationsError(null); }
+    } catch (error) { if (current === generation.current) setRegistrationsError(message(error)); }
   }, [user]);
 
   useEffect(() => { void Promise.resolve().then(refreshMyRegistrations); }, [refreshMyRegistrations]);
@@ -189,12 +194,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return <AuthContext.Provider value={{
-    user, myRegistrations, isLoading, configured, authError, showAuthModal, setShowAuthModal,
+    user, myRegistrations, registrationsError, isLoading, configured, authError, showAuthModal, setShowAuthModal,
     onboardingStep, setOnboardingStep, requestEmailOtp, verifyEmailOtp,
     signInWithGoogle: () => oauth("google"), signInWithGithub: () => oauth("github"),
     completeOnboarding: (data) => persistProfile(data, "portfolio"),
     updateProfile: (data) => persistProfile(data, "portfolio"),
-    signOut, refreshMyRegistrations, openProfile,
+    signOut, refreshMyRegistrations, openProfile, refreshProfile: async () => { await refreshSession(); },
   }}>{children}</AuthContext.Provider>;
 }
 

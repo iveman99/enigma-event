@@ -12,6 +12,7 @@ export interface StudentProfile {
   course: string;
   year: string;
   prn: string;
+  id_card_path?: string;
   created_at: string;
   updated_at: string;
 }
@@ -26,7 +27,7 @@ export async function requireVerifiedSession() {
 }
 
 export async function readProfile(supabase: SupabaseClient, user: User) {
-  const { data, error } = await supabase.from("profiles").select("id, first_name, last_name, phone, college, course, year, prn, created_at, updated_at").eq("id", user.id).single();
+  const { data, error } = await supabase.from("profiles").select("*").eq("id", user.id).single();
   if (error || !data) throw new AuthHttpError(503, "Your profile couldn't be loaded. Please try again shortly.", "profile_unavailable");
   return toStudentUser(user, data as StudentProfile);
 }
@@ -48,6 +49,8 @@ export function toStudentUser(user: User, profile: StudentProfile) {
     provider: provider === "google" || provider === "github" ? provider : "manual" as const,
     emailVerified: Boolean(user.email_confirmed_at),
     phoneVerified: false,
+    hasIdCard: Boolean(profile.id_card_path),
+    isRegistrationReady: Boolean(profile.first_name && profile.last_name && profile.phone && profile.college && profile.course && profile.id_card_path),
     isProfileComplete: Boolean(profile.first_name && profile.last_name && profile.phone),
     createdAt: profile.created_at,
     updatedAt: profile.updated_at,
