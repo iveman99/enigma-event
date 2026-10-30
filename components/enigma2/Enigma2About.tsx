@@ -176,7 +176,7 @@ export default function Enigma2About() {
                 Community Driven
               </span>
               <span className="text-gray-300 font-sans text-xs sm:text-sm">
-                Open to <strong className="text-white font-semibold">B.Tech, Bachelor’s &amp; Master’s</strong> students across all disciplines and colleges.
+                Open to <strong className="text-white font-semibold">Bachelor’s &amp; Master’s</strong> students across all disciplines and colleges.
               </span>
             </div>
           </motion.div>

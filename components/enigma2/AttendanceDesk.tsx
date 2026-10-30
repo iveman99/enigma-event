@@ -52,10 +52,10 @@ export default function AttendanceDesk() {
       if (action !== "preview") void refresh();
       stopCamera();
     } catch (cause) { setError(cause instanceof Error ? cause.message : "The pass couldn't be checked."); }
-    finally { setBusy(false); scanning.current = false; }
+    finally { stopCamera(); setBusy(false); scanning.current = false; }
   };
   const startCamera = async () => {
-    setError("");
+    stopCamera(); setPerson(null); setNotice(""); setError("");
     const BarcodeDetector = (window as Window & { BarcodeDetector?: new (options: { formats: string[] }) => Detector }).BarcodeDetector;
     if (!BarcodeDetector || !navigator.mediaDevices?.getUserMedia) { setError("Camera scanning is unavailable in this browser. Enter the code printed below the student's QR instead."); return; }
     try {

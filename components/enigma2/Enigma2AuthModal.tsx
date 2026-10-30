@@ -6,7 +6,7 @@ import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
 import { basicProfileSchema, requestOtpSchema } from "@/lib/auth/validation";
 import DocumentUpload from "./DocumentUpload";
 import RegistrationList from "./RegistrationList";
-import { ACADEMIC_YEARS, MUMBAI_COLLEGES, STUDENT_COURSES } from "@/lib/colleges";
+import { ACADEMIC_YEARS } from "@/lib/colleges";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -190,12 +190,12 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
             <details open className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
               <summary className="cursor-pointer">College & course</summary>
               <div className="mt-4 space-y-3">
-                <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} required list="enigma-colleges" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /><datalist id="enigma-colleges">{MUMBAI_COLLEGES.map((item) => <option key={item.id} value={item.name} />)}</datalist></label>
-                <label className="block space-y-1.5 text-xs"><span>Course</span><input className={fieldClass} required list="enigma-courses" maxLength={120} value={course} onChange={(e) => setCourse(e.target.value)} /><datalist id="enigma-courses">{STUDENT_COURSES.map((item) => <option key={item} value={item} />)}</datalist></label>
+                <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} required placeholder="Enter the full name of your college" autoComplete="organization" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /></label>
+                <label className="block space-y-1.5 text-xs"><span>Course</span><input className={fieldClass} required placeholder="Enter your course, e.g. B.Sc. Computer Science" maxLength={120} value={course} onChange={(e) => setCourse(e.target.value)} /></label>
                 <label className="block space-y-1.5 text-xs"><span>Study year</span><select className={fieldClass} value={year} onChange={(e) => setYear(e.target.value)}><option value="" className="bg-slate-900">Choose your year</option>{ACADEMIC_YEARS.map((item) => <option key={item} value={item} className="bg-slate-900">{item}</option>)}</select></label>
               </div>
             </details>
-            <p className="text-xs text-slate-400">Type your college and course manually, or use a suggestion. Your college ID is required before event registration.</p>
+            <p className="text-xs text-slate-400">Enter your college and course as shown on your college ID. Upload the ID before registering for an event.</p>
             <DocumentUpload kind="id" label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} />
             <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}Save profile</button>
             {onboardingStep === "edit" && <button type="button" disabled={pending} className="w-full text-sm text-slate-400" onClick={() => setOnboardingStep("portfolio")}>Cancel</button>}
