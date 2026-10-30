@@ -161,7 +161,7 @@ export default function Enigma2About() {
             {/* Lead Line with Glowing Left Border */}
             <div className="border-l-2 border-cyan-400/80 pl-4 sm:pl-5 py-0.5 mt-2">
               <p className="text-gray-100 font-sans text-base sm:text-lg font-medium leading-relaxed">
-                Every great experience starts with an idea. ENIGMA began with one — to bring students together through technology, creativity, and the thrill of competition.
+                Enigma 2.0 is the official Techfest of the Department of Computer Science, University of Mumbai. A day to code, solve, compete and connect.
               </p>
             </div>
 

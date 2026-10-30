@@ -75,7 +75,7 @@ export default function Enigma2Sponsors() {
         "Dedicated Track Branding during 2.5H AI Hack Sprint",
         "Live Developer Workshop / Product Demo Spotlight",
         "Sponsored Challenge Category with Custom Problem Statement",
-        "Branded Booth Pavilion at The Festival Innovation Zone",
+        "Branded Booth Pavilion at The Techfest Innovation Zone",
       ],
       isFlagship: false,
     },
@@ -110,7 +110,7 @@ export default function Enigma2Sponsors() {
       bgGradient: "bg-gradient-to-br from-purple-950/30 via-[#0e121c]/90 to-[#070910]/95",
       status: "OPEN FOR COLLABORATION",
       description:
-        "Amplify festival reach across developer communities, college campus networks, technology media, and student clubs.",
+        "Amplify Techfest reach across developer communities, college campus networks, technology media, and student clubs.",
       perks: [
         "Cross-Promotion across 40+ Engineering College Networks",
         "Digital Certificate Co-Branding for Verified Attendees",
@@ -299,7 +299,7 @@ export default function Enigma2Sponsors() {
                   Talent Pipeline Access
                 </span>
                 <span className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-gray-300">
-                  Enigma Festival Executive
+                  Enigma Organising Team
                 </span>
               </div>
             </motion.div>

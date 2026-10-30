@@ -42,6 +42,7 @@ export default function Enigma2Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
 
+        <nav aria-label="Explore Enigma 2.0" className="flex flex-wrap gap-6 text-sm text-cyan-200"><Link href="/enigma2/about">About Enigma 2.0</Link><Link href="/enigma2/events">Events and registration</Link></nav>
         {/* MAIN FOOTER GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
@@ -90,7 +91,7 @@ export default function Enigma2Footer() {
             {/* Tagline / Mission */}
             <div className="space-y-2.5 max-w-lg">
               <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs sm:text-sm text-gray-200 leading-relaxed">
-                Flagship Technical Arena of the <span className="text-white font-bold">Department of Computer Science (UDCS)</span>, University of Mumbai.
+                Official Techfest of the <span className="text-white font-bold">Department of Computer Science (UDCS)</span>, University of Mumbai.
               </p>
               
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-cyan-950/50 border border-cyan-500/35 text-cyan-300 font-[family-name:var(--font-jetbrains-mono)] text-[10px] sm:text-[11px] font-bold tracking-wider shadow-[0_0_15px_rgba(6,182,212,0.2)]">

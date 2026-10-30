@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 const title = "ENIGMA 2.0 | UDCS Techfest 2027 | University of Mumbai";
-const description = "Explore Enigma 2.0, the Department of Computer Science techfest at the University of Mumbai on 16 January 2027. Discover coding challenges, puzzles, esports and the festival schedule.";
+const description = "Enigma 2.0 is the official Techfest of the Department of Computer Science, University of Mumbai. Explore coding, puzzles and esports on 16 January 2027.";
 
 export const metadata: Metadata = {
   title,

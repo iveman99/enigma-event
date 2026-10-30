@@ -33,14 +33,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.enigmaudcs.in"),
   title: "ENIGMA 2.0 | Official Techfest of UDCS | University of Mumbai",
-  description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Experience premier coding sprints, esports tournaments, campus hunts, and ₹44,000 in rewards.",
+  description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Explore coding challenges, esports and campus puzzles on 16 January 2027.",
   keywords: ["ENIGMA 2.0", "ENIGMA 2027", "UDCS Techfest", "University of Mumbai Techfest", "coding competition Mumbai", "tech fest", "ENIGMA UDCS"],
   authors: [{ name: "Department of Computer Science, University of Mumbai" }],
   creator: "Department of Computer Science, University of Mumbai",
   publisher: "University of Mumbai",
   openGraph: {
     title: "ENIGMA 2.0 | Official Techfest of UDCS | University of Mumbai",
-    description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Participate in coding competitions, workshops, and exciting technical events.",
+    description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Explore coding competitions, campus puzzles and esports.",
     url: "https://enigmaudcs.in",
     siteName: "ENIGMA 2.0",
     images: [

@@ -164,7 +164,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
                 <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} autoComplete="family-name" required maxLength={80} value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={pending} /></label>
               </div>}
               <label className="block space-y-1.5 text-xs text-slate-300"><span>Email address</span><input className={fieldClass} type="email" autoComplete="email" required maxLength={254} value={email} onChange={(e) => setEmail(e.target.value)} disabled={pending} /></label>
-              {mode === "signup" && <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} type="tel" autoComplete="tel" required maxLength={30} placeholder="+91 98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={pending} /><span className="block text-[11px] text-slate-500">For event updates. We verify your email, not your phone.</span></label>}
+              {mode === "signup" && <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} type="tel" autoComplete="tel" required maxLength={30} placeholder="+91 98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={pending} /><span className="block text-[11px] text-slate-500">For event updates. Verify your email to continue.</span></label>}
               <button className={buttonClass} disabled={pending || !ready || cooldown > 0} type="submit">{pending ? <LoaderCircle size={17} className="animate-spin" /> : <Mail size={17} />}{pending ? "Connecting…" : cooldown > 0 ? "Request another code in " + cooldown + "s" : "Send verification code"}</button>
             </form>
           </>}
@@ -205,7 +205,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
               <p className="text-xl font-semibold text-white">{user.name || "Welcome to Enigma"}</p>
               <p className="mt-2 flex items-center gap-2 break-all text-sm text-emerald-200"><CheckCircle2 size={15} className="shrink-0" />{user.email}</p>
-              <p className="mt-2 text-sm text-slate-400">{user.phone || "Add your phone number"}{user.phone && " · Phone not verified"}</p>
+              <p className="mt-2 text-sm text-slate-400">{user.phone || "Add your phone number"}</p>
               {user.college && <p className="mt-3 text-sm text-slate-300">{user.college}</p>}
             </div>
             <div className="flex items-center gap-3 rounded-xl border border-white/10 p-4 text-sm text-slate-300"><Ticket size={19} className="text-cyan-200" />{myRegistrations.length ? myRegistrations.length + " event registrations" : "No event registrations yet."}</div>

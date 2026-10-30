@@ -33,7 +33,7 @@ const GALLERY_ITEMS: GalleryMedia[] = [
     id: "v-aftermovie",
     type: "video",
     src: "/enigma1/enigma1-aftermovie.mp4",
-    title: "Official Festival Aftermovie",
+    title: "Official Techfest Aftermovie",
     tag: "VIDEO",
     subtitle: "Enigma 1.0 Cinema Recap",
     description: "Official aftermovie capturing the inauguration, coding marathons, FIFA arena, and stage ceremonies at UDCS Mumbai.",
@@ -105,7 +105,7 @@ const GALLERY_ITEMS: GalleryMedia[] = [
     src: "/enigma1/enigma1-preview.mp4",
     title: "Fast Showcase Reel",
     tag: "VIDEO",
-    subtitle: "High-Paced Festival Cut",
+    subtitle: "Techfest Highlights",
     description: "A fast-cut vertical reel highlighting student crowds, coding intensity, and celebration moments.",
     date: "March 11, 2026"
   },
