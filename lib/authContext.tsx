@@ -187,6 +187,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user]);
 
   useEffect(() => { void Promise.resolve().then(refreshMyRegistrations); }, [refreshMyRegistrations]);
+  useEffect(() => {
+    if (!user) return;
+    const update = () => { if (document.visibilityState === "visible") void refreshMyRegistrations(); };
+    const timer = window.setInterval(update, 30000);
+    window.addEventListener("focus", update);
+    return () => { window.clearInterval(timer); window.removeEventListener("focus", update); };
+  }, [user, refreshMyRegistrations]);
 
   const openProfile = (mode?: AuthModalStep) => {
     setOnboardingStep(user ? (mode === "edit" ? "edit" : user.isProfileComplete ? "portfolio" : "profile") : "choice");

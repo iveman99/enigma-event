@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { User, Volume2, VolumeX, Menu, X, ArrowUpRight, LogOut, Ticket } from "lucide-react";
+import { User, Volume2, VolumeX, Menu, X, ArrowUpRight, LogOut, Ticket, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import { useAuth } from "@/lib/authContext";
 import { cyberAudio } from "@/lib/audio";
@@ -21,6 +21,15 @@ export default function Enigma2Navbar({
   const { user, signOut, myRegistrations, openProfile } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [terminalAccess, setTerminalAccess] = useState(false);
+  const [terminalPrompt, setTerminalPrompt] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    if (!user) return;
+    void fetch("/api/organiser/access", { cache: "no-store" }).then(r => r.json()).then(d => { if (active) setTerminalAccess(d.allowed === true); }).catch(() => { if (active) setTerminalAccess(false); });
+    return () => { active = false; };
+  }, [user?.id]);
 
   useEffect(() => {
     let ticking = false;
@@ -107,6 +116,7 @@ export default function Enigma2Navbar({
         <div className="flex items-center gap-3">
           {user ? (
             <div className="flex items-center gap-2">
+              {terminalAccess && <button onClick={() => setTerminalPrompt(true)} className="rounded-xl border border-amber-400/40 bg-amber-400/10 px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-amber-200 hover:bg-amber-400/20"><span className="hidden sm:inline">Access terminal</span><span className="sm:hidden">Terminal</span></button>}
               <button
                 onClick={() => openProfile("portfolio")}
                 className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-gray-300 transition-all cursor-pointer"
@@ -151,6 +161,7 @@ export default function Enigma2Navbar({
           </button>
         </div>
       </div>
+      {terminalPrompt && <div className="fixed inset-0 z-[100] flex min-h-screen items-center justify-center bg-black/80 p-4 backdrop-blur-md" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) setTerminalPrompt(false); }}><section role="dialog" aria-modal="true" aria-labelledby="terminal-title" className="w-full max-w-md rounded-3xl border border-cyan-300/30 bg-[#0b1523] p-7 text-white shadow-[0_25px_90px_rgba(0,0,0,.8)]"><div className="flex items-start justify-between"><div className="rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-3"><ShieldCheck className="text-cyan-200" /></div><button onClick={() => setTerminalPrompt(false)} aria-label="Close" className="rounded-full border border-white/15 p-2"><X size={18} /></button></div><p className="mt-6 text-xs font-bold uppercase tracking-[.25em] text-cyan-200">Enigma 2.0 · Organiser access</p><h2 id="terminal-title" className="mt-2 text-2xl font-bold">Welcome to the terminal.</h2><p className="mt-3 text-sm leading-6 text-slate-300">This workspace contains private student details and payment records. Review each payment in your bank or UPI app before approval, record clear notes, and use only your own organiser account.</p><div className="mt-6 flex gap-3"><button onClick={() => setTerminalPrompt(false)} className="flex-1 rounded-xl border border-white/20 px-4 py-3 text-sm">Cancel</button><Link href="/enigma2/terminal" onClick={() => setTerminalPrompt(false)} className="flex-1 rounded-xl bg-cyan-300 px-4 py-3 text-center text-sm font-bold text-slate-950">Enter terminal</Link></div></section></div>}
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (

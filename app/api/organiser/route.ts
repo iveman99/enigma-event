@@ -17,7 +17,17 @@ export async function GET() {
     const actorIds = [...new Set((activity || []).map(a => a.actor_id))];
     const { data: actors } = actorIds.length ? await service.from("profiles").select("id,first_name,last_name").in("id", actorIds) : { data: [] };
     const names = new Map((actors || []).map(a => [a.id, `${a.first_name} ${a.last_name}`.trim()]));
-    return authJson({ success: true, registrations: data, activity: (activity || []).map(a => ({ ...a, actor_name: names.get(a.actor_id) || "Account" })), settings: await paymentSettings() });
+    const { data: profiles, error: profilesError } = await service.from("profiles").select("id,first_name,last_name,phone,college,course,created_at,updated_at").order("created_at", { ascending: false }).limit(2000);
+    if (profilesError) throw new AuthHttpError(503, "The student directory couldn't be loaded.");
+    const students = [];
+    for (let page = 1; page <= 10; page++) {
+      const { data: users, error: usersError } = await service.auth.admin.listUsers({ page, perPage: 200 });
+      if (usersError) throw new AuthHttpError(503, "The sign-in directory couldn't be loaded.");
+      students.push(...users.users.map(u => ({ id: u.id, email: u.email || "", emailVerified: !!u.email_confirmed_at, lastSignIn: u.last_sign_in_at || null, createdAt: u.created_at })));
+      if (users.users.length < 200) break;
+    }
+    const profileById = new Map((profiles || []).map(p => [p.id, p]));
+    return authJson({ success: true, registrations: data, activity: (activity || []).map(a => ({ ...a, actor_name: names.get(a.actor_id) || "Account" })), settings: await paymentSettings(), students: students.map(s => ({ ...s, profile: profileById.get(s.id) || null })) });
   });
 }
 export async function POST(request: Request) {
