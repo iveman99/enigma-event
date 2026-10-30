@@ -236,6 +236,11 @@ export default function Enigma2Footer() {
 
         </div>
 
+        <nav aria-label="Account and privacy information" className="mb-6 flex flex-wrap gap-x-6 gap-y-3 text-xs text-gray-400">
+          <Link href="/account-information" className="underline underline-offset-4 hover:text-white">Student accounts</Link>
+          <Link href="/privacy" className="underline underline-offset-4 hover:text-white">Privacy policy</Link>
+          <Link href="/terms" className="underline underline-offset-4 hover:text-white">Terms of use</Link>
+        </nav>
         {/* BOTTOM CREDITS & SIGN-OFF BAR */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-400">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">

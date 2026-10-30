@@ -72,6 +72,11 @@ export default function Footer() {
                     </a>
                 </div>
 
+                <nav aria-label="Account and privacy information" className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-gray-400">
+                    <Link href="/account-information" className="underline underline-offset-4 hover:text-white">Student accounts</Link>
+                    <Link href="/privacy" className="underline underline-offset-4 hover:text-white">Privacy policy</Link>
+                    <Link href="/terms" className="underline underline-offset-4 hover:text-white">Terms of use</Link>
+                </nav>
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
                         <p className="text-xs text-gray-500 font-mono">
