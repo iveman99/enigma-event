@@ -9,7 +9,7 @@ export const COMPETITIONS = [
 export const registrationSchema = z.object({
   eventId: z.enum(["compile-vibes", "blind-dates", "decode-hunt", "fifa-addicts"]),
   teamName: z.string().trim().max(80),
-  members: z.array(z.object({ name: z.string().trim().min(2).max(160), email: z.email().max(254).transform(v => v.toLowerCase()), college: z.string().trim().min(2).max(200) }).strict()).max(2),
+  members: z.array(z.object({ name: z.string().trim().min(2).max(160), email: z.email().max(254).transform(v => v.toLowerCase()), phone: z.string().trim().regex(/^\+[1-9][0-9]{7,14}$/, "Enter a phone number with country code, such as +919876543210."), college: z.string().trim().min(2).max(200) }).strict()).max(2),
   receiptPath: z.string().max(200),
   transactionReference: z.string().trim().regex(/^[a-zA-Z0-9-]{6,50}$/, "Enter the transaction reference / UTR from your payment app."),
   profileConfirmed: z.literal(true),
@@ -23,7 +23,7 @@ export const registrationSchema = z.object({
 export type RegistrationInput = z.infer<typeof registrationSchema>;
 export type PaymentStatus = "pending" | "approved" | "rejected" | "archived";
 export interface EventRegistration {
-  id: string; event_id: string; event_title: string; team_name: string; members: Array<{name: string; email: string; college: string}>;
+  id: string; event_id: string; event_title: string; team_name: string; members: Array<{name: string; email: string; phone?: string; college: string}>;
   participant: { name: string; email: string; phone: string; college: string; course: string };
   amount: number; status: PaymentStatus; ticket_code: string | null; review_note: string;
   created_at: string; updated_at: string; version: number; transaction_reference: string;

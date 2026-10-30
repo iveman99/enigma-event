@@ -5,7 +5,7 @@ import { entryFee, ownsUpload, registrationSchema } from "@/lib/registration";
 let db: PGlite;
 const student = "00000000-0000-4000-8000-000000000011", organiser = "00000000-0000-4000-8000-000000000012", outsider = "00000000-0000-4000-8000-000000000013";
 const receipt = `${student}/receipt/00000000-0000-4000-8000-000000000014.jpg`;
-const member = { name: "Asha Patil", email: "asha@example.com", college: "Test College" };
+const member = { name: "Asha Patil", email: "asha@example.com", phone: "+919876543211", college: "Test College" };
 beforeAll(async () => {
   db = new PGlite();
   await db.exec(`create role anon; create role authenticated; create role service_role bypassrls;
