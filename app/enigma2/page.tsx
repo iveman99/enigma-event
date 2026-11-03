@@ -17,11 +17,13 @@ import Enigma2MyPassesModal from "@/components/enigma2/Enigma2MyPassesModal";
 import Enigma2SideNav from "@/components/enigma2/Enigma2SideNav";
 import Enigma2SocialSidebar from "@/components/enigma2/Enigma2SocialSidebar";
 import Enigma2ScrollIndicator from "@/components/enigma2/Enigma2ScrollIndicator";
+import { COMPETITIONS } from "@/lib/registration";
 import { Ticket } from "lucide-react";
 import { cyberAudio } from "@/lib/audio";
 
 function Enigma2Content() {
   const { showAuthModal, setShowAuthModal, openProfile, user } = useAuth();
+  const [registrationPrompt, setRegistrationPrompt] = useState("");
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [preselectedEventId, setPreselectedEventId] = useState<string | null>(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -32,7 +34,8 @@ function Enigma2Content() {
     const eventId = sessionStorage.getItem("enigma-registration-event");
     if (!eventId) return;
     sessionStorage.removeItem("enigma-registration-event");
-    setPreselectedEventId(eventId);
+    setRegistrationPrompt("");
+    setPreselectedEventId(eventId === "choose" ? null : eventId);
     setShowAuthModal(false);
     setIsAuthOpen(false);
     setIsRegisterOpen(true);
@@ -41,14 +44,26 @@ function Enigma2Content() {
   const authModalOpen = isAuthOpen || showAuthModal;
   const handleCloseAuth = () => {
     sessionStorage.removeItem("enigma-registration-event");
+    setRegistrationPrompt("");
     setIsAuthOpen(false);
     setShowAuthModal(false);
   };
 
   const handleOpenRegister = (eventId?: string) => {
-    setPreselectedEventId(eventId || null);
-    setIsRegisterOpen(true);
+    const selectedEvent = COMPETITIONS.find(event => event.id === eventId);
+    setPreselectedEventId(selectedEvent?.id || null);
     cyberAudio.playClick();
+    if (!user || !user.isRegistrationReady) {
+      sessionStorage.setItem("enigma-registration-event", selectedEvent?.id || "choose");
+      setRegistrationPrompt(!user
+        ? `Sign in to ${selectedEvent ? "register for " + selectedEvent.title : "register for an event"}. You’ll continue here after signing in.`
+        : `Complete your profile to ${selectedEvent ? "register for " + selectedEvent.title : "continue with registration"}.`);
+      setIsRegisterOpen(false);
+      openProfile(user ? "edit" : "choice");
+      return;
+    }
+    setRegistrationPrompt("");
+    setIsRegisterOpen(true);
   };
 
   const handleOpenAuth = () => {
@@ -110,6 +125,7 @@ function Enigma2Content() {
       {/* Operative Sign In Modal */}
       <Enigma2AuthModal
         isOpen={authModalOpen}
+        initialMessage={registrationPrompt}
         onClose={handleCloseAuth}
       />
 

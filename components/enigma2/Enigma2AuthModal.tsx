@@ -147,7 +147,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           </div>
           <h2 id="enigma-auth-title" className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
           {!user && <p className="mt-3 text-sm leading-relaxed text-slate-400">{stage === "otp" ? "Enter the six-digit code sent to " + sentTo + ". Never share your code." : "Sign in with Google, GitHub or a verification code sent to your email."}</p>}
-          {initialMessage && <p className="mt-3 text-sm text-slate-300">{initialMessage}</p>}
+          {initialMessage && <p role="status" className="mt-4 rounded-xl border border-cyan-300/25 bg-cyan-300/10 p-4 text-sm leading-relaxed text-cyan-100">{initialMessage}</p>}
           {(error || authError) && <p role="alert" className="mt-5 rounded-xl border border-rose-400/25 bg-rose-400/10 p-3 text-sm text-rose-200">{error || authError}</p>}
           {!user && configured === false && <p role="status" className="mt-5 rounded-xl border border-amber-300/20 bg-amber-300/10 p-3 text-sm text-amber-100">Sign-in is being connected. Please check back shortly.</p>}
 
