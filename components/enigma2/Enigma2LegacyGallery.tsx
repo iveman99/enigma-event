@@ -27,7 +27,7 @@ interface GalleryMedia {
   date: string;
 }
 
-// 13 Items: Mixed & Shuffled Videos and Photos
+// Photos and videos from Enigma 1.0.
 const GALLERY_ITEMS: GalleryMedia[] = [
   {
     id: "v-aftermovie",
@@ -159,9 +159,392 @@ const GALLERY_ITEMS: GalleryMedia[] = [
     description: "Esteemed judge assessing algorithmic structure, innovative thinking, and student presentation.",
     date: "March 11, 2026"
   },
+  ...[
+  {
+    "id": "selected-img_0007",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0007.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0047",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0047.webp",
+    "title": "Techfest moments",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Techfest moments at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0053",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0053.webp",
+    "title": "Guest addresses",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest addresses at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0066",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0066.webp",
+    "title": "Guest welcome",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest welcome at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0111",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0111.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0112",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0112.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0118",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0118.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_0129",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_0129.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7127",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7127.webp",
+    "title": "On campus",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On campus at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7129",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7129.webp",
+    "title": "On campus",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On campus at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7137",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7137.webp",
+    "title": "Techfest moments",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Techfest moments at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7148",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7148.webp",
+    "title": "On stage",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On stage at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7155",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7155.webp",
+    "title": "On campus",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On campus at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7188",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7188.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7189",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7189.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7193",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7193.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7197",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7197.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7201",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7201.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7215",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7215.webp",
+    "title": "On stage",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On stage at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7222",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7222.webp",
+    "title": "On stage",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "On stage at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7242",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7242.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7290",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7290.webp",
+    "title": "Guest welcome",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest welcome at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7295",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7295.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7373",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7373.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7383",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7383.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7385",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7385.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7390",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7390.webp",
+    "title": "Awards & certificates",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Awards & certificates at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7423",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7423.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7424",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7424.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7425",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7425.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_7426",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_7426.webp",
+    "title": "Team & participants",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Team & participants at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9878",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9878.webp",
+    "title": "Techfest moments",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Techfest moments at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9880",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9880.webp",
+    "title": "Techfest moments",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Techfest moments at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9907",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9907.webp",
+    "title": "Guest addresses",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest addresses at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9912",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9912.webp",
+    "title": "Techfest moments",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Techfest moments at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9915",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9915.webp",
+    "title": "Guest addresses",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest addresses at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9924",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9924.webp",
+    "title": "Guest welcome",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Guest welcome at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  },
+  {
+    "id": "selected-img_9987",
+    "type": "image" as const,
+    "src": "/enigma1/selected/img_9987.webp",
+    "title": "Coding in action",
+    "tag": "PHOTO",
+    "subtitle": "Enigma 1.0 · Department of Computer Science",
+    "description": "Coding in action at Enigma 1.0, Department of Computer Science, University of Mumbai.",
+    "date": "March 11, 2026"
+  }
+]
 ];
 
 export default function Enigma2LegacyGallery() {
+  const [visibleCount, setVisibleCount] = useState(13);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   // Keyboard navigation for Lightbox
@@ -245,7 +628,7 @@ export default function Enigma2LegacyGallery() {
 
           {/* 13 SHUFFLED & MIXED BOXES (VIDEOS & PHOTOS RUNNING PARALLELLY) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 sm:gap-3.5 pt-1">
-            {GALLERY_ITEMS.map((item, idx) => (
+            {GALLERY_ITEMS.slice(0, visibleCount).map((item, idx) => (
               <motion.div
                 key={item.id}
                 whileHover={{ scale: 1.04, y: -4 }}
@@ -314,6 +697,7 @@ export default function Enigma2LegacyGallery() {
               </motion.div>
             ))}
           </div>
+          {visibleCount < GALLERY_ITEMS.length && <div className="mt-8 text-center"><button type="button" onClick={() => setVisibleCount(count => count + 12)} className="rounded-xl border border-cyan-400/40 bg-cyan-400/10 px-6 py-3 text-sm font-semibold text-cyan-200 hover:bg-cyan-400/20">Show more memories ({GALLERY_ITEMS.length - visibleCount} remaining)</button></div>}
 
         </div>
 
