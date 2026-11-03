@@ -109,7 +109,8 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
     event.preventDefault();
     const parsed = basicProfileSchema.safeParse({ firstName, lastName, phone });
     if (!parsed.success) { setError(parsed.error.issues[0].message); return; }
-    if (profileStep === 1) { setProfileStep(2); return; }
+    if (profileStep === 1) { setError(null); setProfileStep(2); return; }
+    if (!college.trim() || !course.trim()) { setError("Enter your college name and course."); return; }
     const payload = { ...parsed.data, college, course, year };
     const result = await run(() => onboardingStep === "edit" ? updateProfile(payload) : completeOnboarding(payload));
     if (result?.success) onSuccess?.();

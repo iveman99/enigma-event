@@ -72,7 +72,7 @@ export default function Enigma2Arcade({ onOpenRegister }: Enigma2ArcadeProps) {
 
                   <div>
                     <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block">
-                      TRACK 0{i + 1} // {track.tagline}
+                      TRACK 0{i + 1} {"//"} {track.tagline}
                     </span>
                     <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1 group-hover:text-amber-400 transition-colors">
                       {track.title}

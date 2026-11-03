@@ -24,7 +24,7 @@ export default function OrganiserDashboard() {
   const [selectedId, setSelectedId] = useState<string | null>(null), [note, setNote] = useState(""), [checked, setChecked] = useState(false);
   const [editTeam, setEditTeam] = useState("");
   const [image, setImage] = useState<{url: string; label: string} | null>(null), [tab, setTabState] = useState("overview");
-  const setTab = (value: string) => { setTabState(value); window.location.hash = value; setNotice(""); };
+  const setTab = (value: string) => { setTabState(value); window.history.pushState(null, "", "#" + value); setNotice(""); };
   useEffect(() => {
     const sync = () => { const value = window.location.hash.slice(1); setTabState(["overview","students","events","queue","attendance","settings","activity"].includes(value) ? value : "overview"); };
     sync(); window.addEventListener("hashchange", sync); return () => window.removeEventListener("hashchange", sync);

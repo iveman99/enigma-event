@@ -260,12 +260,12 @@ export default function Events() {
                                                             {/* Right: Stats (Prize Pool & Fee) */}
                                                             <div className="flex flex-col items-end gap-2 text-right">
                                                                 {/* Prize Pool - Prominent */}
-                                                                {(event as any).prizePool ? (
+                                                                {event.prizePool ? (
                                                                     <div className="flex flex-col items-end">
                                                                         <span className="text-[10px] uppercase tracking-wider text-gray-400 font-mono">Prize Pool</span>
                                                                         <div className="flex items-center gap-1 text-xl font-bold text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.4)] h-[28px]">
                                                                             <Gamepad size={16} />
-                                                                            <span>{(event as any).prizePool}</span>
+                                                                            <span>{event.prizePool}</span>
                                                                         </div>
                                                                     </div>
                                                                 ) : (
@@ -385,12 +385,12 @@ export default function Events() {
                                                 </div>
 
                                                 {/* Prize Pool Display */}
-                                                {(event as any).prizePool && (
+                                                {event.prizePool && (
                                                     <div className="mt-2">
                                                         <span className="text-xs uppercase tracking-wider text-gray-400 font-mono block mb-1">Prize Pool</span>
                                                         <div className="flex items-center gap-2 text-4xl font-bold text-neon-cyan drop-shadow-[0_0_15px_rgba(0,243,255,0.5)]">
                                                             <Gamepad size={32} />
-                                                            <span>{(event as any).prizePool}</span>
+                                                            <span>{event.prizePool}</span>
                                                         </div>
                                                     </div>
                                                 )}
@@ -438,15 +438,15 @@ export default function Events() {
 
 
                                                 {/* Venue */}
-                                                {(event as any).venue && (
+                                                {event.venue && (
                                                     <div className="bg-white/5 p-5 rounded-xl border border-white/5">
                                                         <h4 className="text-white flex items-center gap-2 mb-2 font-mono uppercase text-sm font-bold">
                                                             <Filter size={16} /> Venue
                                                         </h4>
-                                                        <p className="text-sm text-gray-400 mb-2">{(event as any).venue}</p>
-                                                        {(event as any).venueMapLink && (
+                                                        <p className="text-sm text-gray-400 mb-2">{event.venue}</p>
+                                                        {event.venueMapLink && (
                                                             <a
-                                                                href={(event as any).venueMapLink}
+                                                                href={event.venueMapLink}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
                                                                 className="text-xs text-neon-blue hover:text-white underline decoration-neon-blue/50 flex items-center gap-1"

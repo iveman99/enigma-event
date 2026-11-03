@@ -379,11 +379,11 @@ export default function Enigma2AcrylicShowcase({
                       animate={
                         isShaking
                           ? {
-                              x: [0, (Math.random() - 0.5) * 14, 0],
-                              y: [0, (Math.random() - 0.5) * 12, 0],
+                              x: [0, cup.rotate % 2 === 0 ? 7 : -7, 0],
+                              y: [0, cup.rotate % 2 === 0 ? -6 : 6, 0],
                               rotate: [
                                 cup.rotate,
-                                cup.rotate + (Math.random() - 0.5) * 18,
+                                cup.rotate + (cup.rotate % 2 === 0 ? 9 : -9),
                                 cup.rotate,
                               ],
                             }

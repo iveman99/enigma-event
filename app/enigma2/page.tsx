@@ -18,11 +18,10 @@ import Enigma2SideNav from "@/components/enigma2/Enigma2SideNav";
 import Enigma2SocialSidebar from "@/components/enigma2/Enigma2SocialSidebar";
 import Enigma2ScrollIndicator from "@/components/enigma2/Enigma2ScrollIndicator";
 import { COMPETITIONS } from "@/lib/registration";
-import { Ticket } from "lucide-react";
 import { cyberAudio } from "@/lib/audio";
 
 function Enigma2Content() {
-  const { showAuthModal, setShowAuthModal, openProfile, user } = useAuth();
+  const { showAuthModal, setShowAuthModal, openProfile, user, onboardingStep } = useAuth();
   const [registrationPrompt, setRegistrationPrompt] = useState("");
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [preselectedEventId, setPreselectedEventId] = useState<string | null>(null);
@@ -31,15 +30,19 @@ function Enigma2Content() {
 
   useEffect(() => {
     if (!user?.isRegistrationReady) return;
+    if (showAuthModal && (onboardingStep === "edit" || onboardingStep === "profile")) return;
     const eventId = sessionStorage.getItem("enigma-registration-event");
     if (!eventId) return;
+    const frame = requestAnimationFrame(() => {
     sessionStorage.removeItem("enigma-registration-event");
     setRegistrationPrompt("");
     setPreselectedEventId(eventId === "choose" ? null : eventId);
     setShowAuthModal(false);
     setIsAuthOpen(false);
     setIsRegisterOpen(true);
-  }, [user, setShowAuthModal]);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [user, showAuthModal, onboardingStep, setShowAuthModal]);
 
   const authModalOpen = isAuthOpen || showAuthModal;
   const handleCloseAuth = () => {

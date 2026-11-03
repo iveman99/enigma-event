@@ -20,7 +20,7 @@ import { cyberAudio } from "@/lib/audio";
 interface Enigma2AcrylicCardProps {
   event: Enigma2Event;
   isRegistered: boolean;
-  user: any;
+  user: unknown;
   onExplore: () => void;
   onRegister: () => void;
   idx: number;
