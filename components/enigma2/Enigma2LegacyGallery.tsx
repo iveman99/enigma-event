@@ -544,7 +544,6 @@ const GALLERY_ITEMS: GalleryMedia[] = [
 ];
 
 export default function Enigma2LegacyGallery() {
-  const [visibleCount, setVisibleCount] = useState(13);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   // Keyboard navigation for Lightbox
@@ -628,7 +627,7 @@ export default function Enigma2LegacyGallery() {
 
           {/* 13 SHUFFLED & MIXED BOXES (VIDEOS & PHOTOS RUNNING PARALLELLY) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 sm:gap-3.5 pt-1">
-            {GALLERY_ITEMS.slice(0, visibleCount).map((item, idx) => (
+            {GALLERY_ITEMS.map((item, idx) => (
               <motion.div
                 key={item.id}
                 whileHover={{ scale: 1.04, y: -4 }}
@@ -697,7 +696,6 @@ export default function Enigma2LegacyGallery() {
               </motion.div>
             ))}
           </div>
-          {visibleCount < GALLERY_ITEMS.length && <div className="mt-8 text-center"><button type="button" onClick={() => setVisibleCount(count => count + 12)} className="rounded-xl border border-cyan-400/40 bg-cyan-400/10 px-6 py-3 text-sm font-semibold text-cyan-200 hover:bg-cyan-400/20">Show more memories ({GALLERY_ITEMS.length - visibleCount} remaining)</button></div>}
 
         </div>
 
