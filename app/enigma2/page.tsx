@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthProvider, useAuth } from "@/lib/authContext";
 import Enigma2Navbar from "@/components/enigma2/Enigma2Navbar";
 import Enigma2Hero from "@/components/enigma2/Enigma2Hero";
@@ -27,8 +27,20 @@ function Enigma2Content() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isPassesOpen, setIsPassesOpen] = useState(false);
 
+  useEffect(() => {
+    if (!user?.isRegistrationReady) return;
+    const eventId = sessionStorage.getItem("enigma-registration-event");
+    if (!eventId) return;
+    sessionStorage.removeItem("enigma-registration-event");
+    setPreselectedEventId(eventId);
+    setShowAuthModal(false);
+    setIsAuthOpen(false);
+    setIsRegisterOpen(true);
+  }, [user, setShowAuthModal]);
+
   const authModalOpen = isAuthOpen || showAuthModal;
   const handleCloseAuth = () => {
+    sessionStorage.removeItem("enigma-registration-event");
     setIsAuthOpen(false);
     setShowAuthModal(false);
   };

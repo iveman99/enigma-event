@@ -35,6 +35,26 @@ async function approved() {
   return result.rows[0].id;
 }
 describe("individual festival passes and attendance", () => {
+  it("completes profile, submission, correction, approval, individual passes and attendance in sequence", async () => {
+    const submit = () => db.query<{id:string;version:number;status:string}>("select * from public.submit_event_registration($1,'decode-hunt','Code Crew',$2::jsonb,$3,'WORKFLOW123')", [leader,JSON.stringify(members),receipt]);
+    await expect(submit()).rejects.toThrow(/PROFILE_INCOMPLETE/);
+    await db.query("update public.profiles set first_name='Ravi',last_name='More',phone='+919876543210',college='Test College',course='BSc CS',id_card_path='id.jpg' where id=$1",[leader]);
+    await db.exec("update public.payment_settings set enabled=true,payee='Enigma',upi_id='enigma@bank',qr_path='qr.jpg'");
+    const initial = (await submit()).rows[0];
+    expect(initial.status).toBe("pending");
+    expect((await db.query("select * from public.festival_passes")).rows).toHaveLength(0);
+    await db.query("select public.review_event_registration($1,$2,$3,'rejected','Upload a readable receipt')",[organiser,initial.id,initial.version]);
+    const corrected = (await submit()).rows[0];
+    expect(corrected.version).toBeGreaterThan(initial.version);
+    await db.query("select public.review_event_registration($1,$2,$3,'approved','Payment and ID verified')",[organiser,corrected.id,corrected.version]);
+    const passes = (await db.query<{token:string}>("select token from public.festival_passes")).rows;
+    expect(passes).toHaveLength(3);
+    await db.query("select public.check_in_festival_pass($1,$2)",[organiser,passes[0].token]);
+    expect((await db.query("select * from public.festival_passes where checked_in_at is not null")).rows).toHaveLength(1);
+    const status = (await db.query<{status:string;ticket_code:string}>("select status,ticket_code from public.event_registrations where id=$1",[initial.id])).rows[0];
+    expect(status.status).toBe("approved"); expect(status.ticket_code).toMatch(/^ENG27-/);
+    await db.query("update public.profiles set college='' where id=$1",[leader]);
+  });
   it("creates one distinct pass for the leader and each teammate after approval", async () => {
     await approved();
     const { rows } = await db.query<{email:string;token:string}>("select email,token from public.festival_passes order by email");

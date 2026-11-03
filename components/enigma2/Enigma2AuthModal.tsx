@@ -36,6 +36,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
   const [course, setCourse] = useState(user?.course || "");
   const [year, setYear] = useState(user?.year || "");
   const [otp, setOtp] = useState("");
+  const [profileStep, setProfileStep] = useState(1);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
@@ -108,6 +109,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
     event.preventDefault();
     const parsed = basicProfileSchema.safeParse({ firstName, lastName, phone });
     if (!parsed.success) { setError(parsed.error.issues[0].message); return; }
+    if (profileStep === 1) { setProfileStep(2); return; }
     const payload = { ...parsed.data, college, course, year };
     const result = await run(() => onboardingStep === "edit" ? updateProfile(payload) : completeOnboarding(payload));
     if (result?.success) onSuccess?.();
@@ -117,7 +119,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
   const profileView = Boolean(user) && (onboardingStep === "profile" || onboardingStep === "edit");
   const portfolio = Boolean(user) && !profileView;
   const ready = configured === true && !isLoading;
-  const title = profileView ? "Make it yours." : portfolio ? "Your Enigma account." : stage === "otp" ? "Check your inbox." : mode === "signup" ? "Your next challenge starts here." : "Good to see you again.";
+  const title = profileView ? "Complete your profile" : portfolio ? "Your Enigma account." : stage === "otp" ? "Check your inbox." : mode === "signup" ? "Your next challenge starts here." : "Good to see you again.";
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-[#03060c]/90 p-3 backdrop-blur-xl sm:p-6">
@@ -133,7 +135,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           </div>
           <div className="relative my-16 space-y-5">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-cyan-200"><ShieldCheck size={25} /></div>
-            <h2 className="text-3xl font-semibold leading-tight text-white">One account.<br />Every possibility.</h2>
+            <h2 className="text-3xl font-semibold leading-tight text-white">Your events.<br />One account.</h2>
             <p className="text-sm leading-relaxed text-slate-300">Your place to discover events, manage your details, and follow your registration journey.</p>
           </div>
           <div className="relative flex items-center gap-2 text-xs text-slate-400"><LockKeyhole size={14} /> Your details stay in your control.</div>
@@ -144,7 +146,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
             <button type="button" onClick={onClose} aria-label="Close sign-in" className="rounded-full border border-white/10 p-2 text-slate-400 hover:bg-white/10 hover:text-white"><X size={18} /></button>
           </div>
           <h2 id="enigma-auth-title" className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
-          {!user && <p className="mt-3 text-sm leading-relaxed text-slate-400">{stage === "otp" ? "Enter the six-digit code sent to " + sentTo + ". Never share your code." : "Continue with an existing account or verify your email. No password to remember."}</p>}
+          {!user && <p className="mt-3 text-sm leading-relaxed text-slate-400">{stage === "otp" ? "Enter the six-digit code sent to " + sentTo + ". Never share your code." : "Sign in with Google, GitHub or a verification code sent to your email."}</p>}
           {initialMessage && <p className="mt-3 text-sm text-slate-300">{initialMessage}</p>}
           {(error || authError) && <p role="alert" className="mt-5 rounded-xl border border-rose-400/25 bg-rose-400/10 p-3 text-sm text-rose-200">{error || authError}</p>}
           {!user && configured === false && <p role="status" className="mt-5 rounded-xl border border-amber-300/20 bg-amber-300/10 p-3 text-sm text-amber-100">Sign-in is being connected. Please check back shortly.</p>}
@@ -164,7 +166,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
                 <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} autoComplete="family-name" required maxLength={80} value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={pending} /></label>
               </div>}
               <label className="block space-y-1.5 text-xs text-slate-300"><span>Email address</span><input className={fieldClass} type="email" autoComplete="email" required maxLength={254} value={email} onChange={(e) => setEmail(e.target.value)} disabled={pending} /></label>
-              {mode === "signup" && <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} type="tel" autoComplete="tel" required maxLength={30} placeholder="+91 98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={pending} /><span className="block text-[11px] text-slate-500">For event updates. Verify your email to continue.</span></label>}
+              {mode === "signup" && <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} type="tel" autoComplete="tel" required maxLength={30} placeholder="+91 98765 43210" value={phone} onChange={(e) => setPhone(e.target.value)} disabled={pending} /><span className="block text-[11px] text-slate-500">For event updates. We will verify your email.</span></label>}
               <button className={buttonClass} disabled={pending || !ready || cooldown > 0} type="submit">{pending ? <LoaderCircle size={17} className="animate-spin" /> : <Mail size={17} />}{pending ? "Connecting…" : cooldown > 0 ? "Request another code in " + cooldown + "s" : "Send verification code"}</button>
             </form>
           </>}
@@ -180,14 +182,16 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           </form>}
 
           {profileView && <form onSubmit={saveProfile} className="mt-6 space-y-4">
-            <p className="text-sm text-slate-400">Complete your profile once. We reuse these details for every event; check that they are accurate.</p>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <ol className="mb-5 grid grid-cols-2 gap-2 text-xs" aria-label="Profile steps">{["Personal details","College & ID"].map((label,index) => <li key={label} aria-current={profileStep === index+1 ? "step" : undefined} className={`rounded-xl border px-3 py-3 ${profileStep === index+1 ? "border-cyan-300/50 bg-cyan-300/10 text-cyan-100" : "border-white/10 text-slate-500"}`}>{index+1}. {label}</li>)}</ol>
+            <p className="text-sm text-slate-400">{profileStep === 1 ? "Confirm your name and contact number." : "Enter your college and course, then upload your college ID."}</p>
+            {profileStep === 1 && <><div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <label className="space-y-1.5 text-xs text-slate-300"><span>First name</span><input className={fieldClass} required maxLength={80} autoComplete="given-name" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></label>
               <label className="space-y-1.5 text-xs text-slate-300"><span>Last name</span><input className={fieldClass} required maxLength={80} autoComplete="family-name" value={lastName} onChange={(e) => setLastName(e.target.value)} /></label>
             </div>
             <p className="flex items-center gap-2 text-sm text-emerald-200"><CheckCircle2 size={15} />Email verified: {user?.email}</p>
             <label className="block space-y-1.5 text-xs text-slate-300"><span>Phone number</span><input className={fieldClass} required type="tel" autoComplete="tel" maxLength={30} value={phone} onChange={(e) => setPhone(e.target.value)} /></label>
-            <details open className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
+            </>}
+            {profileStep === 2 && <><details open className="rounded-xl border border-white/10 p-3 text-sm text-slate-300">
               <summary className="cursor-pointer">College & course</summary>
               <div className="mt-4 space-y-3">
                 <label className="block space-y-1.5 text-xs"><span>College</span><input className={fieldClass} required placeholder="Enter the full name of your college" autoComplete="organization" maxLength={200} value={college} onChange={(e) => setCollege(e.target.value)} /></label>
@@ -196,8 +200,9 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
               </div>
             </details>
             <p className="text-xs text-slate-400">Enter your college and course as shown on your college ID. Upload the ID before registering for an event.</p>
-            <DocumentUpload kind="id" label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} />
-            <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}Save profile</button>
+            <DocumentUpload kind="id" label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} /></>}
+            {profileStep === 2 && <button type="button" className="text-sm text-slate-300" onClick={() => setProfileStep(1)}>← Personal details</button>}
+            <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}{profileStep === 1 ? "Continue" : "Save profile"}</button>
             {onboardingStep === "edit" && <button type="button" disabled={pending} className="w-full text-sm text-slate-400" onClick={() => setOnboardingStep("portfolio")}>Cancel</button>}
           </form>}
 
@@ -211,7 +216,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
             <div className="flex items-center gap-3 rounded-xl border border-white/10 p-4 text-sm text-slate-300"><Ticket size={19} className="text-cyan-200" />{myRegistrations.length ? myRegistrations.length + " event registrations" : "No event registrations yet."}</div>
             <p className="text-xs leading-relaxed text-slate-400">{user.isRegistrationReady ? "Your profile is ready for event registration." : "Before registering, add your college, course and college ID in Edit profile."}</p>
             <RegistrationList />
-            <button type="button" className={buttonClass} onClick={() => { setError(null); setOnboardingStep("edit"); }}>Edit profile<ArrowRight size={16} /></button>
+            <button type="button" className={buttonClass} onClick={() => { setError(null); setProfileStep(1); setOnboardingStep("edit"); }}>Edit profile<ArrowRight size={16} /></button>
             <button type="button" disabled={pending} onClick={() => void run(async () => { const result = await signOut(); if (result.success) { setStage("details"); setEmail(""); setPhone(""); setFirstName(""); setLastName(""); } return result; })} className="flex w-full items-center justify-center gap-2 text-sm text-slate-400 hover:text-white"><LogOut size={15} />Sign out</button>
           </div>}
           <div className="mt-7 border-t border-white/10 pt-4 text-xs leading-relaxed text-slate-500">Need help? <a href="tel:+918828069553" className="text-slate-300 underline underline-offset-4">Contact the organising team</a>.</div>
