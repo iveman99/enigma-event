@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ENIGMA 2.0 | Official Techfest of UDCS | University of Mumbai",
     description: "ENIGMA 2.0 is the official techfest of the Department of Computer Science, University of Mumbai. Explore coding competitions, campus puzzles and esports.",
-    url: "https://enigmaudcs.in",
+    url: "https://www.enigmaudcs.in",
     siteName: "ENIGMA 2.0",
     images: [
       {
@@ -73,9 +73,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/logo-udcs-clean.png",
-    shortcut: "/images/logo-udcs-clean.png",
-    apple: "/images/logo-udcs-clean.png",
+    icon: [{ url: "/favicon.png", sizes: "192x192", type: "image/png" }, { url: "/favicon.ico", sizes: "any" }],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.png",
   },
 };
 

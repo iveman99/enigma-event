@@ -42,7 +42,7 @@ export default function Enigma2Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
 
-        <nav aria-label="Explore Enigma 2.0" className="flex flex-wrap gap-6 text-sm text-cyan-200"><Link href="/enigma2/about">About Enigma 2.0</Link><Link href="/enigma2/events">Events and registration</Link></nav>
+        <nav aria-label="Explore Enigma 2.0" className="flex flex-wrap gap-6 text-sm text-cyan-200"><Link href="/enigma2/about">About Enigma 2.0</Link><Link href="/enigma2/events">Events and registration</Link><Link href="/enigma2/prize-pool">Prize Pool</Link></nav>
         {/* MAIN FOOTER GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           

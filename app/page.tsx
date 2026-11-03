@@ -9,39 +9,18 @@ import TheArcade from "@/components/sections/TheArcade";
 import Registration from "@/components/sections/Registration";
 import Team from "@/components/sections/Team";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "ENIGMA 2026",
-  "description": "ENIGMA 2026 is the official techfest of the Department of Computer Science, University of Mumbai featuring coding competitions, workshops, and innovative tech challenges.",
-  "startDate": "2026-02-27",
-  "endDate": "2026-02-28",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "location": {
-    "@type": "Place",
-    "name": "Department of Computer Science, University of Mumbai",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Mumbai",
-      "addressCountry": "India"
-    }
-  },
-  "organizer": {
-    "@type": "Organization",
-    "name": "Department of Computer Science, University of Mumbai",
-    "url": "https://enigmaudcs.in"
-  },
-  "image": [
-    "https://enigmaudcs.in/images/enigma-logo.png"
-  ],
-  "url": "https://enigmaudcs.in"
-};
+const jsonLd = { "@context": "https://schema.org", "@type": "WebSite", name: "Enigma 2.0 | UDCS", alternateName: "Enigma UDCS", url: "https://www.enigmaudcs.in/" };
 
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden text-foreground selection:bg-neon-cyan selection:text-black">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <section className="relative z-10 mx-auto max-w-5xl px-6 py-12 text-center">
+        <h1 className="text-3xl font-bold">Enigma 2.0 — Official Techfest of UDCS</h1>
+        <p className="mt-4">Enigma 2.0 is the official Techfest of the Department of Computer Science, University of Mumbai. Join us on 16 January 2027 for coding challenges, campus puzzles and esports.</p>
+        <nav aria-label="Enigma 2.0" className="mt-6 flex flex-wrap justify-center gap-6"><a href="/enigma2">Explore Enigma 2.0</a><a href="/enigma2/about">About</a><a href="/enigma2/events">Events</a><a href="/enigma2/prize-pool">Prize Pool</a></nav>
+      </section>
+      <div data-nosnippet>
       <TechBackground />
       <Navbar />
 
@@ -57,6 +36,7 @@ export default function Home() {
       <div className="h-20" />
 
       <Footer />
+      </div>
     </main>
   );
 }

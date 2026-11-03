@@ -577,7 +577,7 @@ export default function Enigma2LegacyGallery() {
   };
 
   return (
-    <section 
+    <section
       id="legacy" 
       className="py-10 sm:py-14 relative overflow-hidden bg-[#04060b] select-none text-gray-100 border-t border-white/10"
     >
@@ -585,7 +585,7 @@ export default function Enigma2LegacyGallery() {
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-3 sm:px-6 relative z-10">
+      <div data-nosnippet className="max-w-[1440px] mx-auto px-3 sm:px-6 relative z-10">
         
         {/* ============================================================== */}
         {/* CURVISH CONTAINER BOX - CENTERED HEADER & TIGHT PADDING       */}
