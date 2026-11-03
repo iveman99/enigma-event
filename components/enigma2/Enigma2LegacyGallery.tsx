@@ -28,7 +28,7 @@ interface GalleryMedia {
 }
 
 // Photos and videos from Enigma 1.0.
-const GALLERY_ITEMS: GalleryMedia[] = [
+const GALLERY_SOURCE: GalleryMedia[] = [
   {
     id: "v-aftermovie",
     type: "video",
@@ -543,6 +543,24 @@ const GALLERY_ITEMS: GalleryMedia[] = [
 ]
 ];
 
+// A stable mix keeps server rendering and lightbox navigation in the same order.
+function arrangeMemories(items: GalleryMedia[]): GalleryMedia[] {
+  const photos = items.filter(item => item.type === "image").sort((a, b) => {
+    const score = (id: string) => Array.from(id).reduce((hash, char) => Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0, 2166136261);
+    return score(a.id) - score(b.id) || a.id.localeCompare(b.id);
+  });
+  const featured = ["selected-img_7425", "selected-img_7189", "selected-img_7383"];
+  const ordered = [...featured.map(id => photos.find(item => item.id === id)!).filter(Boolean), ...photos.filter(item => !featured.includes(item.id))];
+  const videos = items.filter(item => item.type === "video");
+  const result: GalleryMedia[] = [];
+  ordered.forEach((photo, index) => {
+    result.push(photo);
+    if (index % 8 === 2 && videos.length) result.push(videos.shift()!);
+  });
+  return [...result, ...videos];
+}
+const GALLERY_ITEMS = arrangeMemories(GALLERY_SOURCE);
+
 export default function Enigma2LegacyGallery() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
@@ -625,8 +643,8 @@ export default function Enigma2LegacyGallery() {
             </div>
           </div>
 
-          {/* 13 SHUFFLED & MIXED BOXES (VIDEOS & PHOTOS RUNNING PARALLELLY) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-3 sm:gap-3.5 pt-1">
+          {/* Mixed photo and video memories */}
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-5 pt-1">
             {GALLERY_ITEMS.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -663,7 +681,7 @@ export default function Enigma2LegacyGallery() {
                   ) : (
                     <Image
                       src={item.src}
-                      alt={item.title}
+                      alt={`${item.title} — ${item.subtitle}`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
