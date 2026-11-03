@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { 
   Play, 
   X, 
@@ -563,6 +563,7 @@ function arrangeMemories(items: GalleryMedia[]): GalleryMedia[] {
 const GALLERY_ITEMS = arrangeMemories(GALLERY_SOURCE);
 
 export default function Enigma2LegacyGallery({ fullGallery = false }: { fullGallery?: boolean }) {
+  const reduceMotion = useReducedMotion();
   const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
@@ -614,12 +615,16 @@ export default function Enigma2LegacyGallery({ fullGallery = false }: { fullGall
       id={fullGallery ? "all-memories" : "legacy"}
       className="py-10 sm:py-14 relative overflow-hidden bg-[#04060b] select-none text-gray-100 border-t border-white/10"
     >
-      {fullGallery && <><div aria-hidden="true" className="memory-orbit pointer-events-none absolute -top-32 left-[10%] h-[600px] w-[600px] rounded-full bg-cyan-500/10 blur-[120px]" /><div aria-hidden="true" className="memory-orbit memory-orbit-delay pointer-events-none absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-violet-500/10 blur-[120px]" /><style jsx>{`
+      {<><div aria-hidden="true" className="memory-orbit pointer-events-none absolute -top-32 left-[10%] h-[600px] w-[600px] rounded-full bg-cyan-500/10 blur-[120px]" /><div aria-hidden="true" className="memory-orbit memory-orbit-delay pointer-events-none absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-violet-500/10 blur-[120px]" /><style jsx>{`
         .memory-orbit { animation: memory-drift 18s ease-in-out infinite alternate; }
         .memory-orbit-delay { animation-delay: -9s; }
         @keyframes memory-drift { from { transform: translate(0,0); } to { transform: translate(100px,90px); } }
         @media (prefers-reduced-motion: reduce) { .memory-orbit { animation: none; } }
       `}</style></>}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden opacity-30">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,.07)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.07)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
+        {[0,1,2,3,4,5].map(dot => <motion.span key={dot} className="absolute h-1 w-1 rounded-full bg-cyan-200 shadow-[0_0_12px_3px_rgba(34,211,238,.4)]" style={{ left: `${8 + dot * 17}%`, top: `${15 + (dot % 3) * 27}%` }} animate={reduceMotion ? {} : { y: [0,-25,0], opacity: [.15,.8,.15] }} transition={{ duration: 5 + dot, repeat: Infinity, ease: "easeInOut" }} />)}
+      </div>
       {/* Subtle Ambient Backdrops */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
@@ -675,8 +680,9 @@ export default function Enigma2LegacyGallery({ fullGallery = false }: { fullGall
                 type="button"
                 aria-label={`Open ${item.title}`}
                 key={item.id}
-                whileHover={{ scale: 1.04, y: -4 }}
-                transition={{ duration: 0.2 }}
+                animate={reduceMotion ? { y: 0 } : { y: [0, -5, 0] }}
+                whileHover={{ scale: 1.025 }}
+                transition={{ y: { duration: 4.5 + (idx % 4) * 0.6, repeat: Infinity, ease: "easeInOut", delay: (idx % 5) * 0.25 }, scale: { duration: 0.2 } }}
                 onClick={() => {
                   cyberAudio.playClick();
                   setSelectedIdx(idx);
@@ -696,7 +702,9 @@ export default function Enigma2LegacyGallery({ fullGallery = false }: { fullGall
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         muted
                         playsInline
-                        preload="none"
+                        preload="metadata"
+                        autoPlay={!reduceMotion}
+                        loop
                         poster={item.src.replace(".mp4", "-poster.jpg")}
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 flex items-center justify-center transition-all">
