@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.9,
         },
-        ...['enigma2/about', 'enigma2/events', 'enigma2/prize-pool', 'account-information', 'privacy', 'terms'].map((path) => ({
+        ...['enigma2/about', 'enigma2/events', 'enigma2/prize-pool', 'enigma2/memories', 'account-information', 'privacy', 'terms'].map((path) => ({
             url: `https://www.enigmaudcs.in/${path}`,
             changeFrequency: 'monthly' as const,
             priority: 0.3,

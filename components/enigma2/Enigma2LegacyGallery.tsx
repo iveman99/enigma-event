@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Play, 
@@ -561,8 +562,22 @@ function arrangeMemories(items: GalleryMedia[]): GalleryMedia[] {
 }
 const GALLERY_ITEMS = arrangeMemories(GALLERY_SOURCE);
 
-export default function Enigma2LegacyGallery() {
+export default function Enigma2LegacyGallery({ fullGallery = false }: { fullGallery?: boolean }) {
+  const [filter, setFilter] = useState<"all" | "image" | "video">("all");
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+
+  const previewPhotos = ["selected-img_7425", "selected-img_7189", "selected-img_7383", "selected-img_9924", "selected-img_7295"];
+  const groups = fullGallery
+    ? [{ label: "All memories", items: GALLERY_ITEMS.filter(item => filter === "all" || item.type === filter) }]
+    : [{ label: "Watch the highlights", items: GALLERY_ITEMS.filter(item => item.type === "video") },
+       { label: "A few favourite moments", items: previewPhotos.map(id => GALLERY_ITEMS.find(item => item.id === id)!).filter(Boolean) }];
+
+  useEffect(() => {
+    if (selectedIdx === null) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [selectedIdx]);
 
   // Keyboard navigation for Lightbox
   useEffect(() => {
@@ -596,9 +611,15 @@ export default function Enigma2LegacyGallery() {
 
   return (
     <section
-      id="legacy" 
+      id={fullGallery ? "all-memories" : "legacy"}
       className="py-10 sm:py-14 relative overflow-hidden bg-[#04060b] select-none text-gray-100 border-t border-white/10"
     >
+      {fullGallery && <><div aria-hidden="true" className="memory-orbit pointer-events-none absolute -top-32 left-[10%] h-[600px] w-[600px] rounded-full bg-cyan-500/10 blur-[120px]" /><div aria-hidden="true" className="memory-orbit memory-orbit-delay pointer-events-none absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-violet-500/10 blur-[120px]" /><style jsx>{`
+        .memory-orbit { animation: memory-drift 18s ease-in-out infinite alternate; }
+        .memory-orbit-delay { animation-delay: -9s; }
+        @keyframes memory-drift { from { transform: translate(0,0); } to { transform: translate(100px,90px); } }
+        @media (prefers-reduced-motion: reduce) { .memory-orbit { animation: none; } }
+      `}</style></>}
       {/* Subtle Ambient Backdrops */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
@@ -635,7 +656,7 @@ export default function Enigma2LegacyGallery() {
             {/* Simple, clear wording */}
             <div className="space-y-1.5">
               <p className="font-[family-name:var(--font-jetbrains-mono)] text-xs sm:text-sm text-gray-300 leading-relaxed">
-                Photos and videos from our last year&apos;s event held on <span className="text-amber-300 font-bold">11 March 2026</span>.
+                Photos and videos from Enigma 1.0, held on <span className="text-amber-300 font-bold">11 March 2026</span>.
               </p>
               <p className="font-[family-name:var(--font-jetbrains-mono)] text-[11px] sm:text-xs text-cyan-300 font-medium">
                 Our upcoming event <span className="text-white font-bold">Enigma 2.0</span> is happening on <span className="text-cyan-300 font-bold underline underline-offset-2">16 January 2027</span>.
@@ -643,10 +664,16 @@ export default function Enigma2LegacyGallery() {
             </div>
           </div>
 
-          {/* Mixed photo and video memories */}
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-5 pt-1">
-            {GALLERY_ITEMS.map((item, idx) => (
-              <motion.div
+          {fullGallery && <div className="flex flex-wrap items-center justify-center gap-3" role="group" aria-label="Filter memories">{(["all", "video", "image"] as const).map(value => <button key={value} type="button" aria-pressed={filter === value} onClick={() => setFilter(value)} className={`rounded-full border px-5 py-2.5 text-sm transition ${filter === value ? "border-cyan-300/60 bg-cyan-300/15 text-cyan-100" : "border-white/15 text-slate-400 hover:text-white"}`}>{value === "all" ? "All memories" : value === "video" ? "Videos" : "Photos"}<span className="ml-2 text-xs opacity-60">{GALLERY_ITEMS.filter(item => value === "all" || item.type === value).length}</span></button>)}</div>}
+          {groups.map(group => <div key={group.label} className="space-y-3">
+          {!fullGallery && <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-slate-400">{group.label === "Watch the highlights" ? <Film size={15} className="text-cyan-300" /> : <Camera size={15} className="text-amber-300" />}{group.label}</h3>}
+          <div className={fullGallery ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5" : "grid grid-flow-col auto-cols-[72%] sm:auto-cols-[38%] lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-5 gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory"}>
+            {group.items.map(item => {
+              const idx = GALLERY_ITEMS.indexOf(item);
+              return (
+              <motion.button
+                type="button"
+                aria-label={`Open ${item.title}`}
                 key={item.id}
                 whileHover={{ scale: 1.04, y: -4 }}
                 transition={{ duration: 0.2 }}
@@ -654,7 +681,7 @@ export default function Enigma2LegacyGallery() {
                   cyberAudio.playClick();
                   setSelectedIdx(idx);
                 }}
-                className={`group relative rounded-2xl overflow-hidden bg-black/80 border cursor-pointer shadow-lg flex flex-col justify-between transition-all ${
+                className={`group snap-start text-left relative rounded-2xl overflow-hidden bg-black/80 border cursor-pointer shadow-lg flex flex-col justify-between transition-all ${
                   item.type === "video" 
                     ? "border-cyan-500/40 hover:border-cyan-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
                     : "border-white/15 hover:border-amber-400 hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]"
@@ -669,8 +696,8 @@ export default function Enigma2LegacyGallery() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         muted
                         playsInline
-                        loop
-                        autoPlay
+                        preload="none"
+                        poster={item.src.replace(".mp4", "-poster.jpg")}
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 flex items-center justify-center transition-all">
                         <div className="w-8 h-8 rounded-full bg-cyan-400/90 text-black flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
@@ -683,6 +710,7 @@ export default function Enigma2LegacyGallery() {
                       src={item.src}
                       alt={`${item.title} — ${item.subtitle}`}
                       fill
+                      sizes={fullGallery ? "(max-width: 768px) 50vw, 25vw" : "(max-width: 640px) 72vw, 20vw"}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   )}
@@ -711,9 +739,11 @@ export default function Enigma2LegacyGallery() {
                     {item.subtitle}
                   </p>
                 </div>
-              </motion.div>
-            ))}
+              </motion.button>
+            ); })}
           </div>
+          </div>)}
+          {!fullGallery && <div className="pt-3 text-center"><Link href="/enigma2/memories" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 rounded-full border border-cyan-300/40 bg-cyan-300 px-7 py-3.5 text-sm font-semibold text-[#061018] shadow-[0_0_30px_rgba(34,211,238,.15)] transition hover:bg-cyan-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300">View all photos &amp; videos<ChevronRight size={17} /></Link><p className="mt-3 text-xs text-slate-500">{GALLERY_ITEMS.length} memories · Opens in a new tab</p></div>}
 
         </div>
 
@@ -728,6 +758,9 @@ export default function Enigma2LegacyGallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Memory viewer"
             onClick={() => setSelectedIdx(null)}
             className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-2xl"
           >
@@ -778,6 +811,8 @@ export default function Enigma2LegacyGallery() {
                 </div>
 
                 <button
+                  aria-label="Close viewer"
+                  autoFocus
                   onClick={() => setSelectedIdx(null)}
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition-all cursor-pointer"
                 >
