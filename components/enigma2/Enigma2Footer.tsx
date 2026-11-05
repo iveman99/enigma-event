@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import AskEnigmaAI from "./AskEnigmaAI";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -120,6 +121,7 @@ export default function Enigma2Footer() {
                 </a>
               </div>
             </div>
+            <AskEnigmaAI />
           </div>
 
           {/* QUICK LINKS (COL 7-9) */}
