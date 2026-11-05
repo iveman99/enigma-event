@@ -1,5 +1,6 @@
 "use client";
 
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, X } from "lucide-react";
 import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
@@ -117,13 +118,13 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
     if (result?.success) onSuccess?.();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined") return null;
   const profileView = Boolean(user) && (onboardingStep === "profile" || onboardingStep === "edit");
   const portfolio = Boolean(user) && !profileView;
   const ready = configured === true && !isLoading;
   const title = profileView ? "Complete your profile" : portfolio ? "Your Enigma account." : stage === "otp" ? "Check your inbox." : mode === "signup" ? "Your next challenge starts here." : "Good to see you again.";
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[80] flex items-center justify-center overflow-y-auto bg-[#03060c]/90 p-3 backdrop-blur-xl sm:p-6">
       <div aria-hidden="true" className="absolute inset-0" onClick={onClose} />
       <div ref={dialog} role="dialog" aria-modal="true" aria-labelledby="enigma-auth-title" tabIndex={-1}
@@ -223,6 +224,6 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           <div className="mt-7 border-t border-white/10 pt-4 text-xs leading-relaxed text-slate-500">Need help? <a href="tel:+918828069553" className="text-slate-300 underline underline-offset-4">Contact the organising team</a>.</div>
         </section>
       </div>
-    </div>
+    </div>, document.body
   );
 }
