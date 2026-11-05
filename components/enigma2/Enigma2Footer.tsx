@@ -67,7 +67,7 @@ export default function Enigma2Footer() {
               </div>
 
               {/* Center: ENIGMA 2.0 Wordmark */}
-              <div className="flex items-baseline leading-none">
+              <div data-enigma-brand className="flex items-baseline leading-none">
                 <span className="enigma-broken-font font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-wider drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]">
                   ENIGMA
                 </span>

@@ -88,7 +88,7 @@ export default function Enigma2Navbar({
             </div>
 
             {/* ENIGMA 2.0 Wordmark */}
-            <div className="flex items-baseline leading-none">
+            <div data-enigma-brand className="flex items-baseline leading-none">
               <span className="enigma-broken-font font-black text-lg sm:text-xl md:text-2xl uppercase tracking-wider">
                 ENIGMA
               </span>

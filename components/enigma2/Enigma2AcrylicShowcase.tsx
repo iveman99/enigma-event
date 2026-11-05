@@ -335,10 +335,10 @@ export default function Enigma2AcrylicShowcase({
                 style={{ transform: "translateZ(35px)" }}
               >
                 <div className="text-right">
-                  <h3
+                  <h3 data-enigma-brand
                     className="font-black text-3xl sm:text-4xl tracking-tighter text-[#161a22] drop-shadow-[0_2px_1px_rgba(255,255,255,0.4)]"
                     style={{
-                      fontFamily: "system-ui, -apple-system, sans-serif",
+                      fontFamily: "var(--font-orbitron), sans-serif",
                       letterSpacing: "-0.05em",
                     }}
                   >

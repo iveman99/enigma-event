@@ -1,9 +1,34 @@
-/* Enigma's established Orbitron identity, with readable section headings. */
-.enigma2-type h1 {font-family:var(--font-orbitron),sans-serif;line-height:1.2;text-wrap:balance}
-.enigma2-type h2,.enigma2-type h2 span,.enigma2-type h3,.enigma2-type h3 span,
-body:has(.enigma2-type) [role="dialog"] h2,body:has(.enigma2-type) [role="dialog"] h3 {
-  font-family:var(--font-inter),sans-serif;letter-spacing:-.025em;text-wrap:balance;
+/* Two typefaces: Orbitron for identity/H1; Inter for reading and controls. */
+body:has(.enigma2-type),body:has(.enigma2-info) {
+  --font-jetbrains-mono:var(--font-inter);
+  --font-sans:var(--font-inter);
 }
+.enigma2-type,.enigma2-info,body:has(.enigma2-type) [role="dialog"] {
+  font-family:var(--font-inter),sans-serif;
+}
+.enigma2-type :where([class*="font-[family-name"],.font-mono,.font-display),
+.enigma2-type svg text,
+body:has(.enigma2-type) [role="dialog"] :where([class*="font-[family-name"],.font-mono,.font-display) {
+  font-family:var(--font-inter),sans-serif;
+}
+.enigma2-type :where(h2,h2 span,h3,h3 span,h4,h4 span),
+.enigma2-info :where(h2,h3,h4),
+body:has(.enigma2-type) [role="dialog"] :where(h2,h3,h4) {
+  font-family:var(--font-inter),sans-serif;letter-spacing:-.02em;text-wrap:balance;
+}
+.enigma2-type :where(h1,h1 span,.enigma-broken-font,.eg-brand-wordmark,.eg-brand-edition,[data-enigma-brand],[data-enigma-brand] *),
+.enigma2-type #hero [class*="top-[82%]"],
+.enigma2-info h1,
+body:has(.enigma2-type) [role="dialog"] :where(.eg-brand-wordmark,.eg-brand-edition) {
+  font-family:var(--font-orbitron),sans-serif;
+}
+.enigma2-type h1,.enigma2-info h1 {line-height:1.2;text-wrap:balance}
+.enigma2-type :where(button,input,select,textarea),.enigma2-info :where(button,input,select,textarea) {font-family:var(--font-inter),sans-serif}
+.enigma2-type :where(button,a,input,select,textarea):focus-visible,.enigma2-info :where(button,a,input,select,textarea):focus-visible {
+  outline:2px solid #67e8f9;outline-offset:4px;
+}
+.enigma2-type :where(input,select,textarea),body:has(.enigma2-type) [role="dialog"] :where(input,select,textarea) {font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.enigma2-type {scroll-behavior:auto}}
 .eg-brand{display:inline-flex;align-items:center;gap:12px;flex-shrink:0;vertical-align:middle;white-space:nowrap}
 .eg-brand-wordmark{display:inline-flex;align-items:baseline;gap:8px;font-family:var(--font-orbitron),sans-serif;font-weight:900;font-size:23px;letter-spacing:.045em;line-height:1.25;color:#dbe6f2;background:linear-gradient(180deg,#fff,#d9e3ee 40%,#7f91a8);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .eg-brand-edition{font-size:11px;letter-spacing:0;color:#ffc400;-webkit-text-fill-color:#ffc400}

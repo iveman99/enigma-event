@@ -1,9 +1,10 @@
+import "@/app/enigma2/typography.css";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 export default function InformationLayout({ title, summary, children }: { title: string; summary: string; children: ReactNode }) {
-  return <main className="min-h-screen bg-[#070c15] px-4 py-8 text-slate-200 sm:px-8 sm:py-14">
+  return <main className="enigma2-info min-h-screen bg-[#070c15] px-4 py-8 text-slate-200 sm:px-8 sm:py-14">
     <div className="mx-auto max-w-4xl">
       <Link href="/" className="inline-flex rounded text-sm text-cyan-200 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4">Back to the Enigma website</Link>
       <div className="mt-7 overflow-hidden rounded-t-2xl border border-white/15 bg-[#0c1726]">
