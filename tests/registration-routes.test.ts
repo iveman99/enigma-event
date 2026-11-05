@@ -38,7 +38,7 @@ describe("registration route boundaries", () => {
     expect(mocks.rpc).not.toHaveBeenCalled();
   });
   it("refuses another student's receipt before any storage read or database write",async () => {
-    const body={eventId:"blind-dates",teamName:"",members:[],profileConfirmed:true,transactionReference:"UTR123456",receiptPath:"00000000-0000-4000-8000-000000000099/receipt/00000000-0000-4000-8000-000000000088.jpg"};
+    const body={eventId:"blind-dates",teamName:"",members:[],profileConfirmed:true,transactionReference:"123456789012",receiptPath:"00000000-0000-4000-8000-000000000099/receipt/00000000-0000-4000-8000-000000000088.jpg"};
     expect((await register(request(body))).status).toBe(400); expect(mocks.info).not.toHaveBeenCalled(); expect(mocks.rpc).not.toHaveBeenCalled();
   });
 });

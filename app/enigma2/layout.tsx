@@ -1,3 +1,4 @@
+import "./typography.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
@@ -32,5 +33,5 @@ const event = {
 };
 
 export default function Enigma2Layout({ children }: { children: ReactNode }) {
-  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(event) }} />{children}</>;
+  return <div className="enigma2-type"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(event) }} />{children}</div>;
 }

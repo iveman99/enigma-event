@@ -2,7 +2,9 @@ import { prepareDocumentImage } from "@/lib/document-image";
 import { randomUUID } from "node:crypto";
 import { authJson, authRoute, assertSameOrigin, AuthHttpError } from "@/lib/auth/http";
 import { requireVerifiedSession } from "@/lib/auth/profile";
-import { DOCUMENT_BUCKET, limitUploads, requireOrganiser, serviceClient } from "@/lib/registration-server";
+import { DOCUMENT_BUCKET, limitUploads, requireOrganiser, serviceClient, signedDocument } from "@/lib/registration-server";
+
+import { ownsUpload } from "@/lib/registration";
 
 export const runtime = "nodejs";
 export async function POST(request: Request) {
@@ -30,5 +32,23 @@ export async function POST(request: Request) {
       if (updateError) { await service.storage.from(DOCUMENT_BUCKET).remove([path]); throw new AuthHttpError(503, "Your ID card couldn't be linked to your profile."); }
     }
     return authJson({ success: true, path });
+  });
+}
+
+// Only the signed-in owner can request a short-lived document preview.
+export async function GET(request: Request) {
+  return authRoute(async () => {
+    const { user } = await requireVerifiedSession();
+    const params = new URL(request.url).searchParams;
+    const kind = params.get("kind");
+    let path = params.get("path") || "";
+    if (kind !== "id" && kind !== "receipt") throw new AuthHttpError(400, "Choose an ID card or payment screenshot.");
+    if (kind === "id" && !path) {
+      const { data, error } = await serviceClient().from("profiles").select("id_card_path").eq("id", user.id).single();
+      if (error) throw new AuthHttpError(503, "Your ID card couldn't be loaded. Please try again.");
+      path = data?.id_card_path || "";
+    }
+    if (!ownsUpload(path, user.id, kind)) throw new AuthHttpError(404, "This image is not available.");
+    return authJson({ url: await signedDocument(path) });
   });
 }

@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, X } from "lucide-react";
 import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
 import { basicProfileSchema, requestOtpSchema } from "@/lib/auth/validation";
+import EnigmaBrand from "./EnigmaBrand";
 import DocumentUpload from "./DocumentUpload";
 import Link from "next/link";
-import Image from "next/image";
 import { ACADEMIC_YEARS } from "@/lib/colleges";
 
 interface AuthModalProps {
@@ -26,6 +26,8 @@ export default function Enigma2AuthModal({ isOpen, onClose, onSuccess, initialMe
 }
 
 function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalProps) {
+  const closeRef = useRef(onClose);
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
   const { user, configured, isLoading, authError, onboardingStep, setOnboardingStep,
     requestEmailOtp, verifyEmailOtp, signInWithGoogle, signInWithGithub, completeOnboarding, updateProfile, signOut, refreshProfile } = useAuth();
   const [mode, setMode] = useState<"signup" | "signin">("signup");
@@ -52,7 +54,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
     document.body.style.overflow = "hidden";
     dialog.current?.focus();
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") closeRef.current();
       if (event.key !== "Tab") return;
       const nodes = dialog.current?.querySelectorAll<HTMLElement>('button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href]');
       if (!nodes?.length) return;
@@ -69,7 +71,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
       document.removeEventListener("keydown", handleKey);
       previousFocus?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -133,7 +135,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           <div aria-hidden="true" className="absolute -left-20 top-12 h-72 w-72 rounded-full border border-cyan-300/25 shadow-[0_0_90px_rgba(34,211,238,0.12)]" />
           <div aria-hidden="true" className="absolute -left-8 top-24 h-48 w-48 rounded-full border border-cyan-300/15" />
           <div className="relative">
-            <div className="mb-4 flex gap-4"><Image src="/images/logo-mu.png" alt="University of Mumbai" width={35} height={42} className="object-contain"/><Image src="/images/logo-udcs-clean.png" alt="Department of Computer Science" width={40} height={40} className="object-contain"/></div><span className="font-display text-2xl font-bold tracking-wider text-white">ENIGMA <span className="text-amber-300">2.0</span></span>
+            <EnigmaBrand />
             <p className="mt-2 text-xs leading-relaxed text-slate-400">Department of Computer Science<br />University of Mumbai</p>
           </div>
           <div className="relative my-16 space-y-5">
@@ -203,7 +205,7 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
               </div>
             </details>
             <p className="text-xs text-slate-400">Enter your college and course as shown on your college ID. Upload the ID before registering for an event.</p>
-            <DocumentUpload kind="id" label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} /></>}
+            <DocumentUpload kind="id" uploaded={Boolean(user?.hasIdCard)} label={user?.hasIdCard ? "Replace college ID card (optional)" : "Upload college ID card"} onUploaded={async () => { await refreshProfile(); }} /></>}
             {profileStep === 2 && <button type="button" className="text-sm text-slate-300" onClick={() => setProfileStep(1)}>← Personal details</button>}
             <button type="submit" disabled={pending} className={buttonClass}>{pending ? <LoaderCircle className="animate-spin" size={17} /> : <ArrowRight size={17} />}{profileStep === 1 ? "Continue" : "Save profile"}</button>
             {onboardingStep === "edit" && <button type="button" disabled={pending} className="w-full text-sm text-slate-400" onClick={() => setOnboardingStep("portfolio")}>Cancel</button>}

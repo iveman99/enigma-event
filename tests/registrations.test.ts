@@ -30,8 +30,12 @@ const review = (id:string,version=1,decision="approved",actor=organiser,note="")
 describe("registration security and payment decisions", () => {
   it("calculates solo/team fees and validates the four event team rules", () => {
     expect(entryFee(1)).toBe(99); expect(entryFee(3)).toBe(149);
-    const base = {eventId:"blind-dates",teamName:"",members:[],receiptPath:receipt,transactionReference:"UTR123456",profileConfirmed:true};
+    const base = {eventId:"blind-dates",teamName:"",members:[],receiptPath:receipt,transactionReference:"123456789012",profileConfirmed:true};
     expect(registrationSchema.safeParse(base).success).toBe(true);
+    for (const transactionReference of ["UTR123456", "123-456", "12e3456", "12345", "1".repeat(51)]) {
+      expect(registrationSchema.safeParse({...base, transactionReference}).success).toBe(false);
+    }
+    expect(registrationSchema.safeParse({...base, transactionReference:"001234567890"}).success).toBe(true);
     expect(registrationSchema.safeParse({...base,eventId:"decode-hunt"}).success).toBe(false);
     expect(registrationSchema.safeParse({...base,members:[member]}).success).toBe(false);
     expect(registrationSchema.safeParse({...base,eventId:"decode-hunt",teamName:"Code Crew",members:[member]}).success).toBe(true);

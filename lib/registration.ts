@@ -11,7 +11,7 @@ export const registrationSchema = z.object({
   teamName: z.string().trim().max(80),
   members: z.array(z.object({ name: z.string().trim().min(2).max(160), email: z.email().max(254).transform(v => v.toLowerCase()), phone: z.string().trim().regex(/^\+[1-9][0-9]{7,14}$/, "Enter a phone number with country code, such as +919876543210."), college: z.string().trim().min(2).max(200) }).strict()).max(2),
   receiptPath: z.string().max(200),
-  transactionReference: z.string().trim().regex(/^[a-zA-Z0-9-]{6,50}$/, "Enter the transaction reference / UTR from your payment app."),
+  transactionReference: z.string().trim().regex(/^[0-9]{6,50}$/, "Enter a numeric transaction reference / UTR (6–50 digits)."),
   profileConfirmed: z.literal(true),
 }).strict().superRefine((value, ctx) => {
   const event = COMPETITIONS.find(e => e.id === value.eventId)!;
