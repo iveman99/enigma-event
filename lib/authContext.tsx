@@ -115,6 +115,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     void Promise.resolve().then(refreshSession).then((currentUser) => {
       if (!active) return;
       if (fromOAuth && currentUser) {
+        if (sessionStorage.getItem("enigma-account-return") === "/enigma2/passes") {
+          sessionStorage.removeItem("enigma-account-return");
+          window.location.replace("/enigma2/passes");
+          return;
+        }
         setOnboardingStep(currentUser.isProfileComplete ? "portfolio" : "profile");
         setShowAuthModal(true);
       }

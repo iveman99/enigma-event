@@ -240,7 +240,7 @@ export default function Enigma2Events({ onSelectEventForRegister }: Enigma2Event
                 isRegistered={isRegistered}
                 user={user}
                 onExplore={() => {
-                  setActiveEventModal(event);
+                  window.location.assign(`/enigma2/events/${event.id}`);
                   cyberAudio.playClick();
                 }}
                 onRegister={() => {

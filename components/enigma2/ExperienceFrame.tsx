@@ -1,0 +1,9 @@
+import Image from "next/image";
+import Link from "next/link";
+export default function ExperienceFrame({children}: {children: React.ReactNode}) {
+ return <div className="relative isolate min-h-screen bg-[#060c17] text-white selection:bg-cyan-300/30">
+ <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10"><Image src="/images/enigma2-celestial-hero.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-35" /><div className="enigma-experience-glow absolute -left-24 top-0 h-[500px] w-[500px] rounded-full bg-cyan-300/10 blur-[100px]"/><div className="absolute inset-0 bg-gradient-to-b from-[#060c17]/20 via-[#060c17]/70 to-[#060c17]" /><div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,.15),transparent_65%)]" /></div>
+ <header className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 border-b border-white/10 px-6 py-5 sm:px-10"><Link href="/enigma2" className="flex items-center gap-3"><Image src="/images/logo-udcs-clean.png" alt="UDCS" width={40} height={40}/><span className="font-display text-xl font-bold tracking-wider">ENIGMA <span className="text-cyan-200">2.0</span></span></Link><nav className="flex gap-6 text-sm text-slate-300"><Link href="/enigma2/events" className="hover:text-cyan-200">Events</Link><Link href="/enigma2/passes" className="hover:text-cyan-200">My passes</Link><Link href="/enigma2" className="hover:text-cyan-200">Home ↗</Link></nav></header>
+ <main className="mx-auto max-w-7xl px-6 py-12 sm:px-10 sm:py-20">{children}</main>
+ <footer className="mx-auto max-w-7xl border-t border-white/10 px-6 py-8 text-xs leading-6 text-slate-400">Official Techfest of the Department of Computer Science, University of Mumbai<div className="mt-2 flex gap-5"><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/enigma2#location">Location</Link></div></footer></div>;
+}

@@ -33,6 +33,11 @@ function Enigma2Content() {
     if (showAuthModal && (onboardingStep === "edit" || onboardingStep === "profile")) return;
     const eventId = sessionStorage.getItem("enigma-registration-event");
     if (!eventId) return;
+    if (eventId === "choose") { sessionStorage.removeItem("enigma-registration-event"); window.location.replace("/enigma2/events"); return; }
+    if (COMPETITIONS.some(event=>event.id===eventId)) {
+      window.location.replace(`/enigma2/events/${eventId}`);
+      return;
+    }
     const frame = requestAnimationFrame(() => {
     sessionStorage.removeItem("enigma-registration-event");
     setRegistrationPrompt("");
@@ -53,20 +58,8 @@ function Enigma2Content() {
   };
 
   const handleOpenRegister = (eventId?: string) => {
-    const selectedEvent = COMPETITIONS.find(event => event.id === eventId);
-    setPreselectedEventId(selectedEvent?.id || null);
-    cyberAudio.playClick();
-    if (!user || !user.isRegistrationReady) {
-      sessionStorage.setItem("enigma-registration-event", selectedEvent?.id || "choose");
-      setRegistrationPrompt(!user
-        ? `Sign in to ${selectedEvent ? "register for " + selectedEvent.title : "register for an event"}. You’ll continue here after signing in.`
-        : `Complete your profile to ${selectedEvent ? "register for " + selectedEvent.title : "continue with registration"}.`);
-      setIsRegisterOpen(false);
-      openProfile(user ? "edit" : "choice");
-      return;
-    }
-    setRegistrationPrompt("");
-    setIsRegisterOpen(true);
+    const event = COMPETITIONS.find(item=>item.id===eventId);
+    window.location.assign(event ? `/enigma2/events/${event.id}` : "/enigma2/events");
   };
 
   const handleOpenAuth = () => {
@@ -74,10 +67,7 @@ function Enigma2Content() {
     cyberAudio.playClick();
   };
 
-  const handleOpenPasses = () => {
-    if (user) setIsPassesOpen(true); else openProfile("choice");
-    cyberAudio.playClick();
-  };
+  const handleOpenPasses = () => { window.location.assign("/enigma2/passes"); };
 
   return (
     <div className="min-h-screen bg-[#07080b] text-gray-100 selection:bg-amber-500/30 selection:text-white relative">

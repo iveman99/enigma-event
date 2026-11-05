@@ -221,3 +221,11 @@ body {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(56, 189, 248, 0.25));
 }
+/* Pass reveal uses motion only when the visitor allows it. */
+@keyframes enigma-pass-reveal { from { opacity: 0; transform: perspective(1000px) rotateY(-12deg) translateY(8px); } to { opacity: 1; transform: perspective(1000px) rotateY(0) translateY(0); } }
+.enigma-pass-reveal { animation: enigma-pass-reveal .35s ease-out; }
+@media (prefers-reduced-motion: reduce) { .enigma-pass-reveal { animation: none; } }
+
+@keyframes enigma-experience-drift { from { transform: translate(0,0); } to { transform: translate(20vw,12vh); } }
+.enigma-experience-glow { animation: enigma-experience-drift 20s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .enigma-experience-glow { animation: none; } }
