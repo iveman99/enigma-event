@@ -33,7 +33,7 @@ function Enigma2Content() {
     if (showAuthModal && (onboardingStep === "edit" || onboardingStep === "profile")) return;
     const eventId = sessionStorage.getItem("enigma-registration-event");
     if (!eventId) return;
-    if (eventId === "choose") { sessionStorage.removeItem("enigma-registration-event"); window.location.replace("/enigma2/events"); return; }
+    if (eventId === "choose") { sessionStorage.removeItem("enigma-registration-event"); window.location.replace("/enigma2#events"); return; }
     if (COMPETITIONS.some(event=>event.id===eventId)) {
       window.location.replace(`/enigma2/events/${eventId}`);
       return;
@@ -59,7 +59,7 @@ function Enigma2Content() {
 
   const handleOpenRegister = (eventId?: string) => {
     const event = COMPETITIONS.find(item=>item.id===eventId);
-    window.location.assign(event ? `/enigma2/events/${event.id}` : "/enigma2/events");
+    window.location.assign(event ? `/enigma2/events/${event.id}` : "/enigma2#events");
   };
 
   const handleOpenAuth = () => {

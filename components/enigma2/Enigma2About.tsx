@@ -167,18 +167,9 @@ export default function Enigma2About() {
 
             {/* Narrative Paragraph */}
             <p className="text-gray-300 font-sans text-sm sm:text-base leading-relaxed pt-1">
-              Organized by the Department of Computer Science, University of Mumbai, <span className="text-white font-semibold">ENIGMA 1.0</span> turned that vision into reality with curious minds from <span className="text-cyan-300 font-semibold">9 colleges</span>. Now, <span className="text-white font-semibold">ENIGMA 2.0</span> opens the next chapter — pushing boundaries with creative coding, unexpected programming trials, strategic puzzles, and tech-themed treasure hunts.
+              <span className="text-white font-semibold">ENIGMA 1.0</span> turned that vision into reality with curious minds from <span className="text-cyan-300 font-semibold">9 colleges</span>. Now, <span className="text-white font-semibold">ENIGMA 2.0</span> opens the next chapter — pushing boundaries with creative coding, unexpected programming trials, strategic puzzles, and tech-themed treasure hunts.
             </p>
 
-            {/* Community Ethos & Inclusivity Callout */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs sm:text-sm font-mono text-cyan-300">
-              <span className="px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-200 font-semibold text-xs">
-                Community Driven
-              </span>
-              <span className="text-gray-300 font-sans text-xs sm:text-sm">
-                Open to <strong className="text-white font-semibold">Bachelor’s &amp; Master’s</strong> students across all disciplines and colleges.
-              </span>
-            </div>
           </motion.div>
 
           {/* Right Column: 4 Small, Transparent Info Cards */}

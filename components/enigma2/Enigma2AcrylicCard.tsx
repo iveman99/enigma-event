@@ -363,7 +363,7 @@ export default function Enigma2AcrylicCard({
 
               {/* Event Description (Clean, Human, No Buzzwords) */}
               <p className="text-gray-300 font-sans text-xs sm:text-sm leading-relaxed">
-                {theme.summary}
+                {event.shortDescription}
               </p>
 
               {/* Specifications Grid */}

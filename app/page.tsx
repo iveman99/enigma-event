@@ -18,7 +18,7 @@ export default function Home() {
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-12 text-center">
         <h1 className="text-3xl font-bold">Enigma 2.0 — Official Techfest of UDCS</h1>
         <p className="mt-4">Enigma 2.0 is the official Techfest of the Department of Computer Science, University of Mumbai. Join us on 16 January 2027 for coding challenges, campus puzzles and esports.</p>
-        <nav aria-label="Enigma 2.0" className="mt-6 flex flex-wrap justify-center gap-6"><a href="/enigma2">Explore Enigma 2.0</a><a href="/enigma2/about">About</a><a href="/enigma2/events">Events</a><a href="/enigma2/prize-pool">Prize Pool</a></nav>
+        <nav aria-label="Enigma 2.0" className="mt-6 flex flex-wrap justify-center gap-6"><a href="/enigma2">Explore Enigma 2.0</a><a href="/enigma2/about">About</a><a href="/enigma2#events">Events</a><a href="/enigma2/prize-pool">Prize Pool</a></nav>
       </section>
       <div data-nosnippet>
       <TechBackground />

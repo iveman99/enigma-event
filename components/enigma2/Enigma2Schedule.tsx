@@ -178,20 +178,6 @@ export default function Enigma2Schedule() {
                 </div>
               </div>
 
-              {/* Right Column: "XX" Floating Stat Card */}
-              <div className="w-full sm:w-72 lg:w-80 shrink-0 p-4 sm:p-5 rounded-2xl bg-white/[0.05] border border-white/15 backdrop-blur-xl shadow-xl flex items-center gap-4 hover:border-amber-400/50 transition-all duration-300">
-                <div className="font-[family-name:var(--font-orbitron)] font-black text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-br from-amber-300 to-amber-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.5)] shrink-0">
-                  ₹44K
-                </div>
-                <div className="space-y-0.5 text-xs">
-                  <div className="font-[family-name:var(--font-jetbrains-mono)] font-bold text-white uppercase tracking-wider text-[11px]">
-                    Total Prize Vault
-                  </div>
-                  <p className="text-gray-400 font-[family-name:var(--font-jetbrains-mono)] text-[10px] leading-tight">
-                    Cash bounties, trophies & merit certificates across 4 live arenas.
-                  </p>
-                </div>
-              </div>
 
             </div>
 

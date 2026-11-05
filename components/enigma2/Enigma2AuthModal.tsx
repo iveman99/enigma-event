@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, Ticket, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Github, LoaderCircle, LockKeyhole, LogOut, Mail, ShieldCheck, X } from "lucide-react";
 import { useAuth, type AuthResult, type OtpRequest } from "@/lib/authContext";
 import { basicProfileSchema, requestOtpSchema } from "@/lib/auth/validation";
 import DocumentUpload from "./DocumentUpload";
-import RegistrationList from "./RegistrationList";
+import Link from "next/link";
+import Image from "next/image";
 import { ACADEMIC_YEARS } from "@/lib/colleges";
 
 interface AuthModalProps {
@@ -24,7 +25,7 @@ export default function Enigma2AuthModal({ isOpen, onClose, onSuccess, initialMe
 }
 
 function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalProps) {
-  const { user, myRegistrations, configured, isLoading, authError, onboardingStep, setOnboardingStep,
+  const { user, configured, isLoading, authError, onboardingStep, setOnboardingStep,
     requestEmailOtp, verifyEmailOtp, signInWithGoogle, signInWithGithub, completeOnboarding, updateProfile, signOut, refreshProfile } = useAuth();
   const [mode, setMode] = useState<"signup" | "signin">("signup");
   const [stage, setStage] = useState<"details" | "otp">("details");
@@ -131,15 +132,15 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
           <div aria-hidden="true" className="absolute -left-20 top-12 h-72 w-72 rounded-full border border-cyan-300/25 shadow-[0_0_90px_rgba(34,211,238,0.12)]" />
           <div aria-hidden="true" className="absolute -left-8 top-24 h-48 w-48 rounded-full border border-cyan-300/15" />
           <div className="relative">
-            <span className="font-display text-2xl font-bold tracking-wider text-white">ENIGMA <span className="text-amber-300">2.0</span></span>
+            <div className="mb-4 flex gap-4"><Image src="/images/logo-mu.png" alt="University of Mumbai" width={35} height={42} className="object-contain"/><Image src="/images/logo-udcs-clean.png" alt="Department of Computer Science" width={40} height={40} className="object-contain"/></div><span className="font-display text-2xl font-bold tracking-wider text-white">ENIGMA <span className="text-amber-300">2.0</span></span>
             <p className="mt-2 text-xs leading-relaxed text-slate-400">Department of Computer Science<br />University of Mumbai</p>
           </div>
           <div className="relative my-16 space-y-5">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-cyan-200"><ShieldCheck size={25} /></div>
             <h2 className="text-3xl font-semibold leading-tight text-white">Your events.<br />One account.</h2>
-            <p className="text-sm leading-relaxed text-slate-300">Your place to discover events, manage your details, and follow your registration journey.</p>
+            <p className="text-sm leading-relaxed text-slate-300">Your profile, registrations and passes.</p>
           </div>
-          <div className="relative flex items-center gap-2 text-xs text-slate-400"><LockKeyhole size={14} /> Your details stay in your control.</div>
+          <div className="relative flex items-center gap-2 text-xs text-slate-400"><LockKeyhole size={14} /> Verified email access</div>
         </aside>
         <section className="max-h-[88dvh] overflow-y-auto p-6 sm:p-9">
           <div className="mb-7 flex items-center justify-between gap-4">
@@ -214,9 +215,8 @@ function AuthDialog({ isOpen, onClose, onSuccess, initialMessage }: AuthModalPro
               <p className="mt-2 text-sm text-slate-400">{user.phone || "Add your phone number"}</p>
               {user.college && <p className="mt-3 text-sm text-slate-300">{user.college}</p>}
             </div>
-            <div className="flex items-center gap-3 rounded-xl border border-white/10 p-4 text-sm text-slate-300"><Ticket size={19} className="text-cyan-200" />{myRegistrations.length ? myRegistrations.length + " event registrations" : "No event registrations yet."}</div>
-            <p className="text-xs leading-relaxed text-slate-400">{user.isRegistrationReady ? "Your profile is ready for event registration." : "Before registering, add your college, course and college ID in Edit profile."}</p>
-            <RegistrationList />
+            <div className="grid grid-cols-2 gap-4 rounded-2xl border border-white/10 p-5 text-sm"><div><p className="text-xs text-slate-500">Course</p><p className="mt-1">{user.course || "Not added"}</p></div><div><p className="text-xs text-slate-500">College ID</p><p className="mt-1">{user.hasIdCard ? "Uploaded" : "Not uploaded"}</p></div></div>
+            <Link href="/enigma2/passes" onClick={onClose} className="flex items-center justify-between rounded-xl border border-cyan-300/30 bg-cyan-300/5 p-4 text-sm text-cyan-200">Passes & registration status<ArrowRight size={16}/></Link>
             <button type="button" className={buttonClass} onClick={() => { setError(null); setProfileStep(1); setOnboardingStep("edit"); }}>Edit profile<ArrowRight size={16} /></button>
             <button type="button" disabled={pending} onClick={() => void run(async () => { const result = await signOut(); if (result.success) { setStage("details"); setEmail(""); setPhone(""); setFirstName(""); setLastName(""); } return result; })} className="flex w-full items-center justify-center gap-2 text-sm text-slate-400 hover:text-white"><LogOut size={15} />Sign out</button>
           </div>}
