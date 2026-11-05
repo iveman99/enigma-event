@@ -9,5 +9,5 @@ body:has(.enigma2-type) [role="dialog"] h2,body:has(.enigma2-type) [role="dialog
 .eg-brand-edition{font-size:11px;letter-spacing:0;color:#ffc400;-webkit-text-fill-color:#ffc400}
 .eg-brand-mu{width:28px;height:36px;object-fit:contain}.eg-brand-udcs{width:32px;height:32px;object-fit:contain}
 .eg-brand-compact{gap:7px}.eg-brand-compact .eg-brand-wordmark{font-size:15px;gap:5px}.eg-brand-compact .eg-brand-edition{font-size:8px}.eg-brand-compact .eg-brand-mu{width:20px;height:26px}.eg-brand-compact .eg-brand-udcs{width:23px;height:23px}
-.eg-brand-badge{padding:9px 11px;border-radius:10px;background:#09121d}
+.eg-brand-badge{align-self:flex-start;padding:9px 11px;border-radius:10px;background:#09121d}
 @media(max-width:400px){.eg-brand{gap:8px}.eg-brand-wordmark{font-size:19px}.eg-brand-compact .eg-brand-wordmark{font-size:13px}.eg-brand-compact{gap:5px}}
