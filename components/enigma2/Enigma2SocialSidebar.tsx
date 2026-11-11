@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Instagram } from "lucide-react";
+import { Instagram, QrCode } from "lucide-react";
 import { cyberAudio } from "@/lib/audio";
 
 // Custom SVG for WhatsApp
@@ -80,6 +80,16 @@ export default function Enigma2SocialSidebar() {
             title="WhatsApp"
           >
             <WhatsAppIcon size={20} />
+          </a>
+          <span aria-hidden="true" className="my-0.5 h-px w-6 bg-white/15" />
+          <a
+            href="#after-event"
+            onClick={() => cyberAudio.playClick()}
+            className="text-cyan-100/80 transition-all hover:scale-110 hover:text-cyan-100 p-1"
+            title="Event feedback and photos"
+            aria-label="Go to event feedback and photo sharing"
+          >
+            <QrCode size={19} />
           </a>
         </div>
       </div>

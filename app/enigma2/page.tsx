@@ -8,6 +8,7 @@ import Enigma2About from "@/components/enigma2/Enigma2About";
 import Enigma2Events from "@/components/enigma2/Enigma2Events";
 import Enigma2Schedule from "@/components/enigma2/Enigma2Schedule";
 import Enigma2Contact from "@/components/enigma2/Enigma2Contact";
+import Enigma2AfterEvent from "@/components/enigma2/Enigma2AfterEvent";
 import Enigma2Team from "@/components/enigma2/Enigma2Team";
 import Enigma2LegacyGallery from "@/components/enigma2/Enigma2LegacyGallery";
 import Enigma2Footer from "@/components/enigma2/Enigma2Footer";
@@ -98,6 +99,8 @@ function Enigma2Content() {
         <Enigma2Schedule />
         {/* Enigma 2.0 Location Slide */}
         <Enigma2Contact />
+        {/* Post-event feedback and photo sharing */}
+        <Enigma2AfterEvent />
         {/* Organizing Team */}
         <Enigma2Team />
         {/* Enigma 1.0 Archival Vault */}
