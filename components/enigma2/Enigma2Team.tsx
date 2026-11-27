@@ -34,15 +34,13 @@ const ROW_1_MEMBERS: TeamMember[] = [
     name: "Deeksha Singh", 
     role: "Marketing & PR Head", 
     linkedin: "https://www.linkedin.com/in/deeksha-singh-951024376/", 
-    image: "/images/team/Deeksha.jpeg", 
-    lead: true 
+    image: "/images/team/Deeksha.jpeg" 
   },
   { 
     name: "Ankita Goyal", 
     role: "Decor & Aesthetics Head", 
     linkedin: "https://www.linkedin.com/in/ankita-goyal-702881247", 
-    image: "/images/team/Ankita.jpeg", 
-    lead: true 
+    image: "/images/team/Ankita.jpeg" 
   },
   { 
     name: "Aryan Palekar", 
