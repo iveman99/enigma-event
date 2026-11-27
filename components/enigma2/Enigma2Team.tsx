@@ -51,10 +51,10 @@ const ROW_1_MEMBERS: TeamMember[] = [
     image: "/images/team/Aryan.jpeg" 
   },
   { 
-    name: "Kunal", 
-    role: "Logistics Lead", 
+    name: "Pranay Kokan", 
+    role: "Creative Direction", 
     linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Kunal.jpeg" 
+    image: "/images/team/Pranay.jpeg" 
   },
   { 
     name: "Pranav", 
@@ -63,25 +63,55 @@ const ROW_1_MEMBERS: TeamMember[] = [
     image: "/images/team/Pranav.jpeg" 
   },
   { 
-    name: "Om", 
-    role: "Esports Arena Lead", 
+    name: "Siddhi Gadkar", 
+    role: "Event Operations", 
     linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Om.jpeg" 
+    image: "/images/team/Siddhi.jpeg" 
+  },
+  { 
+    name: "Sumana Sarkar", 
+    role: "Event Operations", 
+    linkedin: "https://www.linkedin.com/", 
+    image: "/images/team/Sumana.jpeg" 
   },
 ];
 
 const ROW_2_MEMBERS: TeamMember[] = [
   { 
-    name: "Adarsh", 
-    role: "Systems & Infrastructure", 
+    name: "Aditya Pawar", 
+    role: "Core Volunteer", 
     linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Adarsh.jpeg" 
+    image: "/images/team/Aditya.jpeg" 
   },
   { 
-    name: "Hera", 
-    role: "Public Relations Lead", 
+    name: "Prajwal Sonawane", 
+    role: "Core Volunteer", 
     linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Hera.jpeg" 
+    image: "/images/team/Prajwal.jpeg" 
+  },
+  { 
+    name: "Priyanka Kunchikorve", 
+    role: "Core Volunteer", 
+    linkedin: "https://www.linkedin.com/", 
+    image: "/images/team/Priyanka.jpeg" 
+  },
+  { 
+    name: "Vivek Aghera", 
+    role: "Core Volunteer", 
+    linkedin: "https://www.linkedin.com/", 
+    image: "/images/team/Vivek.jpeg" 
+  },
+  { 
+    name: "Nikhil Rane", 
+    role: "Core Volunteer", 
+    linkedin: "https://www.linkedin.com/", 
+    image: "/images/team/Nikhil.jpeg" 
+  },
+  { 
+    name: "Sejal Singh", 
+    role: "Core Volunteer", 
+    linkedin: "https://www.linkedin.com/", 
+    image: "/images/team/Sejal.jpeg" 
   },
   { 
     name: "Gaurav", 
@@ -90,34 +120,10 @@ const ROW_2_MEMBERS: TeamMember[] = [
     image: "/images/team/Gaurav.jpeg" 
   },
   { 
-    name: "Mahesh", 
-    role: "Arena Management", 
-    linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Mahesh.jpeg" 
-  },
-  { 
-    name: "Pranay", 
-    role: "Creative Direction", 
-    linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Pranay.jpeg" 
-  },
-  { 
-    name: "Priyanshi", 
-    role: "Hospitality Lead", 
-    linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Priyanshi.jpeg" 
-  },
-  { 
-    name: "Rahul", 
+    name: "Manish Talreja", 
     role: "Web Operations", 
     linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Rahul.jpeg" 
-  },
-  { 
-    name: "Shweta", 
-    role: "Registration Desk", 
-    linkedin: "https://www.linkedin.com/", 
-    image: "/images/team/Shweta.jpeg" 
+    image: "/images/team/Manish.jpeg" 
   },
 ];
 
@@ -261,24 +267,24 @@ export default function Enigma2Team() {
             <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#07080c] to-transparent z-20 pointer-events-none" />
 
             <div className="flex animate-team-marquee hover:[animation-play-state:paused] group-hover/row1:[animation-play-state:paused] w-max">
-              {/* Set 1: 8 Members spanning 100vw */}
+              {/* Set 1 */}
               {ROW_1_MEMBERS.map((member, i) => renderMemberCard(member, i))}
               {/* Set 2: Duplicate for seamless continuous auto-scroll */}
-              {ROW_1_MEMBERS.map((member, i) => renderMemberCard(member, i + 8))}
+              {ROW_1_MEMBERS.map((member, i) => renderMemberCard(member, i + ROW_1_MEMBERS.length))}
             </div>
           </div>
 
-          {/* ROW 2: AUTO-SCROLL RIGHT / OPPOSITE DIRECTION (8 Members visible across screen, looped) */}
+          {/* ROW 2: AUTO-SCROLL RIGHT / OPPOSITE DIRECTION */}
           <div className="relative overflow-hidden w-full group/row2">
             {/* Subtle Edge Fades */}
             <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#07080c] to-transparent z-20 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#07080c] to-transparent z-20 pointer-events-none" />
 
             <div className="flex animate-team-marquee-reverse hover:[animation-play-state:paused] group-hover/row2:[animation-play-state:paused] w-max">
-              {/* Set 1: 8 Members spanning 100vw */}
+              {/* Set 1 */}
               {ROW_2_MEMBERS.map((member, i) => renderMemberCard(member, i))}
               {/* Set 2: Duplicate for seamless continuous auto-scroll */}
-              {ROW_2_MEMBERS.map((member, i) => renderMemberCard(member, i + 8))}
+              {ROW_2_MEMBERS.map((member, i) => renderMemberCard(member, i + ROW_2_MEMBERS.length))}
             </div>
           </div>
 
